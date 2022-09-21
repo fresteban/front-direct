@@ -45,44 +45,53 @@
 </table>
 
 <form (ngSubmit)="addItem()">
-  <div class="row mb-4">
-    <div class="col">
+
+<form [formGroup]="itemForm" (ngSubmit)="addItem()">
+
+  <!-- Campo Nombre -->
       <div class="form-outline">
-        <input type="text"  placeholder="Nombre" name="nombre" class="form-control" [value]="newItem.nombre" [(ngModel)]="newItem.nombre" />
+        <input formControlName="nombre" type="text" placeholder="Nombre" [value]="newItem.nombre" [(ngModel)]="newItem.nombre" />
         <label class="form-label" for="form6Example1"></label>
+        <p *ngIf="itemForm.get('nombre')?.hasError('required')">Campo obligatorio</p>
       </div>
-    </div>
-  </div>
-
-  <!-- Text input -->
+      <hr>
+  <!-- Campo Descripcion -->
   <div class="form-outline mb-4">
-    <input type="text" placeholder="Descripción"  class="form-control" [value]="newItem.descripcion" [(ngModel)]="newItem.descripcion" />
+    <input formControlName="descripcion" type="text" placeholder="Descripción" [value]="newItem.descripcion" [(ngModel)]="newItem.descripcion" />
     <label class="form-label" for="form6Example3"></label>
+    <p *ngIf="itemForm.get('descripcion')?.hasError('required')">Campo obligatorio</p>
   </div>
-
-  <!-- Text input -->
+  <hr>
+  <!-- Campo Precio -->
   <div class="form-outline mb-4">
-    <input type="number" placeholder="Precio" class="form-control" />
+    <input formControlName="precio" type="number" placeholder="Precio" />
     <label class="form-label" for="form6Example4"></label>
+    <p *ngIf="itemForm.get('precio')?.hasError('required')">Campo obligatorio</p>
+  </div>
+  <hr>
+  <!-- Campo Tipo -->
+  <div>
+    <div class="form-check">
+      <input formControlName="tipo" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+      <label class="form-check-label" for="flexRadioDefault1"> Alimento </label>
+    </div>
+
+    <div class="form-check">
+      <input formControlName="tipo" class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
+      <label class="form-check-label" for="flexRadioDefault2"> Bebestible </label>
+    </div>
+    <p *ngIf="itemForm.get('tipo')?.hasError('required')">Campo obligatorio</p>
+  </div>
+  <hr>
+  <!-- Campo Imagen -->
+  <div class="form-outline mb-4">
+    <input formControlName="imagen" type="text" placeholder="Imagen" id="form6Example4" />
+    <label class="form-label" for="form6Example4"></label>
+    <p *ngIf="itemForm.get('imagen')?.hasError('required')">Campo obligatorio</p>
   </div>
 
-  <!-- Default radio -->
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-  <label class="form-check-label" for="flexRadioDefault1"> Alimento </label>
-</div>
 
-<!-- Default checked radio -->
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
-  <label class="form-check-label" for="flexRadioDefault2"> Bebestible </label>
-</div>
-
- <!-- Text input -->
- <div class="form-outline mb-4">
-  <input type="text" placeholder="Imagen" id="form6Example4" class="form-control" />
-  <label class="form-label" for="form6Example4"></label>
-</div>
+</form>
   <!-- Submit button -->
   <button type="submit" class="btn btn-primary btn-block mb-4">Crear Item</button>
 </form>

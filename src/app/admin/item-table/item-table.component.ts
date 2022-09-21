@@ -1,14 +1,17 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Item } from '../interfaces/item';
 import { ItemServiceService } from '../services/item-service.service';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-item-table',
   templateUrl: './item-table.component.html',
   styleUrls: ['./item-table.component.scss']
 })
+
 export class ItemTableComponent implements OnInit {
+
+  itemForm: FormGroup;
 
   @Input()
   newItem: Item = {
@@ -30,9 +33,20 @@ export class ItemTableComponent implements OnInit {
   }
 
 
-  constructor(private ItemServiceService: ItemServiceService) { }
+  constructor(private ItemServiceService: ItemServiceService, public fb: FormBuilder) {
+    this.itemForm = this.fb.group({
+      nombre: ['', [Validators.required]],
+      descripcion: ['', [Validators.required]],
+      precio: ['', [Validators.required]],
+      tipo: ['', [Validators.required]]
+    })
+  }
 
-  ngOnInit(): void {
+  ngOnInit() {
+  }
+
+  saveData(){
+    console.log(this.itemForm.value);
   }
 
   addItem(){
@@ -65,4 +79,5 @@ export class ItemTableComponent implements OnInit {
       };
     }
   }
+
 }
