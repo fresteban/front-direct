@@ -44,59 +44,45 @@
   </tbody>
 </table>
 
-<form>
-  <!-- 2 column grid layout with text inputs for the first and last names -->
+<form (ngSubmit)="addItem()">
   <div class="row mb-4">
     <div class="col">
       <div class="form-outline">
-        <input type="text" id="form6Example1" class="form-control" />
-        <label class="form-label" for="form6Example1">First name</label>
-      </div>
-    </div>
-    <div class="col">
-      <div class="form-outline">
-        <input type="text" id="form6Example2" class="form-control" />
-        <label class="form-label" for="form6Example2">Last name</label>
+        <input type="text"  placeholder="Nombre" name="nombre" class="form-control" [value]="newItem.nombre" [(ngModel)]="newItem.nombre" />
+        <label class="form-label" for="form6Example1"></label>
       </div>
     </div>
   </div>
 
   <!-- Text input -->
   <div class="form-outline mb-4">
-    <input type="text" id="form6Example3" class="form-control" />
-    <label class="form-label" for="form6Example3">Company name</label>
+    <input type="text" placeholder="Descripción"  class="form-control" [value]="newItem.descripcion" [(ngModel)]="newItem.descripcion" />
+    <label class="form-label" for="form6Example3"></label>
   </div>
 
   <!-- Text input -->
   <div class="form-outline mb-4">
-    <input type="text" id="form6Example4" class="form-control" />
-    <label class="form-label" for="form6Example4">Address</label>
+    <input type="number" placeholder="Precio" class="form-control" />
+    <label class="form-label" for="form6Example4"></label>
   </div>
 
-  <!-- Email input -->
-  <div class="form-outline mb-4">
-    <input type="email" id="form6Example5" class="form-control" />
-    <label class="form-label" for="form6Example5">Email</label>
-  </div>
+  <!-- Default radio -->
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+  <label class="form-check-label" for="flexRadioDefault1"> Alimento </label>
+</div>
 
-  <!-- Number input -->
-  <div class="form-outline mb-4">
-    <input type="number" id="form6Example6" class="form-control" />
-    <label class="form-label" for="form6Example6">Phone</label>
-  </div>
+<!-- Default checked radio -->
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked/>
+  <label class="form-check-label" for="flexRadioDefault2"> Bebestible </label>
+</div>
 
-  <!-- Message input -->
-  <div class="form-outline mb-4">
-    <textarea class="form-control" id="form6Example7" rows="4"></textarea>
-    <label class="form-label" for="form6Example7">Additional information</label>
-  </div>
-
-  <!-- Checkbox -->
-  <div class="form-check d-flex justify-content-center mb-4">
-    <input class="form-check-input me-2" type="checkbox" value="" id="form6Example8" checked />
-    <label class="form-check-label" for="form6Example8"> Create an account? </label>
-  </div>
-
+ <!-- Text input -->
+ <div class="form-outline mb-4">
+  <input type="text" placeholder="Imagen" id="form6Example4" class="form-control" />
+  <label class="form-label" for="form6Example4"></label>
+</div>
   <!-- Submit button -->
-  <button type="submit" class="btn btn-primary btn-block mb-4">Place order</button>
+  <button type="submit" class="btn btn-primary btn-block mb-4">Crear Item</button>
 </form>

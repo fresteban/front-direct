@@ -5,5 +5,5 @@ export interface Item {
   precio: number;
   tipo: string;
   foto: string;
-  disponibilidad: boolean;
+  disponibilidad: boolean | null;
 }

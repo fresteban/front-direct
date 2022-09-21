@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Item } from '../interfaces/item';
 import { ItemServiceService } from '../services/item-service.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-item-table',
