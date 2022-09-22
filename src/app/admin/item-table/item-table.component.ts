@@ -11,7 +11,6 @@ import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms'
 
 export class ItemTableComponent implements OnInit {
 
-  itemForm: FormGroup;
 
   @Input()
   newItem: Item = {
@@ -34,13 +33,7 @@ export class ItemTableComponent implements OnInit {
 
 
   constructor(private ItemServiceService: ItemServiceService, public fb: FormBuilder) {
-    this.itemForm = this.fb.group({
-      nombre: ['', [Validators.required]],
-      descripcion: ['', [Validators.required]],
-      precio: ['', [Validators.required]],
-      tipo: ['', [Validators.required]],
-      imagen: ['', [Validators.required]]
-    })
+    
   }
 
   ngOnInit() {
