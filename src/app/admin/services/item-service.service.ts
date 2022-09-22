@@ -6,22 +6,25 @@ import { Item } from '../interfaces/item';
 })
 export class ItemServiceService {
 
+ 
   constructor() { }
+
+ 
 
   private _foodList: Item[] = [{
     id: 1,
-    nombre: 'Ensalada de penca',
-    descripcion: 'Pico pal que lee Pico pal que lee Pico pal que lee',
-    precio: 69,
+    nombre: 'Comida ejemplo',
+    descripcion: 'Comida Comida Comida',
+    precio: 100,
     tipo: '1',
     foto: '',
     disponibilidad: true
   }];
   private _drinkList: Item[] = [{
     id: 2,
-    nombre: 'Vomito de perro',
-    descripcion: 'Pico pal que lee Pico pal que lee Pico pal que lee',
-    precio: 666,
+    nombre: 'Bebida ejemplo',
+    descripcion: 'Bebida Bebida Bebida',
+    precio: 200,
     tipo: '1',
     foto: '',
     disponibilidad: true
@@ -42,4 +45,5 @@ export class ItemServiceService {
   addDrink(drink: Item){
     this._drinkList.push(drink);
   }
+  
 }

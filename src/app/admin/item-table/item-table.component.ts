@@ -1,13 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Item } from '../interfaces/item';
 import { ItemServiceService } from '../services/item-service.service';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-item-table',
   templateUrl: './item-table.component.html',
   styleUrls: ['./item-table.component.scss']
 })
+
 export class ItemTableComponent implements OnInit {
+
 
   @Input()
   newItem: Item = {
@@ -29,10 +32,14 @@ export class ItemTableComponent implements OnInit {
   }
 
 
-  constructor(private ItemServiceService: ItemServiceService) { }
-
-  ngOnInit(): void {
+  constructor(private ItemServiceService: ItemServiceService, public fb: FormBuilder) {
+    
   }
+
+  ngOnInit() {
+  }
+
+
 
   addItem(){
     if(this.newItem.nombre.trim().length === 0){
@@ -50,6 +57,7 @@ export class ItemTableComponent implements OnInit {
         foto: '',
         disponibilidad: false
       };
+      console.log('Comida agregada');
     }
     else if(this.newItem.tipo === '0'){
       this.ItemServiceService.addDrink(this.newItem);
@@ -62,6 +70,9 @@ export class ItemTableComponent implements OnInit {
         foto: '',
         disponibilidad: false
       };
+      console.log('Bebida agregada');
     }
+    console.log('additem');
   }
+
 }

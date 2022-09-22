@@ -8,9 +8,12 @@ import { ItemTableComponent } from '../item-table/item-table.component';
 })
 export class AdminMainPageComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+
+  ngOnInit() {
   }
+
+
 
 }
