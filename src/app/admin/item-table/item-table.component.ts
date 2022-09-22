@@ -38,15 +38,12 @@ export class ItemTableComponent implements OnInit {
       nombre: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
       precio: ['', [Validators.required]],
-      tipo: ['', [Validators.required]]
+      tipo: ['', [Validators.required]],
+      imagen: ['', [Validators.required]]
     })
   }
 
   ngOnInit() {
-  }
-
-  saveData(){
-    console.log(this.itemForm.value);
   }
 
   addItem(){
@@ -65,6 +62,7 @@ export class ItemTableComponent implements OnInit {
         foto: '',
         disponibilidad: false
       };
+      console.log('Comida agregada');
     }
     else if(this.newItem.tipo === '0'){
       this.ItemServiceService.addDrink(this.newItem);
@@ -77,7 +75,9 @@ export class ItemTableComponent implements OnInit {
         foto: '',
         disponibilidad: false
       };
+      console.log('Bebida agregada');
     }
+    console.log('additem');
   }
 
 }
