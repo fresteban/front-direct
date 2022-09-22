@@ -12,10 +12,10 @@ import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms'
 export class ItemTableComponent implements OnInit {
   listaItems: Item[] = [];
 
-  constructor(private _itemService: ItemService) {}
+  constructor(private _itemService: ItemService) { }
 
   ngOnInit(): void {
-      this.obtenerItems();
+    this.obtenerItems();
   }
 
   obtenerItems() {

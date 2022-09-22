@@ -1,0 +1,33 @@
+div.tableContainer {
+    width: 90%;
+    /* table width will be 99% of this*/
+    height: 500px;
+    /* must be greater than tbody*/
+    overflow: auto;
+    margin: 50px auto;
+}
+
+table {
+    width: 97%;
+    /*100% of container produces horiz. scroll in Mozilla*/
+    border: none;
+    border-spacing: 0px;
+    background-color: transparent;
+}
+
+table>tbody {
+    overflow: auto;
+    height: 280px;
+    overflow-x: hidden;
+}
+
+table>tbody tr {
+    height: auto;
+}
+
+thead tr th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #ffffff;
+}

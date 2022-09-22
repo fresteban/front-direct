@@ -15,6 +15,10 @@ export class ItemService {
     return this.http.get(this.url);
   }
 
+  guardarItem(item: Item): Observable<any>{
+    return this.http.post(this.url, item);
+  }
+
   private _foodList: Item[] = [{
     nombre: 'Comida ejemplo',
     descripcion: 'Comida Comida Comida',

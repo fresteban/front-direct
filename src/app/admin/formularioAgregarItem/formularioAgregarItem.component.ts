@@ -1,12 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { bootstrapApplication} from '@angular/platform-browser';
+import { bootstrapApplication } from '@angular/platform-browser';
 import { Item } from '../../interfaces/item';
 import { ItemTableComponent } from '../item-table/item-table.component';
 import { ItemService } from '../../services/item.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
-declare var window:any;
+declare var window: any;
 
 @Component({
   selector: 'app-formularioAgregarItem',
@@ -29,7 +31,7 @@ export class FormularioAgregarItemComponent implements OnInit {
     disponibilidad: false
   }
 
-  constructor(private ItemService: ItemService, public fb: FormBuilder) {
+  constructor(private ItemService: ItemService, private fb: FormBuilder, private router: Router, private _itemService: ItemService, private toastr: ToastrService) {
     this.itemForm = this.fb.group({
       nombre: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
@@ -39,26 +41,51 @@ export class FormularioAgregarItemComponent implements OnInit {
     })
   }
 
+
+
   ngOnInit(): void {
     this.formModal = new window.bootstrap.Modal(
       document.getElementById("exampleModal")
     );
   }
 
+  agregarItem() {
+    console.log("yapo");
+    const newItem: Item = {
+      nombre: this.itemForm.get('nombre')?.value,
+      descripcion: this.itemForm.get('descripcion')?.value,
+      precio: this.itemForm.get('precio')?.value,
+      tipo: this.itemForm.get('tipo')?.value,
+      foto: this.itemForm.get('foto')?.value,
+      disponibilidad: false
+    }
 
-  openModal(){
+    console.log(newItem);
+
+    this._itemService.guardarItem(newItem).subscribe(data => {
+      this.toastr.success('Agregado con exito');
+    }, error => {
+      console.log(error);
+      this.itemForm.reset();
+    })
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigate(["/"]));
+
+  }
+
+
+  openModal() {
     this.formModal.show();
   }
-  save(){
+  save() {
     this.formModal.hide();
   }
 
-  addItem(){
-    if(this.newItem.nombre.trim().length === 0){
+  addItem() {
+    if (this.newItem.nombre.trim().length === 0) {
       return;
     }
 
-    if(this.newItem.tipo === '1'){
+    if (this.newItem.tipo === '1') {
       this.ItemService.addFood(this.newItem);
       this.newItem = {
         nombre: '',
@@ -70,7 +97,7 @@ export class FormularioAgregarItemComponent implements OnInit {
       };
       console.log('Comida agregada');
     }
-    else if(this.newItem.tipo === '0'){
+    else if (this.newItem.tipo === '0') {
       this.ItemService.addDrink(this.newItem);
       this.newItem = {
         nombre: '',

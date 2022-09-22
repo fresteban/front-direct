@@ -8,9 +8,9 @@ describe('FormularioAgregarItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormularioAgregarItemComponent ]
+      declarations: [FormularioAgregarItemComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(FormularioAgregarItemComponent);
     component = fixture.componentInstance;
