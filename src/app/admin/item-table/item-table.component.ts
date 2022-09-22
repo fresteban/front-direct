@@ -46,6 +46,8 @@ export class ItemTableComponent implements OnInit {
   ngOnInit() {
   }
 
+
+
   addItem(){
     if(this.newItem.nombre.trim().length === 0){
       return;

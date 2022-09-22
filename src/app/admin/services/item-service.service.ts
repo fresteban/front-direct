@@ -6,7 +6,10 @@ import { Item } from '../interfaces/item';
 })
 export class ItemServiceService {
 
+ 
   constructor() { }
+
+ 
 
   private _foodList: Item[] = [{
     id: 1,
@@ -42,4 +45,5 @@ export class ItemServiceService {
   addDrink(drink: Item){
     this._drinkList.push(drink);
   }
+  
 }
