@@ -7,8 +7,8 @@ import { Item } from '../interfaces/item';
   providedIn: 'root'
 })
 export class ItemService {
-  url = 'http://localhost:4000/api/items/';
- 
+  url = '/api/items/';
+
   constructor(private http: HttpClient) { }
 
   getItems(): Observable<any> {
@@ -47,5 +47,5 @@ export class ItemService {
   addDrink(drink: Item){
     this._drinkList.push(drink);
   }
-  
+
 }
