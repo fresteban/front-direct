@@ -3,6 +3,7 @@ import { Item } from '../interfaces/item';
 import { ItemServiceService } from '../services/item-service.service';
 import { FormsModule } from '@angular/forms';
 
+
 @Component({
   selector: 'app-item-table',
   templateUrl: './item-table.component.html',
@@ -29,11 +30,17 @@ export class ItemTableComponent implements OnInit {
     return this.ItemServiceService.drinkList;
   }
 
+ 
 
   constructor(private ItemServiceService: ItemServiceService) { }
 
+  
+
   ngOnInit(): void {
+
   }
+
+ 
 
   addItem(){
     if(this.newItem.nombre.trim().length === 0){
