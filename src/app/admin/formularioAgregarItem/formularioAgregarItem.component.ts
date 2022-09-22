@@ -1,27 +1,26 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { bootstrapApplication} from '@angular/platform-browser';
-import { Item } from '../interfaces/item';
+import { Item } from '../../interfaces/item';
 import { ItemTableComponent } from '../item-table/item-table.component';
-import { ItemServiceService } from '../services/item-service.service';
+import { ItemService } from '../../services/item.service';
 
 
 declare var window:any;
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
+  selector: 'app-formularioAgregarItem',
+  templateUrl: './formularioAgregarItem.component.html',
+  styleUrls: ['./formularioAgregarItem.component.scss']
 })
-export class ModalComponent implements OnInit {
+export class FormularioAgregarItemComponent implements OnInit {
 
-  title = 'ang13-bootstrap5-modal-demo';
+  title = 'ang13-bootstrap5-formularioAgregarItem-demo';
   formModal: any;
   itemForm: FormGroup;
 
   @Input()
   newItem: Item = {
-    id: 0,
     nombre: '',
     descripcion: '',
     precio: 0,
@@ -30,7 +29,7 @@ export class ModalComponent implements OnInit {
     disponibilidad: false
   }
 
-  constructor(private ItemServiceService: ItemServiceService, public fb: FormBuilder) {
+  constructor(private ItemService: ItemService, public fb: FormBuilder) {
     this.itemForm = this.fb.group({
       nombre: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
@@ -60,9 +59,8 @@ export class ModalComponent implements OnInit {
     }
 
     if(this.newItem.tipo === '1'){
-      this.ItemServiceService.addFood(this.newItem);
+      this.ItemService.addFood(this.newItem);
       this.newItem = {
-        id: 0,
         nombre: '',
         descripcion: '',
         precio: 0,
@@ -73,9 +71,8 @@ export class ModalComponent implements OnInit {
       console.log('Comida agregada');
     }
     else if(this.newItem.tipo === '0'){
-      this.ItemServiceService.addDrink(this.newItem);
+      this.ItemService.addDrink(this.newItem);
       this.newItem = {
-        id: 0,
         nombre: '',
         descripcion: '',
         precio: 0,

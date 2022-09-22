@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Item } from '../interfaces/item';
-import { ItemServiceService } from '../services/item-service.service';
+import { Item } from '../../interfaces/item';
+import { ItemService } from '../../services/item.service';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -10,8 +10,24 @@ import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms'
 })
 
 export class ItemTableComponent implements OnInit {
+  listaItems: Item[] = [];
 
+  constructor(private _itemService: ItemService) {}
 
+  ngOnInit(): void {
+      this.obtenerItems();
+  }
+
+  obtenerItems() {
+    this._itemService.getItems().subscribe(data => {
+      console.log(data);
+      this.listaItems = data;
+    }, error => {
+      console.log(error);
+    })
+  }
+
+  /*
   @Input()
   newItem: Item = {
     id: 0,
@@ -24,15 +40,15 @@ export class ItemTableComponent implements OnInit {
   }
 
   get foodList() {
-    return this.ItemServiceService.foodList;
+    return this.ItemService.foodList;
   }
 
   get drinkList() {
-    return this.ItemServiceService.drinkList;
+    return this.ItemService.drinkList;
   }
 
 
-  constructor(private ItemServiceService: ItemServiceService, public fb: FormBuilder) {
+  constructor(private ItemService: ItemService, public fb: FormBuilder) {
     
   }
 
@@ -47,7 +63,7 @@ export class ItemTableComponent implements OnInit {
     }
 
     if(this.newItem.tipo === '1'){
-      this.ItemServiceService.addFood(this.newItem);
+      this.ItemService.addFood(this.newItem);
       this.newItem = {
         id: 0,
         nombre: '',
@@ -60,7 +76,7 @@ export class ItemTableComponent implements OnInit {
       console.log('Comida agregada');
     }
     else if(this.newItem.tipo === '0'){
-      this.ItemServiceService.addDrink(this.newItem);
+      this.ItemService.addDrink(this.newItem);
       this.newItem = {
         id: 0,
         nombre: '',
@@ -74,5 +90,7 @@ export class ItemTableComponent implements OnInit {
     }
     console.log('additem');
   }
+
+  */
 
 }
