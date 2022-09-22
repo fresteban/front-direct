@@ -1,18 +1,21 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Item } from '../interfaces/item';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ItemServiceService {
-
+export class ItemService {
+  url = 'http://localhost:4000/api/items/';
  
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
- 
+  getItems(): Observable<any> {
+    return this.http.get(this.url);
+  }
 
   private _foodList: Item[] = [{
-    id: 1,
     nombre: 'Comida ejemplo',
     descripcion: 'Comida Comida Comida',
     precio: 100,
@@ -21,7 +24,6 @@ export class ItemServiceService {
     disponibilidad: true
   }];
   private _drinkList: Item[] = [{
-    id: 2,
     nombre: 'Bebida ejemplo',
     descripcion: 'Bebida Bebida Bebida',
     precio: 200,

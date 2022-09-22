@@ -3,7 +3,6 @@
   <table class="table">
       <thead>
         <tr>
-          <th scope="col">ID Item</th>
           <th scope="col">Nombre</th>
           <th scope="col">Descripción</th>
           <th scope="col">Precio</th>
@@ -12,42 +11,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="table-active">
-          <td *ngFor="let item of foodList"> {{item.id}} </td>
-          <td *ngFor="let item of foodList"> {{item.nombre}} </td>
-          <td *ngFor="let item of foodList"> {{item.descripcion}} </td>
-          <td *ngFor="let item of foodList"> {{item.precio}} </td>
-          <td *ngFor="let item of foodList"> {{item.disponibilidad}} </td>
-          <td *ngFor="let item of foodList"> Borrar Modificar </td>
+        <tr *ngFor="let item of listaItems" class="table-active" >
+          <td> {{item.nombre}} </td>
+          <td> {{item.descripcion}} </td>
+          <td> {{item.precio}} </td>
+          <td> {{item.disponibilidad}} </td>
+          <td> Borrar Modificar </td>
         </tr>
       </tbody>
     </table>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">ID Item</th>
-          <th scope="col">Nombre</th>
-          <th scope="col">Descripción</th>
-          <th scope="col">Precio</th>
-          <th scope="col">Disponibilidad</th>
-          <th scope="col">Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="table-active">
-          <td *ngFor="let item of drinkList"> {{item.id}} </td>
-          <td *ngFor="let item of drinkList"> {{item.nombre}} </td>
-          <td *ngFor="let item of drinkList"> {{item.descripcion}} </td>
-          <td *ngFor="let item of drinkList"> {{item.precio}} </td>
-          <td *ngFor="let item of drinkList"> {{item.disponibilidad}} </td>
-          <td *ngFor="let item of drinkList"> Borrar Modificar </td>
-        </tr>
-      </tbody>
-    </table>
-
 
   <!--formulario para agregar items-->
-  <app-modal></app-modal>
-</div>
+  <app-formularioAgregarItem></app-formularioAgregarItem>
+</div> 
 
