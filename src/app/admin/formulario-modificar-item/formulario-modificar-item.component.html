@@ -1,32 +1,27 @@
-<!-- Button trigger formularioAgregarItem -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Nuevo Item
-</button>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">¡Agregue un Nuevo Item!</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modificar item</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="row mb-4">
           <div class="col">
             <!-- Form Group -->
-            <form [formGroup]="itemForm" (ngSubmit)="agregarItem()">
+            <form [formGroup]="itemForm" (ngSubmit)="modificarItem(editItem)">
               <!-- Campo Nombre -->
               <div class="form-outline">
-                <input formControlName="nombre" type="text" placeholder="Nombre" [value]="newItem.nombre"
-                  [(ngModel)]="newItem.nombre" />
+                <input formControlName="nombre" type="text" placeholder="Nombre" [value]="editItem.nombre"
+                  [(ngModel)]="editItem.nombre" />
                 <label class="form-label" for="form6Example1"></label>
                 <p *ngIf="itemForm.get('nombre')?.hasError('required')">Campo obligatorio</p>
               </div>
               <hr>
               <!-- Campo Descripcion -->
               <div class="form-outline mb-4">
-                <input formControlName="descripcion" type="text" placeholder="Descripción" [value]="newItem.descripcion"
-                  [(ngModel)]="newItem.descripcion" />
+                <input formControlName="descripcion" type="text" placeholder="Descripción" [value]="editItem.descripcion"
+                  [(ngModel)]="editItem.descripcion" />
                 <label class="form-label" for="form6Example3"></label>
                 <p *ngIf="itemForm.get('descripcion')?.hasError('required')">Campo obligatorio</p>
               </div>
@@ -60,9 +55,9 @@
                 <label class="form-label" for="form6Example4"></label>
                 <p *ngIf="itemForm.get('imagen')?.hasError('required')">Campo obligatorio</p>
               </div>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="ngSubmit" class="btn btn-primary" data-bs-dismiss="modal">Agregar Item</button>
             </form>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="ngSubmit" class="btn btn-primary" data-bs-dismiss="modal">Guardar Cambios</button>
           </div>
         </div>
       </div>

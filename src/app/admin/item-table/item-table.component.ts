@@ -2,7 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Item } from '../../interfaces/item';
 import { ItemService } from '../../services/item.service';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { FormularioModificarItemComponent } from '../formulario-modificar-item/formulario-modificar-item.component';
 
+
+declare var window:any;
 @Component({
   selector: 'app-item-table',
   templateUrl: './item-table.component.html',
@@ -11,11 +15,13 @@ import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms'
 
 export class ItemTableComponent implements OnInit {
   listaItems: Item[] = [];
+  formModal: any;
 
   constructor(private _itemService: ItemService) { }
 
   ngOnInit(): void {
     this.obtenerItems();
+
   }
 
   obtenerItems() {
@@ -49,7 +55,7 @@ export class ItemTableComponent implements OnInit {
 
 
   constructor(private ItemService: ItemService, public fb: FormBuilder) {
-    
+
   }
 
   ngOnInit() {

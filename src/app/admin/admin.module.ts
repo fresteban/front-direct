@@ -4,6 +4,8 @@ import { AdminMainPageComponent } from './admin-main-page/admin-main-page.compon
 import { ItemTableComponent } from './item-table/item-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormularioAgregarItemComponent } from './formularioAgregarItem/formularioAgregarItem.component';
+import { FormularioModificarItemComponent } from './formulario-modificar-item/formulario-modificar-item.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -11,7 +13,8 @@ import { FormularioAgregarItemComponent } from './formularioAgregarItem/formular
   declarations: [
     AdminMainPageComponent,
     ItemTableComponent,
-    FormularioAgregarItemComponent
+    FormularioAgregarItemComponent,
+    FormularioModificarItemComponent
   ],
   exports: [
     AdminMainPageComponent
@@ -19,7 +22,8 @@ import { FormularioAgregarItemComponent } from './formularioAgregarItem/formular
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class AdminModule { }
