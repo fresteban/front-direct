@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { Item } from '../../interfaces/item';
@@ -16,8 +16,7 @@ declare var window: any;
   styleUrls: ['./formularioAgregarItem.component.scss']
 })
 export class FormularioAgregarItemComponent implements OnInit {
-
-  title = 'ang13-bootstrap5-formularioAgregarItem-demo';
+  @Output() newItemEvent = new EventEmitter<string>();
   formModal: any;
   itemForm: FormGroup;
 
@@ -41,11 +40,9 @@ export class FormularioAgregarItemComponent implements OnInit {
     })
   }
 
-
-
   ngOnInit(): void {
     this.formModal = new window.bootstrap.Modal(
-      document.getElementById("exampleModal")
+      document.getElementById("itemForm")
     );
   }
 
@@ -68,10 +65,14 @@ export class FormularioAgregarItemComponent implements OnInit {
       console.log(error);
       this.itemForm.reset();
     })
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigate(["/"]));
+    this.newItemEvent.emit("guardado");
+    //this.router.navigateByUrl('/admin', { skipLocationChange: false }).then(() => this.router.navigate(["/admin"]));
 
   }
 
+  inicio(){
+    this.itemForm.reset();
+  }
 
   openModal() {
     this.formModal.show();
