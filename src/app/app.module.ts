@@ -8,10 +8,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
+import { ClienteComponent } from './cliente/cliente.component';
+import { CarritoComponent } from './carrito/carrito.component';
+import { NavbarComponent } from './navbar/navbar.component';
+
+import { RouterModule } from '@angular/router';
+import { AdminMainPageComponent } from './admin/admin-main-page/admin-main-page.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    ClienteComponent,
+    CarritoComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +31,14 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    RouterModule.forRoot([
+      {path: '',component:HomeComponent},
+      {path: 'cliente',component:ClienteComponent},
+      {path: 'admin',component:AdminMainPageComponent},
+      {path: 'carrito',component:CarritoComponent},
+      {path: '**',redirectTo:'/',pathMatch:'full'},
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
