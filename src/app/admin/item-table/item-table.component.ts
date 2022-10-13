@@ -4,6 +4,7 @@ import { ItemService } from '../../services/item.service';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { FormularioModificarItemComponent } from '../formulario-modificar-item/formulario-modificar-item.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 declare var window:any;
@@ -17,7 +18,8 @@ export class ItemTableComponent implements OnInit {
   listaItems: Item[] = [];
   formModal: any;
 
-  constructor(private _itemService: ItemService) { }
+  constructor(private _itemService: ItemService,
+        private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.obtenerItems();
@@ -29,6 +31,15 @@ export class ItemTableComponent implements OnInit {
       console.log(data);
       this.listaItems = data;
     }, error => {
+      console.log(error);
+    })
+  }
+
+  eliminarItem(id: any){
+    this._itemService.eliminarItem(id).subscribe(data => {
+      this.toastr.error('El producto fue eliminado con exito', 'Producto eliminado');
+      this.obtenerItems();
+    },error => {
       console.log(error);
     })
   }
