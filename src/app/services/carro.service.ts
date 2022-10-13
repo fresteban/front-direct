@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Cesta } from '../interfaces/cesta';
+import { ItemPedido } from '../interfaces/item-pedido';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarroService {
 
-  public listaCarro : any = []
+  public listaCarro : Cesta[] = [];
+  public listaItemPedido : ItemPedido[] = [];
   public listaProductos = new BehaviorSubject<any>([]);
 
   constructor() { }
@@ -23,6 +26,7 @@ export class CarroService {
     this.listaProductos.next(this.listaCarro);
     this.obtenerPrecio();
     console.log(this.listaCarro);
+    console.log(this.listaProductos);
   }
   obtenerPrecio() : number{
     let total = 0;

@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Item } from 'src/app/interfaces/item';
 
 
+
+
 declare var window:any;
 
 @Component({
@@ -39,7 +41,7 @@ export class FormularioModificarItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formModal = new window.bootstrapApplication.Modal(
+    this.formModal = new window.bootstrap.Modal(
       document.getElementById("exampleModal")
     );
   }
@@ -62,4 +64,5 @@ export class FormularioModificarItemComponent implements OnInit {
       disponibilidad: false
     }
   }
+
 }

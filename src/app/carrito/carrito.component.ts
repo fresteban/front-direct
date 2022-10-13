@@ -13,7 +13,7 @@ export class CarritoComponent implements OnInit {
   listaItems: Item[] = [];
   public listaProductos : any;
   public productos : any;
-  public totalfinal !: number;
+  public totalfinal ?: number;
 
   constructor(private _itemService: ItemService, private _carroService: CarroService) { }
 
