@@ -1,5 +1,4 @@
-import { ItemPedido } from './item-pedido';
-
+import { ItemPedido } from "./item-pedido";
 
 export interface Cesta {
   id_: number;

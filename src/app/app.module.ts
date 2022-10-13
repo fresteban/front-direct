@@ -14,6 +14,8 @@ import { NavbarComponent } from './compartido/navbar/navbar.component';
 
 import { RouterModule } from '@angular/router';
 import { AdminMainPageComponent } from './admin/admin-main-page/admin-main-page.component';
+import { CompartidoModule } from './compartido/compartido.module';
+import { CartaModule } from './carta/carta.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { AdminMainPageComponent } from './admin/admin-main-page/admin-main-page.
     BrowserModule,
     AppRoutingModule,
     AdminModule,
+    CartaModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
