@@ -39,8 +39,8 @@ export class FormularioModificarItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formModal = new window.bootstrapApplication.Modal(
-      document.getElementById("exampleModal")
+    this.formModal = new window.bootstrap.Modal(
+      document.getElementById("modalEditar")
     );
   }
 
