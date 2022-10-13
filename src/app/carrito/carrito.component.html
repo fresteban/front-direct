@@ -14,15 +14,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Taco Picao a choro</td>
-                        <td>Un taco pa los cogoteros</td>
-                        <td>159723</td>
-                        <td><img src="../../assets/Arquitectura Logica - Page 1.png" alt=""></td>
-                        <td>3</td>
-                        <td>470252</td>
+                    <tr *ngFor="let item of productos; let i = index">
+                        <td>{{item.nombre}}</td>
+                        <td>{{item.descripcion}}</td>
+                        <td>{{item.precio}}</td>
+                        <td><img src="{{item.foto}}" alt="" class="imgtmn"></td>
+                        <td>{{item.cantidad}}</td>
+                        <td>{{item.total}}</td>
                         <td>
-                            <button class="btn btn-danger">Eliminar</button>
+                            <button (click)="quitarItem(item)" class="btn btn-danger">Eliminar</button>
                         </td>
                     </tr>
                 </tbody>
