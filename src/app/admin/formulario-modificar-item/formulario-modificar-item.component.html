@@ -11,53 +11,45 @@
             <!-- Form Group -->
             <form [formGroup]="itemForm" (ngSubmit)="modificarItem(editItem)">
               <!-- Campo Nombre -->
-              <div class="form-outline">
-                <input formControlName="nombre" type="text" placeholder="Nombre" [value]="editItem.nombre"
-                  [(ngModel)]="editItem.nombre" />
-                <label class="form-label" for="form6Example1"></label>
-                <p *ngIf="itemForm.get('nombre')?.hasError('required')">Campo obligatorio</p>
+              <div class="parte">
+                <label for="nombreItem">Nombre Item</label>
+                <input type="text" formControlName="nombre" class="form-control form-control-lg">
+                <div class="text-danger" *ngIf="itemForm.get('nombre')?.hasError('required') && itemForm.get('nombre')?.touched">
+                  <span>El campo es obligatorio</span>
+                </div>
               </div>
-              <hr>
               <!-- Campo Descripcion -->
-              <div class="form-outline mb-4">
-                <input formControlName="descripcion" type="text" placeholder="Descripción" [value]="editItem.descripcion"
-                  [(ngModel)]="editItem.descripcion" />
-                <label class="form-label" for="form6Example3"></label>
-                <p *ngIf="itemForm.get('descripcion')?.hasError('required')">Campo obligatorio</p>
+              <div class="parte">
+                <label for="descripcionItem">Descripcion</label>
+                <textarea class="form-control" formControlName="descripcion" required rows="3"></textarea>
+                <div class="text-danger" *ngIf="itemForm.get('descripcion')?.hasError('required') && itemForm.get('descripcion')?.touched">
+                  <span>El campo es obligatorio</span>
+                </div>
               </div>
-              <hr>
               <!-- Campo Precio -->
-              <div class="form-outline mb-4">
-                <input formControlName="precio" type="number" placeholder="Precio" />
-                <label class="form-label" for="form6Example4"></label>
-                <p *ngIf="itemForm.get('precio')?.hasError('required')">Campo obligatorio</p>
-              </div>
-              <hr>
-              <!-- Campo Tipo -->
-              <div>
-                <div class="form-check">
-                  <input formControlName="tipo" class="form-check-input" value="alimento" type="radio"
-                    id="flexRadioDefault1" />
-                  <label class="form-check-label" for="flexRadioDefault1"> Alimento </label>
+              <div class="parte">
+                <label for="precioItem">Precio</label>
+                <input type="number" formControlName="precio" class="form-control form-control-lg" required>
+                <div class="text-danger" *ngIf="itemForm.get('precio')?.hasError('required') && itemForm.get('precio')?.touched">
+                  <span>El campo es obligatorio</span>
                 </div>
-
-                <div class="form-check">
-                  <input formControlName="tipo" class="form-check-input" value="bebestible" type="radio"
-                    id="flexRadioDefault2" />
-                  <label class="form-check-label" for="flexRadioDefault2"> Bebestible </label>
-                </div>
-                <p *ngIf="itemForm.get('tipo')?.hasError('required')">Campo obligatorio</p>
               </div>
-              <hr>
               <!-- Campo Imagen -->
-              <div class="form-outline mb-4">
-                <input formControlName="imagen" type="text" placeholder="Imagen" id="form6Example4" />
-                <label class="form-label" for="form6Example4"></label>
-                <p *ngIf="itemForm.get('imagen')?.hasError('required')">Campo obligatorio</p>
+              <div class="parte ">
+                <div class="custom-file">
+                  <input formControlName="imagen" type="file" class="custom-file-input" id="customFileLang" lang="es" accept="image/png, image/gif, image/jpeg" required>
+                  <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                </div>
+                <div class="text-danger" *ngIf="itemForm.get('imagen')?.hasError('required') && itemForm.get('imagen')?.touched">
+                  <span>El campo es obligatorio</span>
+                </div>
               </div>
             </form>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="ngSubmit" class="btn btn-primary" data-bs-dismiss="modal">Guardar Cambios</button>
+            <div class="parte">
+              <button type="button" class="botonAbajo btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+              <button type="ngSubmit" class="botonAbajo btn btn-primary" data-bs-dismiss="modal">Guardar Cambios</button>
+            </div>
+            
           </div>
         </div>
       </div>

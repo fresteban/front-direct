@@ -19,6 +19,14 @@ export class ItemService {
     return this.http.post(this.url, item);
   }
 
+  eliminarItem(id: String): Observable<any> {
+    return this.http.delete(this.url + id);
+  }
+
+  obtenerItem(id: String): Observable<any> {
+    return this.http.get(this.url + id);
+  }
+
   private _foodList: Item[] = [{
     nombre: 'Comida ejemplo',
     descripcion: 'Comida Comida Comida',
