@@ -1,11 +1,12 @@
-import { ItemPedido } from "./item-pedido";
+import { Item } from "./item";
 
 export interface Cesta {
   id_: number;
   activo: boolean;
   fechaInicio: Date;
   estado: string;
-  listaItems: ItemPedido;
+  listaItems: Item[];
   totalCesta: number;
-  mesa: number;
+  // Configurar el link de mesa
+  // mesa: number;
 }

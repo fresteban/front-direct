@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Item } from 'src/app/interfaces/item';
 
 
+
+
 declare var window:any;
 
 @Component({
@@ -62,4 +64,5 @@ export class FormularioModificarItemComponent implements OnInit {
       disponibilidad: false
     }
   }
+
 }
