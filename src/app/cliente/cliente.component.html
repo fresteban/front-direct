@@ -23,7 +23,7 @@
             <br>
             <h4>${{item.precio}} CLP</h4>
             <div class="flota text-center">
-                <button type="button" class="btn btn-outline-success align-self-center" *ngIf="item.disponibilidad">Agregar</button>
+                <button type="button" class="btn btn-outline-success align-self-center" *ngIf="item.disponibilidad" (click)=agregarCarro(item)>Agregar</button>
                 <button type="button" class="btn btn-outline-info align-self-center" *ngIf="!item.disponibilidad">No Disponible</button>
             </div>
         </div>
