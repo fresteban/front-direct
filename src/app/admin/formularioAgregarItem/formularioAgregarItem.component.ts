@@ -42,7 +42,7 @@ export class FormularioAgregarItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.formModal = new window.bootstrap.Modal(
-      document.getElementById("itemForm")
+      document.getElementById("exampleModal")
     );
   }
 
