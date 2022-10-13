@@ -1,0 +1,44 @@
+<ng-container *ngIf="true">
+    <div class="card-table">
+        <div class="card-product">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Precio</th>
+                        <th>Foto</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of productos; let i = index">
+                        <td>{{item.nombre}}</td>
+                        <td>{{item.descripcion}}</td>
+                        <td>{{item.precio}}</td>
+                        <td><img src="{{item.foto}}" alt="" class="imgtmn"></td>
+                        <td>{{item.cantidad}}</td>
+                        <td>{{item.total}}</td>
+                        <td>
+                            <button (click)="quitarItem(item)" class="btn btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="false">
+<div class="container">
+    <h5 class="carro">Mi Pedido</h5>
+    <div class="center">
+        <img src="" alt="">
+        <h4>Tu carrito está vacío!</h4>
+        <h6>Agregale un producto!</h6>
+        <button class="btn btn-outline-info bg-dark" type="submit" routerLink="/cliente">VOLVER AL MENÚ</button>
+    </div>
+</div>
+</ng-container>
