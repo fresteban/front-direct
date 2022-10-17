@@ -21,19 +21,21 @@ export class FormularioModificarItemComponent implements OnInit {
   @Input()
   editItem: Item = {
     nombre: '',
-    descripcion: '',
+    detalle: '',
     precio: 0,
-    tipo: '',
+    categoria: '',
+    subcategoria: '',
     foto: '',
-    disponibilidad: false
+    estado: ''
   }
 
   constructor(private ItemService: ItemService, private fb: FormBuilder, private router: Router, private _itemService: ItemService, private toastr: ToastrService) {
     this.itemForm = this.fb.group({
       nombre: [''],
-      descripcion: [''],
+      detalle: [''],
       precio: [''],
-      tipo: [''],
+      categoria: [''],
+      subcategoria: [''],
       imagen: ['']
     })
   }
@@ -55,11 +57,12 @@ export class FormularioModificarItemComponent implements OnInit {
   modificarItem(item : Item){
     const newItem: Item = {
       nombre: this.itemForm.get('nombre')?.value,
-      descripcion: this.itemForm.get('descripcion')?.value,
+      detalle: this.itemForm.get('detalle')?.value,
       precio: this.itemForm.get('precio')?.value,
-      tipo: this.itemForm.get('tipo')?.value,
+      categoria: this.itemForm.get('categoria')?.value,
+      subcategoria: '',
       foto: this.itemForm.get('foto')?.value,
-      disponibilidad: false
+      estado: 'no disponible'
     }
   }
 }

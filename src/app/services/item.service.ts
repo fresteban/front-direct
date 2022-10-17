@@ -7,7 +7,7 @@ import { Item } from '../interfaces/item';
   providedIn: 'root'
 })
 export class ItemService {
-  url = 'http://localhost:4000/api/items/';
+  url = 'http://localhost:4000/api/Item';
  
   constructor(private http: HttpClient) { }
 
@@ -25,39 +25,6 @@ export class ItemService {
 
   obtenerItem(id: String): Observable<any> {
     return this.http.get(this.url + id);
-  }
-
-  private _foodList: Item[] = [{
-    nombre: 'Comida ejemplo',
-    descripcion: 'Comida Comida Comida',
-    precio: 100,
-    tipo: '1',
-    foto: '',
-    disponibilidad: true
-  }];
-  private _drinkList: Item[] = [{
-    nombre: 'Bebida ejemplo',
-    descripcion: 'Bebida Bebida Bebida',
-    precio: 200,
-    tipo: '1',
-    foto: '',
-    disponibilidad: true
-  }];
-
-  get foodList(): Item[] {
-    return [...this._foodList]
-  }
-
-  get drinkList(): Item[] {
-    return [...this._drinkList]
-  }
-
-  addFood(food: Item){
-    this._foodList.push(food);
-  }
-
-  addDrink(drink: Item){
-    this._drinkList.push(drink);
   }
   
 }
