@@ -23,11 +23,11 @@
                   <span>El campo es obligatorio</span>
                 </div>
               </div>
-              <!-- Campo Descripcion -->
+              <!-- Campo Detalle -->
               <div class="parte">
-                <label for="descripcionItem">Descripcion</label>
-                <textarea class="form-control" formControlName="descripcion" required rows="3"></textarea>
-                <div class="text-danger" *ngIf="itemForm.get('descripcion')?.hasError('required') && itemForm.get('descripcion')?.touched">
+                <label for="detalleItem">Detalle</label>
+                <textarea class="form-control" formControlName="detalle" required rows="3"></textarea>
+                <div class="text-danger" *ngIf="itemForm.get('detalle')?.hasError('required') && itemForm.get('detalle')?.touched">
                   <span>El campo es obligatorio</span>
                 </div>
               </div>
@@ -43,16 +43,16 @@
               <div class="parte">
                 <label for="precioItem">Tipo de Item</label>
                 <div class="form-check">
-                  <input formControlName="tipo" class="form-check-input" value="alimento" type="radio"
+                  <input formControlName="categoria" class="form-check-input" value="alimento" type="radio"
                     id="flexRadioDefault1"/>
                   <label class="form-check-label" for="flexRadioDefault1"> Alimento </label>
                 </div>
                 <div class="form-check">
-                  <input formControlName="tipo" class="form-check-input" value="bebestible" type="radio"
+                  <input formControlName="categoria" class="form-check-input" value="bebestible" type="radio"
                     id="flexRadioDefault2" />
                   <label class="form-check-label" for="flexRadioDefault2"> Bebestible </label>
                 </div>
-                <div class="text-danger" *ngIf="itemForm.get('tipo')?.hasError('required') && itemForm.get('tipo')?.touched">
+                <div class="text-danger" *ngIf="itemForm.get('categoria')?.hasError('required') && itemForm.get('categoria')?.touched">
                   <span>El campo es obligatorio</span>
                 </div>
               </div>

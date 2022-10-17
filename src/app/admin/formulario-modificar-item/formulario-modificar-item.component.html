@@ -18,11 +18,11 @@
                   <span>El campo es obligatorio</span>
                 </div>
               </div>
-              <!-- Campo Descripcion -->
+              <!-- Campo Detalle -->
               <div class="parte">
-                <label for="descripcionItem">Descripcion</label>
-                <textarea class="form-control" formControlName="descripcion" required rows="3"></textarea>
-                <div class="text-danger" *ngIf="itemForm.get('descripcion')?.hasError('required') && itemForm.get('descripcion')?.touched">
+                <label for="detalleItem">Detalle</label>
+                <textarea class="form-control" formControlName="detalle" required rows="3"></textarea>
+                <div class="text-danger" *ngIf="itemForm.get('detalle')?.hasError('required') && itemForm.get('detalle')?.touched">
                   <span>El campo es obligatorio</span>
                 </div>
               </div>

@@ -53,11 +53,11 @@ export class ItemTableComponent implements OnInit {
   newItem: Item = {
     id: 0,
     nombre: '',
-    descripcion: '',
+    detalle: '',
     precio: 0,
-    tipo: '',
+    categoria: '',
     foto: '',
-    disponibilidad: false
+    estado: false
   }
 
   get foodList() {
@@ -83,29 +83,29 @@ export class ItemTableComponent implements OnInit {
       return;
     }
 
-    if(this.newItem.tipo === '1'){
+    if(this.newItem.categoria === '1'){
       this.ItemService.addFood(this.newItem);
       this.newItem = {
         id: 0,
         nombre: '',
-        descripcion: '',
+        detalle: '',
         precio: 0,
-        tipo: '',
+        categoria: '',
         foto: '',
-        disponibilidad: false
+        estado: false
       };
       console.log('Comida agregada');
     }
-    else if(this.newItem.tipo === '0'){
+    else if(this.newItem.categoria === '0'){
       this.ItemService.addDrink(this.newItem);
       this.newItem = {
         id: 0,
         nombre: '',
-        descripcion: '',
+        detalle: '',
         precio: 0,
-        tipo: '',
+        categoria: '',
         foto: '',
-        disponibilidad: false
+        estado: false
       };
       console.log('Bebida agregada');
     }

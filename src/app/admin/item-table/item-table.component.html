@@ -7,16 +7,16 @@
           <th scope="col">Nombre</th>
           <th scope="col">Descripción</th>
           <th scope="col">Precio</th>
-          <th scope="col">Disponibilidad</th>
+          <th scope="col">Estado</th>
           <th scope="col">Modificar</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of listaItems" class="table-active">
           <td> {{item.nombre}} </td>
-          <td> {{item.descripcion}} </td>
+          <td> {{item.detalle}} </td>
           <td> {{item.precio}} </td>
-          <td> {{item.disponibilidad}} </td>
+          <td> {{item.estado}} </td>
           <td>
             <ul class="navega">
               <li>

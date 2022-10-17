@@ -16,15 +16,15 @@
     </div>
 </div>
 <ol class="list-group" *ngFor="let item of listaItems">
-    <li class="list-group-item d-flex justify-content-between align-items-start" *ngIf="item.tipo == 'alimento'">
+    <li class="list-group-item d-flex justify-content-between align-items-start" *ngIf="item.categoria == 'comida'">
         <div class="col-md-7 ms-2 me-auto">
             <div class="fw-bold">{{item.nombre}}</div>
-            {{item.descripcion}}
+            {{item.detalle}}
             <br>
             <h4>${{item.precio | number}} Pesos</h4>
             <div class="flota text-center">
-                <button type="button" class="btn btn-outline-success align-self-center" *ngIf="item.disponibilidad" (click)=agregarCarro(item)>Agregar</button>
-                <button type="button" class="btn btn-secondary" *ngIf="!item.disponibilidad" disabled>No Disponible</button>
+                <button type="button" class="btn btn-outline-success align-self-center" *ngIf="item.estado" (click)=agregarCarro(item)>Agregar</button>
+                <button type="button" class="btn btn-outline-info align-self-center" *ngIf="!item.estado">No Disponible</button>
             </div>
         </div>
         <img src="{{item.foto}}" width="35%" height="35%" alt="" class="ms-2 align-self-center">
@@ -35,8 +35,8 @@
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
             <div class="flota text-center">
                 <button type="button" class="btn btn-outline-success align-self-center" >Agregar</button>
-
-                *ngIf="{{item.disponibilidad}} != true"
+               
+                *ngIf="{{item.estado}} != true"
                 <button type="button" class="btn btn-outline-success align-self-center">No Disponible</button>
             </div>
         </div>
@@ -62,39 +62,17 @@
     </div>
 </div>
 <ol class="list-group" *ngFor="let item of listaItems">
-    <li class="list-group-item d-flex justify-content-between align-items-start" *ngIf="item.tipo == 'bebidas'">
+    <li class="list-group-item d-flex justify-content-between align-items-start" *ngIf="item.categoria == 'bebidas'">
         <div class="col-md-7 ms-2 me-auto">
             <div class="fw-bold">{{item.nombre}}</div>
-            {{item.descripcion}}
+            {{item.detalle}}
             <br>
             <h4>${{item.precio}} CLP</h4>
             <div class="flota text-center">
-                <button type="button" class="btn btn-outline-success align-self-center" *ngIf="item.disponibilidad">Agregar</button>
-                <button type="button" class="btn btn-outline-info align-self-center" *ngIf="!item.disponibilidad">No Disponible</button>
+                <button type="button" class="btn btn-outline-success align-self-center" *ngIf="item.estado">Agregar</button>
+                <button type="button" class="btn btn-outline-info align-self-center" *ngIf="!item.estado">No Disponible</button>
             </div>
         </div>
-        <img src="{{item.foto}}" width="35%" height="35%" alt="" class="ms-2 align-self-center" *ngIf="item.tipo == 'bebidas'">
+        <img src="{{item.foto}}" width="35%" height="35%" alt="" class="ms-2 align-self-center" *ngIf="item.categoria == 'bebidas'">
     </li>
-    <!--
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="col-md-7 ms-2 me-auto">
-            <div class="fw-bold">Tussy</div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            <div class="flota text-center">
-                <button type="button" class="btn btn-outline-success align-self-center">Agregar</button>
-            </div>
-        </div>
-        <img src="../../../assets/Arquitectura Logica - Page 1.png" width="35%" height="35%" alt="" class="ms-2 align-self-center">
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="col-md-7 ms-2 me-auto">
-            <div class="fw-bold">Marihuana</div>
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            <div class="flota text-center">
-                <button type="button" class="btn btn-outline-success align-self-center">Agregar</button>
-            </div>
-        </div>
-        <img src="../../../assets/Arquitectura Logica - Page 1.png" width="35%" height="35%" alt="" class="ms-2 align-self-center">
-    </li>
-    -->
 </ol>
