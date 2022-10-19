@@ -7,8 +7,8 @@ import { Item } from '../interfaces/item';
   providedIn: 'root'
 })
 export class ItemService {
-  url = 'http://localhost:4000/api/Item';
- 
+  url = 'http://localhost:4000/api/Item/';
+
   constructor(private http: HttpClient) { }
 
   getItems(): Observable<any> {
@@ -20,11 +20,13 @@ export class ItemService {
   }
 
   eliminarItem(id: String): Observable<any> {
+    console.log('siuuuu');
+    console.log(id);
     return this.http.delete(this.url + id);
   }
 
   obtenerItem(id: String): Observable<any> {
     return this.http.get(this.url + id);
   }
-  
+
 }

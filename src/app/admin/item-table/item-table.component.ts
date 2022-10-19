@@ -45,7 +45,7 @@ export class ItemTableComponent implements OnInit {
   }
 
   doSomething()
-  { 
+  {
      this.obtenerItems();
   }
   /*

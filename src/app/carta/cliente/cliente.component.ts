@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ItemService } from 'src/app/services/item.service';
 import { Item } from 'src/app/interfaces/item';
 import { CarroService } from 'src/app/services/carro.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cliente',
@@ -12,7 +13,7 @@ export class ClienteComponent implements OnInit {
 
   listaItems: Item[] = [];
 
-  constructor(private _itemService: ItemService, private _carroService: CarroService) { }
+  constructor(private _itemService: ItemService, private _carroService: CarroService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.obtenerItems();
@@ -28,8 +29,9 @@ export class ClienteComponent implements OnInit {
   }
 
   agregarCarro(item : any) {
+    this.toastr.success('Item agregado a la cesta')
     this._carroService.agregarCarro(item);
-    
+
   }
 
 }
