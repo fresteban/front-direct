@@ -11,7 +11,7 @@
 <div class="tacokun text-center">
     <div class="row">
         <div class="col">
-            <h5>Tacos</h5>
+            <h5>Alimentos</h5>
         </div>
     </div>
 </div>
@@ -21,7 +21,7 @@
             <div class="fw-bold">{{item.nombre}}</div>
             {{item.detalle}}
             <br>
-            <h4>${{item.precio}} CLP</h4>
+            <h4>${{item.precio | number}} Pesos</h4>
             <div class="flota text-center">
                 <button type="button" class="btn btn-outline-success align-self-center" *ngIf="item.estado" (click)=agregarCarro(item)>Agregar</button>
                 <button type="button" class="btn btn-outline-info align-self-center" *ngIf="!item.estado">No Disponible</button>
