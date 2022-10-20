@@ -7,7 +7,7 @@ import { FormularioModificarItemComponent } from '../formulario-modificar-item/f
 import { ToastrService } from 'ngx-toastr';
 
 
-declare var window:any;
+declare var window: any;
 @Component({
   selector: 'app-item-table',
   templateUrl: './item-table.component.html',
@@ -19,7 +19,7 @@ export class ItemTableComponent implements OnInit {
   formModal: any;
 
   constructor(private _itemService: ItemService,
-        private toastr: ToastrService) { }
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.obtenerItems();
@@ -35,18 +35,18 @@ export class ItemTableComponent implements OnInit {
     })
   }
 
-  eliminarItem(id: any){
-    this._itemService.eliminarItem(id).subscribe(data => {
-      this.toastr.error('El producto fue eliminado con exito', 'Producto eliminado');
-      this.obtenerItems();
-    },error => {
-      console.log(error);
-    })
+  eliminarItem(id: any) {
+    if (confirm('Esta seguro de eliminar?'))
+      this._itemService.eliminarItem(id).subscribe(data => {
+        this.toastr.error('El producto fue eliminado con exito', 'Producto eliminado');
+        this.obtenerItems();
+      }, error => {
+        console.log(error);
+      })
   }
 
-  doSomething()
-  { 
-     this.obtenerItems();
+  doSomething() {
+    this.obtenerItems();
   }
   /*
   @Input()
