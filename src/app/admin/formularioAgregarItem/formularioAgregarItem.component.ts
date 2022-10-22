@@ -19,6 +19,8 @@ export class FormularioAgregarItemComponent implements OnInit {
   @Output() newItemEvent = new EventEmitter<string>();
   formModal: any;
   itemForm: FormGroup;
+  categorias: String[] = ['Comida', 'Bebestible'];
+  subcategorias: String[] = [];
 
   @Input()
   newItem: Item = {
@@ -37,6 +39,7 @@ export class FormularioAgregarItemComponent implements OnInit {
       detalle: ['', [Validators.required]],
       precio: ['', [Validators.required]],
       categoria: ['', [Validators.required]],
+      subcategoria: ['', [Validators.required]],
       imagen: ['', [Validators.required]]
     })
   }
@@ -45,6 +48,15 @@ export class FormularioAgregarItemComponent implements OnInit {
     this.formModal = new window.bootstrap.Modal(
       document.getElementById("exampleModal")
     );
+    this.cargarSubCategorias();
+    console.log("veve; ", this.categorias);
+  }
+
+  cargarSubCategorias() {
+    this._itemService.obtenerSubCategorias().subscribe(data => {
+      console.log("data: ", data);
+      this.subcategorias = data;
+    })
   }
 
   agregarItem() {
@@ -54,7 +66,7 @@ export class FormularioAgregarItemComponent implements OnInit {
       detalle: this.itemForm.get('detalle')?.value,
       precio: this.itemForm.get('precio')?.value,
       categoria: this.itemForm.get('categoria')?.value,
-      subcategoria: '', //INCOMPLETO
+      subcategoria: this.itemForm.get('subcategoria')?.value,
       foto: this.itemForm.get('foto')?.value,
       estado: 'no disponible'
     }
@@ -72,7 +84,7 @@ export class FormularioAgregarItemComponent implements OnInit {
 
   }
 
-  inicio(){
+  inicio() {
     this.itemForm.reset();
   }
 

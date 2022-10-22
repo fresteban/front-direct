@@ -1,4 +1,4 @@
-import { Cesta } from "./cesta";
+import { Cesta } from "./carro";
 
 export interface Pedido {
   id_: number;

@@ -15,7 +15,7 @@ export class ItemService {
     return this.http.get(this.url);
   }
 
-  guardarItem(item: Item): Observable<any>{
+  guardarItem(item: Item): Observable<any> {
     return this.http.post(this.url, item);
   }
 
@@ -29,4 +29,7 @@ export class ItemService {
     return this.http.get(this.url + id);
   }
 
+  obtenerSubCategorias(): Observable<any> {
+    return this.http.get(this.url + 'subcategorias');
+  }
 }

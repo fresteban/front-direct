@@ -17,6 +17,4 @@ export class Item {
     this.foto = foto;
     this.estado = estado;
   }
-
-
 }
