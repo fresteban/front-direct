@@ -20,6 +20,8 @@ export class ItemService {
   }
 
   eliminarItem(id: String): Observable<any> {
+    console.log('siuuuu');
+    console.log(id);
     return this.http.delete(this.url + id);
   }
 

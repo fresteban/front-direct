@@ -16,7 +16,7 @@
           <td> {{item.nombre}} </td>
           <td> {{item.detalle}} </td>
           <td> {{item.precio}} </td>
-          <td> {{item.estado}} </td>
+          <td class="text-capitalize"> {{item.estado}} </td>
           <td>
             <ul class="navega">
               <li>
@@ -30,12 +30,30 @@
               </li>
               <li>
                 <!-- Botón Eliminar -->
-                <button class="boton-modificar" (click)="eliminarItem(item._id)">
+                <button class="boton-modificar" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                     <path
                       d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
                   </svg>
                 </button>
+                <!-- Modal para eliminar Item -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">¿Está seguro del cambio?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        ¿Está seguro que desea eliminar este producto del menú?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" (click)="eliminarItem(item._id)">Confirmar</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </li>
             </ul>
           </td>
