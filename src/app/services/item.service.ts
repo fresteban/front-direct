@@ -26,7 +26,7 @@ export class ItemService {
   obtenerItem(id: String): Observable<any> {
     return this.http.get(this.url + id);
   }
-  
+
   obtenerSubCategorias(): Observable<any> {
     return this.http.get(this.url + 'subcategorias');
   }

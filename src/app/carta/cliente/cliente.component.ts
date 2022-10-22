@@ -1,3 +1,5 @@
+import { Categoria } from './../../interfaces/categoria';
+import { CategoriasService } from './../../services/categorias.service';
 import { Component, OnInit } from '@angular/core';
 import { ItemService } from 'src/app/services/item.service';
 import { Item } from 'src/app/interfaces/item';
@@ -10,15 +12,25 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./cliente.component.scss']
 })
 export class ClienteComponent implements OnInit {
-  subcategorias: String[] = [];
+  subcategorias: string[] = [];
   listaItems: Item[] = [];
-  categorias: String[] = ['Comida', 'Bebestible'];
+  categorias: string[] = ['Comida', 'Bebestible'];
+  cat: Categoria[] = [];
 
-  constructor(private _itemService: ItemService, private _carroService: CarroService, private toastr: ToastrService) { }
+  constructor(private _itemService: ItemService, private _carroService: CarroService, private _categoriaService: CategoriasService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.obtenerItems();
     this.cargarSubCategorias();
+    this.cargarCategorias();
+  }
+
+  cargarCategorias() {
+    this._categoriaService.obtenerCategorias().subscribe(data => {
+      console.log("data:; ", data);
+      this.cat = data;
+      console.log("this.cat: ", this.cat);
+    })
   }
 
   cargarSubCategorias() {
@@ -37,10 +49,10 @@ export class ClienteComponent implements OnInit {
     })
   }
 
-  agregarCarro(item : any) {
+  agregarCarro(item: any) {
     this.toastr.success('Item agregado a la cesta')
     this._carroService.agregarCarro(item);
-    
+
   }
 
 }

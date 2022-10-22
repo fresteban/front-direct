@@ -9,13 +9,64 @@
     </div>
   </div>
 </div>
-<div *ngFor="let categoria of categorias">
-  <div class="text-center tacokun"><h5>{{categoria}}</h5></div>
-  <div *ngFor="let subcategoria of subcategorias">
-    <div class="text-center bebichan"><h4>{{subcategoria}}</h4></div>
+<div *ngFor="let categoria of cat">
+  <div class="text-center tacokun">
+    <h5>{{categoria.categoria}}</h5>
+  </div>
+
+  <div *ngFor="let subcategoria of categoria.subcategoria">
+    <div class="text-center bebichan">
+      <h4>{{subcategoria}}</h4>
+    </div>
+    <div *ngFor="let item of listaItems">
+      <div class="d-flex justify-content-center" *ngIf="item.categoria == categoria.categoria && item.subcategoria == subcategoria
+        && item.estado != 'eliminado'">
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-8 nopadding">
+              <div class="card-body">
+                <h5 class="card-title col-7">{{item.nombre}}</h5>
+                <p class="card-text">{{item.detalle}}</p>
+              </div>
+            </div>
+            <div class="col-4 nopadding">
+              <div class="row">
+                <img
+                  src="https://static.vecteezy.com/system/resources/previews/007/062/757/non_2x/shawarma-character-buritto-fast-food-cartoon-chicken-vegetables-roll-meal-doner-gebab-shawarma-flat-cartoon-illustration-arabic-eastern-food-burittos-mexican-food-free-vector.jpg"
+                  class="card-img" alt="...">
+              </div>
+              <div class="row">
+                <h5 class="text-success">$ {{item.precio}}</h5>
+              </div>
+              <div class="row">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <div class="col-xs-1">
+                    <button type="button" class="btn btn-warning form-control">-</button>
+                  </div>
+                  <div class="col-xs-2">
+                    <input type="number" class="form-control" name="cantidad" id="cantidad">
+                  </div>
+                  <div class="col-xs-1">
+                    <button type="button" class="btn btn-warning form-control">+</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div *ngIf="item.estado == 'disponible'" class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-success" (click)=agregarCarro(item)>Agregar a la Cesta</button>
+                </div>
+                <div *ngIf="item.estado != 'disponible'" class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-secondary disable">No disponible</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-<div class="tacokun text-center">
+<!-- <div class="tacokun text-center">
   <div class="row">
     <div class="col">
       <h5>Alimentos</h5>
@@ -61,4 +112,4 @@
     <img src="{{item.foto}}" width="35%" height="35%" alt="" class="ms-2 align-self-center"
       *ngIf="item.categoria == 'bebidas'">
   </li>
-</ol>
+</ol> -->
