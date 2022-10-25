@@ -33,7 +33,7 @@ export class FormularioAgregarItemComponent implements OnInit {
     estado: 'no disponible'
   }
 
-  constructor(private ItemService: ItemService, private fb: FormBuilder, private router: Router, private _itemService: ItemService, private toastr: ToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private _itemService: ItemService, private toastr: ToastrService) {
     this.itemForm = this.fb.group({
       nombre: ['', [Validators.required]],
       detalle: ['', [Validators.required]],
