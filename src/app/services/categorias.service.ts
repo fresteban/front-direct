@@ -16,4 +16,7 @@ export class CategoriasService {
     return this.http.get(this.url)
   }
 
+  obtenerCategoriasTotal(): Observable<any> {
+    return this.http.get(this.url + 'categorias');
+  }
 }

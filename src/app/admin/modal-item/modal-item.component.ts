@@ -4,6 +4,8 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ItemService } from 'src/app/services/item.service';
 import { Item } from 'src/app/interfaces/item';
 import { ToastrService } from 'ngx-toastr';
+import { CategoriasService } from '../../services/categorias.service';
+import { Categoria } from '../../interfaces/categoria';
 
 @Component({
   selector: 'app-modal-item',
@@ -13,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ModalItemComponent implements OnInit {
   categorias: String[] = ['Comida', 'Bebestible'];
   subcategorias: String[] = [];
+  cat: Categoria[] = [];
   itemForm: FormGroup;
   title = '';
 
@@ -30,6 +33,7 @@ export class ModalItemComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private modalService: NgbModal,
     private _itemService: ItemService,
+    private _categoriaService: CategoriasService,
     private toastr: ToastrService) {
     this.itemForm = this.fb.group({
       nombre: ['', [Validators.required]],
@@ -43,12 +47,21 @@ export class ModalItemComponent implements OnInit {
   @ViewChild('content') addview!: ElementRef
 
   ngOnInit(): void {
+    this.cargarCategorias();
     this.cargarSubCategorias();
   }
 
   cargarSubCategorias() {
     this._itemService.obtenerSubCategorias().subscribe(data => {
       this.subcategorias = data;
+    })
+  }
+
+  cargarCategorias() {
+    this._categoriaService.obtenerCategoriasTotal().subscribe(data => {
+      console.log("data:; ", data);
+      this.cat = data;
+      console.log("this.cat: ", this.cat);
     })
   }
 
@@ -73,7 +86,7 @@ export class ModalItemComponent implements OnInit {
 
       if (this.editdata) {
         console.log(this.editdata._id)
-        console.log("A VER: ", newItem);
+        console.log("AbER: ", newItem);
         //values = this.itemForm.getRawValue()
         this._itemService.actualizarItem(newItem, this.editdata._id).subscribe(data => {
           console.log(this.saveresponse);
