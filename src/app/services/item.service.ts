@@ -43,8 +43,8 @@ export class ItemService {
     return this.http.get(this.url + 'subcategorias');
   }
 
-  actualizarItem(item:any): Observable<any> {
-    return this.http.put(this.url+item._id, item).pipe(
+  actualizarItem(item:Item, id:string): Observable<any> {
+    return this.http.put(this.url+id, item).pipe(
       tap(() => {
         this._refreshrequired.next();
       })
