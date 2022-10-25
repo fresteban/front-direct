@@ -6,12 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormularioAgregarItemComponent } from './formularioAgregarItem/formularioAgregarItem.component';
 import { FormularioModificarItemComponent } from './formulario-modificar-item/formulario-modificar-item.component';
 import { RouterModule } from '@angular/router';
+import { ModalItemComponent } from './modal-item/modal-item.component';
 @NgModule({
   declarations: [
     AdminMainPageComponent,
     ItemTableComponent,
     FormularioAgregarItemComponent,
-    FormularioModificarItemComponent
+    FormularioModificarItemComponent,
+    ModalItemComponent
   ],
   exports: [
     AdminMainPageComponent

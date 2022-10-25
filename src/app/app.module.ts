@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { AdminMainPageComponent } from './admin/admin-main-page/admin-main-page.component';
 import { CompartidoModule } from './compartido/compartido.module';
 import { CartaModule } from './carta/carta.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CartaModule } from './carta/carta.module';
       {path: 'admin',component:AdminMainPageComponent},
       {path: 'carrito',component:CarritoComponent},
       {path: '**',redirectTo:'/',pathMatch:'full'},
-    ])
+    ]),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

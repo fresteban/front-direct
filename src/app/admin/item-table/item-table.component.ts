@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Item } from '../../interfaces/item';
 import { ItemService } from '../../services/item.service';
 import { ToastrService } from 'ngx-toastr';
+import { ModalItemComponent } from '../modal-item/modal-item.component';
 
 
 declare var window: any;
@@ -16,12 +17,18 @@ export class ItemTableComponent implements OnInit {
   formModal: any;
 
   constructor(private _itemService: ItemService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService) {
+      this._itemService.Refreshrequired.subscribe(result => {
+        this.obtenerItems();
+      })
+     }
+
+  @ViewChild(ModalItemComponent) addView !:ModalItemComponent
 
   ngOnInit(): void {
     this.obtenerItems();
-
   }
+
 
   obtenerItems() {
     this._itemService.getItems().subscribe(data => {
@@ -40,6 +47,10 @@ export class ItemTableComponent implements OnInit {
       }, error => {
         console.log(error);
       })
+  }
+
+  editarItem(id: any) {
+    this.addView.cargarItemEditar(id);
   }
 
   doSomething() {
