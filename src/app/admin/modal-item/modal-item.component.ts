@@ -73,19 +73,19 @@ export class ModalItemComponent implements OnInit {
 
       if (this.editdata) {
         console.log(this.editdata._id)
+        console.log("A VER: ", newItem);
         //values = this.itemForm.getRawValue()
-        this._itemService.actualizarItem(this.itemForm.getRawValue()).subscribe(data => {
+        this._itemService.actualizarItem(newItem, this.editdata._id).subscribe(data => {
           console.log(this.saveresponse);
           console.log("EDIT");
         });
       }
       else {
-        this._itemService.guardarItem(this.itemForm.getRawValue()).subscribe(data => {
-          this.saveresponse = data;
-          console.log(this.saveresponse);
-          console.log("NEW");
-
-
+        this._itemService.guardarItem(newItem).subscribe(data => {
+          this.toastr.success('Agregado con exito');
+        }, error => {
+          console.log(error);
+          this.itemForm.reset();
         });
       }
 
