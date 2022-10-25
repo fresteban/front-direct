@@ -3,9 +3,10 @@ import { Item } from '../../interfaces/item';
 import { ItemService } from '../../services/item.service';
 import { ToastrService } from 'ngx-toastr';
 import { ModalItemComponent } from '../modal-item/modal-item.component';
+import { CategoriasService } from '../../services/categorias.service';
 
 
-declare var window: any;
+declare var window: any
 @Component({
   selector: 'app-item-table',
   templateUrl: './item-table.component.html',

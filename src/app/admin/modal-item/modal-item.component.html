@@ -34,7 +34,7 @@
       </div>
       <!-- Campo Tipo -->
       <div class="parte">
-        <label for="precioItem">Categoria de Item</label>
+        <label for="categoriaItem">Categoria de Item</label>
         <div class="form-check">
           <div *ngFor="let categoria of categorias">
             <input type="radio" formControlName="categoria" class="form-check-input" value="{{categoria}}"
@@ -49,11 +49,11 @@
       </div>
       <!-- Campo Subcategoria -->
       <div class="parte">
-        <label for="precioItem">Subcategoria de Item</label>
+        <label for="subcategoriaItem">Subcategoria de Item</label>
         <div class="form-check">
           <select class="form-control" formControlName="subcategoria">
             <option selected>Seleccionar una subcategoria</option>
-            <option *ngFor="let subcategoria of subcategorias">{{subcategoria}}</option>
+            <option *ngFor="let subcategoria of cat">{{subcategorias}}</option>
           </select>
         </div>
         <div class="text-danger"
