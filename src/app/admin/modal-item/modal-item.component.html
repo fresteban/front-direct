@@ -37,7 +37,7 @@
         <label for="categoriaItem">Categoria de Item</label>
         <div class="form-check">
           <div *ngFor="let categoria of categorias">
-            <input type="radio" formControlName="categoria" class="form-check-input" value="{{categoria}}"
+            <input type="radio" formControlName="categoria" class="form-check-input" value="{{categoria}}" (change)="changeCategoria($any($event).target.id)"
               id="{{categoria}}">
             <label class="form-check-label" for="{categoria}">{{categoria}}</label>
           </div>
@@ -53,7 +53,7 @@
         <div class="form-check">
           <select class="form-control" formControlName="subcategoria">
             <option selected>Seleccionar una subcategoria</option>
-            <option *ngFor="let subcategoria of cat">{{subcategorias}}</option>
+            <option *ngFor="let subcat of subcategorias">{{subcat}}</option>
           </select>
         </div>
         <div class="text-danger"
