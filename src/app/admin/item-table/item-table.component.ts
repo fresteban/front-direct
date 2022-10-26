@@ -1,13 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Item } from '../../interfaces/item';
 import { ItemService } from '../../services/item.service';
-import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { FormularioModificarItemComponent } from '../formulario-modificar-item/formulario-modificar-item.component';
 import { ToastrService } from 'ngx-toastr';
+import { ModalItemComponent } from '../modal-item/modal-item.component';
+import { CategoriasService } from '../../services/categorias.service';
 
 
-declare var window:any;
+declare var window: any
 @Component({
   selector: 'app-item-table',
   templateUrl: './item-table.component.html',
@@ -19,12 +18,18 @@ export class ItemTableComponent implements OnInit {
   formModal: any;
 
   constructor(private _itemService: ItemService,
-        private toastr: ToastrService) { }
+    private toastr: ToastrService) {
+      this._itemService.Refreshrequired.subscribe(result => {
+        this.obtenerItems();
+      })
+     }
+
+  @ViewChild(ModalItemComponent) addView !:ModalItemComponent
 
   ngOnInit(): void {
     this.obtenerItems();
-
   }
+
 
   obtenerItems() {
     this._itemService.getItems().subscribe(data => {
@@ -35,83 +40,23 @@ export class ItemTableComponent implements OnInit {
     })
   }
 
-  eliminarItem(id: any){
-    this._itemService.eliminarItem(id).subscribe(data => {
-      this.toastr.error('El producto fue eliminado con exito', 'Producto eliminado');
-      this.obtenerItems();
-    },error => {
-      console.log(error);
-    })
+  eliminarItem(id: any) {
+    if (confirm('Esta seguro de eliminar?'))
+      this._itemService.eliminarItem(id).subscribe(data => {
+        this.toastr.error('El producto fue eliminado con exito', 'Producto eliminado');
+        this.obtenerItems();
+      }, error => {
+        console.log(error);
+      })
   }
 
-  doSomething()
-  { 
-     this.obtenerItems();
-  }
-  /*
-  @Input()
-  newItem: Item = {
-    id: 0,
-    nombre: '',
-    descripcion: '',
-    precio: 0,
-    tipo: '',
-    foto: '',
-    disponibilidad: false
+  editarItem(id: any) {
+    this.addView.cargarItemEditar(id);
   }
 
-  get foodList() {
-    return this.ItemService.foodList;
+  doSomething() {
+    this.obtenerItems();
   }
 
-  get drinkList() {
-    return this.ItemService.drinkList;
-  }
-
-
-  constructor(private ItemService: ItemService, public fb: FormBuilder) {
-
-  }
-
-  ngOnInit() {
-  }
-
-
-
-  addItem(){
-    if(this.newItem.nombre.trim().length === 0){
-      return;
-    }
-
-    if(this.newItem.tipo === '1'){
-      this.ItemService.addFood(this.newItem);
-      this.newItem = {
-        id: 0,
-        nombre: '',
-        descripcion: '',
-        precio: 0,
-        tipo: '',
-        foto: '',
-        disponibilidad: false
-      };
-      console.log('Comida agregada');
-    }
-    else if(this.newItem.tipo === '0'){
-      this.ItemService.addDrink(this.newItem);
-      this.newItem = {
-        id: 0,
-        nombre: '',
-        descripcion: '',
-        precio: 0,
-        tipo: '',
-        foto: '',
-        disponibilidad: false
-      };
-      console.log('Bebida agregada');
-    }
-    console.log('additem');
-  }
-
-  */
 
 }

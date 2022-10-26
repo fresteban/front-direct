@@ -1,100 +1,115 @@
 <div class="cartanasta text-center">
-    <div class="row justify-content-between text-center">
-        <div class="col-4 align-self-center" style="margin-left:5%;">
-            <h5>Carta Online</h5>
-        </div>
-        <div class="col-4">
-            <button class="btn btn-outline-info bg-dark" type="submit" routerLink="/carrito" style="margin-right:5%; margin-top: 5%; margin-bottom: 5%;">IR AL PEDIDO</button>
-        </div>
+  <div class="row justify-content-between text-center">
+    <div class="col-4 align-self-center" style="margin-left:5%;">
+      <h5>Carta Online</h5>
     </div>
+    <div class="col-4">
+      <button class="btn btn-outline-info bg-dark" type="submit" routerLink="/carrito"
+        style="margin-right:5%; margin-top: 5%; margin-bottom: 5%;">IR AL PEDIDO</button>
+    </div>
+  </div>
 </div>
-<div class="tacokun text-center">
-    <div class="row">
-        <div class="col">
-            <h5>Tacos</h5>
-        </div>
+<div *ngFor="let categoria of cat">
+  <div class="text-center tacokun">
+    <h5>{{categoria.categoria}}</h5>
+  </div>
+
+  <div *ngFor="let subcategoria of categoria.subcategoria">
+    <div class="text-center bebichan">
+      <h4>{{subcategoria}}</h4>
     </div>
+    <div *ngFor="let item of listaItems">
+      <div class="d-flex justify-content-center" *ngIf="item.categoria == categoria.categoria && item.subcategoria == subcategoria
+        && item.estado != 'eliminado'">
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-8 nopadding">
+              <div class="card-body">
+                <h5 class="card-title col-7">{{item.nombre}}</h5>
+                <p class="card-text">{{item.detalle}}</p>
+              </div>
+            </div>
+            <div class="col-4 nopadding">
+              <div class="row">
+                <img
+                  src="https://static.vecteezy.com/system/resources/previews/007/062/757/non_2x/shawarma-character-buritto-fast-food-cartoon-chicken-vegetables-roll-meal-doner-gebab-shawarma-flat-cartoon-illustration-arabic-eastern-food-burittos-mexican-food-free-vector.jpg"
+                  class="card-img" alt="...">
+              </div>
+              <div class="row">
+                <h5 class="text-success">$ {{item.precio}}</h5>
+              </div>
+              <div class="row">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <div class="col-xs-1">
+                    <button type="button" class="btn btn-warning form-control">-</button>
+                  </div>
+                  <div class="col-xs-2">
+                    <input type="number" class="form-control" name="cantidad" id="cantidad">
+                  </div>
+                  <div class="col-xs-1">
+                    <button type="button" class="btn btn-warning form-control">+</button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div *ngIf="item.estado == 'disponible'" class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-success" (click)=agregarCarro(item)>Agregar a la Cesta</button>
+                </div>
+                <div *ngIf="item.estado != 'disponible'" class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-secondary disable">No disponible</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div class="tacokun text-center">
+  <div class="row">
+    <div class="col">
+      <h5>Alimentos</h5>
+    </div>
+  </div>
 </div>
 <ol class="list-group" *ngFor="let item of listaItems">
-    <li class="list-group-item d-flex justify-content-between align-items-start" *ngIf="item.tipo == 'alimento'">
-        <div class="col-md-7 ms-2 me-auto">
-            <div class="fw-bold">{{item.nombre}}</div>
-            {{item.descripcion}}
-            <br>
-            <h4>${{item.precio}} CLP</h4>
-            <div class="flota text-center">
-                <button type="button" class="btn btn-outline-success align-self-center" *ngIf="item.disponibilidad" (click)=agregarCarro(item)>Agregar</button>
-                <button type="button" class="btn btn-outline-info align-self-center" *ngIf="!item.disponibilidad">No Disponible</button>
-            </div>
-        </div>
-        <img src="{{item.foto}}" width="35%" height="35%" alt="" class="ms-2 align-self-center">
-    </li>
-    <!-- <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="col-md-7 ms-2 me-auto">
-            <div class="fw-bold">Taco Picante</div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            <div class="flota text-center">
-                <button type="button" class="btn btn-outline-success align-self-center" >Agregar</button>
-               
-                *ngIf="{{item.disponibilidad}} != true"
-                <button type="button" class="btn btn-outline-success align-self-center">No Disponible</button>
-            </div>
-        </div>
-        <img src="../../../assets/Arquitectura Logica - Page 1.png" width="35%" height="35%" alt="" class="ms-2 align-self-center">
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="col-md-7 ms-2 me-auto">
-            <div class="fw-bold">Taco en un Taco</div>
-            LA MAMA DE LA MAMA DE LA MAMA DE LA MAMA DE LA MAMA DE LA MAMA DE LA MAMA
-            <div class="flota text-center">
-                <button type="button" class="btn btn-outline-success align-self-center">Agregar</button>
-            </div>
-        </div>
-        <img src="../../../assets/Arquitectura Logica - Page 1.png" width="35%" height="35%" alt="" class="ms-2 align-self-center">
-    </li>
--->
+  <li class="list-group-item d-flex justify-content-between align-items-start" *ngIf="item.categoria == 'comida'">
+    <div class="col-md-7 ms-2 me-auto">
+      <div class="fw-bold">{{item.nombre}}</div>
+      {{item.detalle}}
+      <br>
+      <h4>${{item.precio | number}} Pesos</h4>
+      <div class="flota text-center">
+        <button type="button" class="btn btn-outline-success align-self-center" *ngIf="item.estado"
+          (click)=agregarCarro(item)>Agregar</button>
+        <button type="button" class="btn btn-outline-info align-self-center" *ngIf="!item.estado">No Disponible</button>
+      </div>
+    </div>
+    <img src="{{item.foto}}" width="35%" height="35%" alt="" class="ms-2 align-self-center">
+  </li>
+
 </ol>
 <div class="bebichan text-center">
-    <div class="row">
-        <div class="col">
-            <h5>Bebestibles</h5>
-        </div>
+  <div class="row">
+    <div class="col">
+      <h5>Bebestibles</h5>
     </div>
+  </div>
 </div>
 <ol class="list-group" *ngFor="let item of listaItems">
-    <li class="list-group-item d-flex justify-content-between align-items-start" *ngIf="item.tipo == 'bebidas'">
-        <div class="col-md-7 ms-2 me-auto">
-            <div class="fw-bold">{{item.nombre}}</div>
-            {{item.descripcion}}
-            <br>
-            <h4>${{item.precio}} CLP</h4>
-            <div class="flota text-center">
-                <button type="button" class="btn btn-outline-success align-self-center" *ngIf="item.disponibilidad">Agregar</button>
-                <button type="button" class="btn btn-outline-info align-self-center" *ngIf="!item.disponibilidad">No Disponible</button>
-            </div>
-        </div>
-        <img src="{{item.foto}}" width="35%" height="35%" alt="" class="ms-2 align-self-center" *ngIf="item.tipo == 'bebidas'">
-    </li>
-    <!-- 
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="col-md-7 ms-2 me-auto">
-            <div class="fw-bold">Tussy</div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            <div class="flota text-center">
-                <button type="button" class="btn btn-outline-success align-self-center">Agregar</button>
-            </div>
-        </div>
-        <img src="../../../assets/Arquitectura Logica - Page 1.png" width="35%" height="35%" alt="" class="ms-2 align-self-center">
-    </li>
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="col-md-7 ms-2 me-auto">
-            <div class="fw-bold">Marihuana</div>
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            <div class="flota text-center">
-                <button type="button" class="btn btn-outline-success align-self-center">Agregar</button>
-            </div>
-        </div>
-        <img src="../../../assets/Arquitectura Logica - Page 1.png" width="35%" height="35%" alt="" class="ms-2 align-self-center">
-    </li>
-    -->
-</ol>
+  <li class="list-group-item d-flex justify-content-between align-items-start" *ngIf="item.categoria == 'bebidas'">
+    <div class="col-md-7 ms-2 me-auto">
+      <div class="fw-bold">{{item.nombre}}</div>
+      {{item.detalle}}
+      <br>
+      <h4>${{item.precio}} CLP</h4>
+      <div class="flota text-center">
+        <button type="button" class="btn btn-outline-success align-self-center" *ngIf="item.estado">Agregar</button>
+        <button type="button" class="btn btn-outline-info align-self-center" *ngIf="!item.estado">No Disponible</button>
+      </div>
+    </div>
+    <img src="{{item.foto}}" width="35%" height="35%" alt="" class="ms-2 align-self-center"
+      *ngIf="item.categoria == 'bebidas'">
+  </li>
+</ol> -->

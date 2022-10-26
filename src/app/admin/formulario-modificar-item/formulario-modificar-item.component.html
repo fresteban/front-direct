@@ -1,8 +1,8 @@
-<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalEditarLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modificar item</h5>
+        <h5 class="modal-title" id="exampleModalEditarLabel">Modificar item</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -18,11 +18,11 @@
                   <span>El campo es obligatorio</span>
                 </div>
               </div>
-              <!-- Campo Descripcion -->
+              <!-- Campo Detalle -->
               <div class="parte">
-                <label for="descripcionItem">Descripcion</label>
-                <textarea class="form-control" formControlName="descripcion" required rows="3"></textarea>
-                <div class="text-danger" *ngIf="itemForm.get('descripcion')?.hasError('required') && itemForm.get('descripcion')?.touched">
+                <label for="detalleItem">Detalle</label>
+                <textarea class="form-control" formControlName="detalle" required rows="3"></textarea>
+                <div class="text-danger" *ngIf="itemForm.get('detalle')?.hasError('required') && itemForm.get('detalle')?.touched">
                   <span>El campo es obligatorio</span>
                 </div>
               </div>

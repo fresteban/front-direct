@@ -19,42 +19,56 @@ export class FormularioAgregarItemComponent implements OnInit {
   @Output() newItemEvent = new EventEmitter<string>();
   formModal: any;
   itemForm: FormGroup;
+  categorias: String[] = ['Comida', 'Bebestible'];
+  subcategorias: String[] = [];
 
   @Input()
   newItem: Item = {
     nombre: '',
-    descripcion: '',
+    detalle: '',
     precio: 0,
-    tipo: '',
+    categoria: '',
+    subcategoria: '',
     foto: '',
-    disponibilidad: false
+    estado: 'no disponible'
   }
 
-  constructor(private ItemService: ItemService, private fb: FormBuilder, private router: Router, private _itemService: ItemService, private toastr: ToastrService) {
+  constructor(private fb: FormBuilder, private router: Router, private _itemService: ItemService, private toastr: ToastrService) {
     this.itemForm = this.fb.group({
       nombre: ['', [Validators.required]],
-      descripcion: ['', [Validators.required]],
+      detalle: ['', [Validators.required]],
       precio: ['', [Validators.required]],
-      tipo: ['', [Validators.required]],
+      categoria: ['', [Validators.required]],
+      subcategoria: ['', [Validators.required]],
       imagen: ['', [Validators.required]]
     })
   }
 
   ngOnInit(): void {
     this.formModal = new window.bootstrap.Modal(
-      document.getElementById("itemForm")
+      document.getElementById("exampleModal")
     );
+    this.cargarSubCategorias();
+    console.log("veve; ", this.categorias);
+  }
+
+  cargarSubCategorias() {
+    this._itemService.obtenerSubCategorias().subscribe(data => {
+      console.log("data: ", data);
+      this.subcategorias = data;
+    })
   }
 
   agregarItem() {
     console.log("yapo");
     const newItem: Item = {
       nombre: this.itemForm.get('nombre')?.value,
-      descripcion: this.itemForm.get('descripcion')?.value,
+      detalle: this.itemForm.get('detalle')?.value,
       precio: this.itemForm.get('precio')?.value,
-      tipo: this.itemForm.get('tipo')?.value,
+      categoria: this.itemForm.get('categoria')?.value,
+      subcategoria: this.itemForm.get('subcategoria')?.value,
       foto: this.itemForm.get('foto')?.value,
-      disponibilidad: false
+      estado: 'no disponible'
     }
 
     console.log(newItem);
@@ -70,7 +84,7 @@ export class FormularioAgregarItemComponent implements OnInit {
 
   }
 
-  inicio(){
+  inicio() {
     this.itemForm.reset();
   }
 
@@ -80,37 +94,4 @@ export class FormularioAgregarItemComponent implements OnInit {
   save() {
     this.formModal.hide();
   }
-
-  addItem() {
-    if (this.newItem.nombre.trim().length === 0) {
-      return;
-    }
-
-    if (this.newItem.tipo === '1') {
-      this.ItemService.addFood(this.newItem);
-      this.newItem = {
-        nombre: '',
-        descripcion: '',
-        precio: 0,
-        tipo: '',
-        foto: '',
-        disponibilidad: false
-      };
-      console.log('Comida agregada');
-    }
-    else if (this.newItem.tipo === '0') {
-      this.ItemService.addDrink(this.newItem);
-      this.newItem = {
-        nombre: '',
-        descripcion: '',
-        precio: 0,
-        tipo: '',
-        foto: '',
-        disponibilidad: false
-      };
-      console.log('Bebida agregada');
-    }
-    console.log('additem');
-  }
-
 }

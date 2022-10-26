@@ -1,44 +1,52 @@
 <ng-container *ngIf="true">
-    <div class="card-table">
-        <div class="card-product">
-            <table class="table table-responsive">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Precio</th>
-                        <th>Foto</th>
-                        <th>Cantidad</th>
-                        <th>Total</th>
-                        <th>Accion</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of productos; let i = index">
-                        <td>{{item.nombre}}</td>
-                        <td>{{item.descripcion}}</td>
-                        <td>{{item.precio}}</td>
-                        <td><img src="{{item.foto}}" alt="" class="imgtmn"></td>
-                        <td>{{item.cantidad}}</td>
-                        <td>{{item.total}}</td>
-                        <td>
-                            <button (click)="quitarItem(item)" class="btn btn-danger">Eliminar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <div class="slds-text-align_center">
+    <div class="row">
+      <div class="col">
+        <h2>Mi Pedido</h2>
+      </div>
+      <div class="col">
+        <button class="btn btn-outline-info bg-dark" type="submit" routerLink="/cliente">VOLVER AL MENÚ</button>
+      </div>
     </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of productos; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          {{ item.nombre }}
+        </td>
+        <td>{{ item.precio | number }}</td>
+        <td>{{ item.cantidad | number }}</td>
+        <td>
+          <button class="boton-modificar" (click)="quitarItem(item)">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <path
+                d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+            </svg>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </ng-container>
 
 <ng-container *ngIf="false">
-<div class="container">
+  <div class="container">
     <h5 class="carro">Mi Pedido</h5>
     <div class="center">
-        <img src="" alt="">
-        <h4>Tu carrito está vacío!</h4>
-        <h6>Agregale un producto!</h6>
-        <button class="btn btn-outline-info bg-dark" type="submit" routerLink="/cliente">VOLVER AL MENÚ</button>
+      <img src="" alt="">
+      <h4>Tu carrito está vacío!</h4>
+      <h6>Agregale un producto!</h6>
     </div>
-</div>
+  </div>
 </ng-container>

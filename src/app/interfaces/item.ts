@@ -1,20 +1,20 @@
 export class Item {
   _id?: number;
   nombre: string;
-  descripcion: string;
+  detalle: string;
   precio: number;
-  tipo: string;
+  categoria: string;
+  subcategoria: string;
   foto: string;
-  disponibilidad: boolean | null;
+  estado: string;
 
-  constructor(nombre: string, descripcion: string, precio: number, tipo: string, foto: string, disponibilidad: boolean){
+  constructor(nombre: string, detalle: string, precio: number, categoria: string, subcategoria: string, foto: string, estado: string){
     this.nombre = nombre;
-    this.descripcion = descripcion;
+    this.detalle = detalle;
     this.precio = precio;
-    this.tipo = tipo;
+    this.categoria = categoria;
+    this.subcategoria = subcategoria;
     this.foto = foto;
-    this.disponibilidad = disponibilidad;
+    this.estado = estado;
   }
-
-
 }
