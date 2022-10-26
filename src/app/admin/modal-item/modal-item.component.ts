@@ -107,6 +107,7 @@ export class ModalItemComponent implements OnInit {
       this.errormessage = 'Ingese datos validos';
       this.errorclass = 'errormessage';
     }
+    console.log('subcategoria: ', this.newItem.subcategoria)
   }
 
   cargarItemEditar(id: any) {
