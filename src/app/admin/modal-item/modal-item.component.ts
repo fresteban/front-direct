@@ -66,7 +66,7 @@ export class ModalItemComponent implements OnInit {
   errormessage = '';
   errorclass = '';
   saveresponse: any;
-  editdata: any;
+  editdata: any = '';
 
   changeCategoria(it) {
     console.log("ITT: ", it);
@@ -91,7 +91,6 @@ export class ModalItemComponent implements OnInit {
       }
 
       if (this.editdata) {
-        //values = this.itemForm.getRawValue()
         this._itemService.actualizarItem(newItem, this.editdata._id).subscribe(data => {
         });
       }
@@ -135,6 +134,7 @@ export class ModalItemComponent implements OnInit {
       subcategoria: '',
     });
     this.subcategorias = [];
+    this.editdata = ''
   }
 
   open(id: any) {
