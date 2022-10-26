@@ -7,13 +7,17 @@ import { FormularioAgregarItemComponent } from './formularioAgregarItem/formular
 import { FormularioModificarItemComponent } from './formulario-modificar-item/formulario-modificar-item.component';
 import { RouterModule } from '@angular/router';
 import { ModalItemComponent } from './modal-item/modal-item.component';
+import { ItemEliminadosComponent } from './item-eliminados/item-eliminados.component';
+import { VistaCategoriasComponent } from './vista-categorias/vista-categorias.component';
 @NgModule({
   declarations: [
     AdminMainPageComponent,
     ItemTableComponent,
     FormularioAgregarItemComponent,
     FormularioModificarItemComponent,
-    ModalItemComponent
+    ModalItemComponent,
+    ItemEliminadosComponent,
+    VistaCategoriasComponent
   ],
   exports: [
     AdminMainPageComponent

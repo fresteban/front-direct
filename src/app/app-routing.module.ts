@@ -14,7 +14,7 @@ const routes: Routes = [
   {
     path: 'admin/:idItem',
     component: FormularioModificarItemComponent
-  }
+  },
 ];
 
 @NgModule({

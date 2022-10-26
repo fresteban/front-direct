@@ -17,6 +17,8 @@ import { AdminMainPageComponent } from './admin/admin-main-page/admin-main-page.
 import { CompartidoModule } from './compartido/compartido.module';
 import { CartaModule } from './carta/carta.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CocinaModule } from './cocina/cocina.module';
+import { EmpleadoModule } from './empleado/empleado.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       {path: 'carrito',component:CarritoComponent},
       {path: '**',redirectTo:'/',pathMatch:'full'},
     ]),
-    NgbModule
+    NgbModule,
+    CocinaModule,
+    EmpleadoModule
   ],
   providers: [],
   bootstrap: [AppComponent]
