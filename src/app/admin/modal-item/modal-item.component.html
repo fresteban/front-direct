@@ -36,14 +36,14 @@
       <div class="parte">
         <label for="categoriaItem">Categoria de Item</label>
         <div class="form-check">
-          <div *ngFor="let categoria of categorias">
-            <input type="radio" formControlName="categoria" class="form-check-input" value="{{categoria}}" (change)="changeCategoria($any($event).target.id)"
-              id="{{categoria}}">
-            <label class="form-check-label" for="{categoria}">{{categoria}}</label>
+          <div *ngFor="let categoria of cat">
+            <input type="radio" formControlName="categoria" class="form-check-input" value="{{categoria.categoria}}" (change)="changeCategoria($any($event).target.id)"
+              id="{{categoria.categoria}}">
+            <label class="form-check-label" for="{categoria.categoria}">{{categoria.categoria}}</label>
           </div>
         </div>
         <div class="text-danger"
-          *ngIf="itemForm.get('categoria')?.hasError('required') && itemForm.get('categoria')?.touched">
+          *ngIf="itemForm.get('categoria.categoria')?.hasError('required') && itemForm.get('categoria.categoria')?.touched">
           <span>El campo es obligatorio</span>
         </div>
       </div>
