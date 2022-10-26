@@ -59,9 +59,7 @@ export class ModalItemComponent implements OnInit {
 
   cargarCategorias() {
     this._categoriaService.obtenerCategoriasTotal().subscribe(data => {
-      console.log("data:; ", data);
       this.cat = data;
-      console.log("this.cat: ", this.cat);
     })
   }
 
@@ -69,6 +67,15 @@ export class ModalItemComponent implements OnInit {
   errorclass = '';
   saveresponse: any;
   editdata: any;
+
+  changeCategoria(it) {
+    console.log("ITT: ", it);
+    this.cat.forEach(element => {
+      if (element.categoria == it) {
+        this.subcategorias = element.subcategoria
+      }
+    });
+  }
 
   guardarItem() {
 
@@ -82,15 +89,10 @@ export class ModalItemComponent implements OnInit {
         estado: 'no disponible',
         foto: ''
       }
-      console.log("newItem: ", newItem)
 
       if (this.editdata) {
-        console.log(this.editdata._id)
-        console.log("AbER: ", newItem);
         //values = this.itemForm.getRawValue()
         this._itemService.actualizarItem(newItem, this.editdata._id).subscribe(data => {
-          console.log(this.saveresponse);
-          console.log("EDIT");
         });
       }
       else {
@@ -112,6 +114,7 @@ export class ModalItemComponent implements OnInit {
     this.open(id);
     this._itemService.obtenerItem(id).subscribe(res => {
       this.editdata = res;
+      this.changeCategoria(this.editdata.categoria)
       this.itemForm.setValue({
         nombre: this.editdata.nombre,
         detalle: this.editdata.detalle,
@@ -131,6 +134,7 @@ export class ModalItemComponent implements OnInit {
       categoria: '',
       subcategoria: '',
     });
+    this.subcategorias = [];
   }
 
   open(id: any) {
