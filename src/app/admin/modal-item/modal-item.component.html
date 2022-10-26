@@ -33,7 +33,7 @@
         </div>
       </div>
       <!-- Campo Tipo -->
-      <div class="parte" *ngIf="editdata == ''">
+      <div class="parte">
         <label for="categoriaItem">Categoria de Item</label>
         <div class="form-check">
           <div *ngFor="let categoria of cat">
@@ -61,7 +61,9 @@
           <span>El campo es obligatorio</span>
         </div>
       </div>
+      <div class="parte">
 
+      </div>
       <div>
         <div class="input-group">
           <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="modal.close('save click')">Guardar</button>
