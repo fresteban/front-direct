@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { ModalItemComponent } from './modal-item/modal-item.component';
 import { ItemEliminadosComponent } from './item-eliminados/item-eliminados.component';
 import { VistaCategoriasComponent } from './vista-categorias/vista-categorias.component';
+import { LoginComponent } from '../usuario/login/login.component';
 @NgModule({
   declarations: [
     AdminMainPageComponent,
@@ -17,7 +18,8 @@ import { VistaCategoriasComponent } from './vista-categorias/vista-categorias.co
     FormularioModificarItemComponent,
     ModalItemComponent,
     ItemEliminadosComponent,
-    VistaCategoriasComponent
+    VistaCategoriasComponent,
+    LoginComponent
   ],
   exports: [
     AdminMainPageComponent
