@@ -33,7 +33,7 @@
         </div>
       </div>
       <!-- Campo Tipo -->
-      <div class="parte">
+      <div class="parte" *ngIf="editdata == ''">
         <label for="categoriaItem">Categoria de Item</label>
         <div class="form-check">
           <div *ngFor="let categoria of cat">
