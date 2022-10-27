@@ -50,9 +50,10 @@ export class ClienteComponent implements OnInit {
   }
 
   agregarCarro(item: any) {
+    var cantidad: number = +(<HTMLInputElement>document.getElementById('cantidad')).value;
+    for (let index = 0; index < cantidad; index++) {
+      this._carroService.agregarCarro(item);
+    }
     this.toastr.success('Item agregado a la cesta')
-    this._carroService.agregarCarro(item);
-
   }
-
 }
