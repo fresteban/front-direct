@@ -19,6 +19,7 @@ import { CartaModule } from './carta/carta.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CocinaModule } from './cocina/cocina.module';
 import { EmpleadoModule } from './empleado/empleado.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { EmpleadoModule } from './empleado/empleado.module';
     ]),
     NgbModule,
     CocinaModule,
-    EmpleadoModule
+    EmpleadoModule,
+    UsuarioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -11,6 +11,7 @@ export class AdministracionService {
   constructor(private http: HttpClient) { }
 
   getUsuario(credencial: any): Observable<any> {
+    console.log(credencial);
     return this.http.get(this.url, credencial)
   }
 }
