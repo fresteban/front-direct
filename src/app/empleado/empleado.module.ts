@@ -5,6 +5,8 @@ import { MesasComponent } from './mesas/mesas.component';
 import { CuentasEsperaComponent } from './cuentas-espera/cuentas-espera.component';
 import { CuentasComponent } from './cuentas/cuentas.component';
 import { MenuEmpleadoComponent } from './menu-empleado/menu-empleado.component';
+import { RouterModule } from '@angular/router';
+import { CompartidoModule } from '../compartido/compartido.module';
 
 
 
@@ -14,10 +16,12 @@ import { MenuEmpleadoComponent } from './menu-empleado/menu-empleado.component';
     MesasComponent,
     CuentasEsperaComponent,
     CuentasComponent,
-    MenuEmpleadoComponent
+    MenuEmpleadoComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    CompartidoModule
   ]
 })
 export class EmpleadoModule { }
