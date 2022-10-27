@@ -8,14 +8,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ClienteComponent } from './carta/cliente/cliente.component';
-import { CarritoComponent } from './carrito/carrito.component';
+import { CartaComponent } from './cliente/carta/carta.component';
+import { CarritoComponent } from './cliente/carrito/carrito.component';
 import { NavbarComponent } from './compartido/navbar/navbar.component';
 
 import { RouterModule } from '@angular/router';
 import { AdminMainPageComponent } from './admin/admin-main-page/admin-main-page.component';
 import { CompartidoModule } from './compartido/compartido.module';
-import { CartaModule } from './carta/carta.module';
+import { ClienteModule } from './cliente/cliente.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CocinaModule } from './cocina/cocina.module';
 import { EmpleadoModule } from './empleado/empleado.module';
@@ -24,7 +24,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 @NgModule({
   declarations: [
     AppComponent,
-    ClienteComponent,
+    CartaComponent,
     CarritoComponent,
     NavbarComponent
   ],
@@ -32,13 +32,14 @@ import { UsuarioModule } from './usuario/usuario.module';
     BrowserModule,
     AppRoutingModule,
     AdminModule,
-    CartaModule,
+    CompartidoModule,
+    ClienteModule,
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     RouterModule.forRoot([
-      {path: '',component:ClienteComponent},
+      {path: '',component:CartaComponent},
       {path: 'admin',component:AdminMainPageComponent},
       {path: 'carrito',component:CarritoComponent},
       {path: '**',redirectTo:'/',pathMatch:'full'},
