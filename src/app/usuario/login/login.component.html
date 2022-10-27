@@ -1,0 +1,49 @@
+<section class="vh-100" style="background-color: #665107;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+
+
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <form [formGroup]="userForm" (ngSubmit)="obtenerUsuario()">
+
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
+                    <span class="h1 fw-bold mb-0">Iniciar sesión</span>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="email" formControlName="email" id="form2Example17" class="form-control form-control-lg" />
+                    <label class="form-label" for="form2Example17">Correo electrónico</label>
+                    <div class="text-danger"
+                      *ngIf="userForm.get('email')?.hasError('required') && userForm.get('email')?.touched">
+                      <span>El campo es obligatorio</span>
+                    </div>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input type="password" formControlName="password" id="form2Example27" class="form-control form-control-lg" />
+                    <label class="form-label" for="form2Example27">Contraseña</label>
+                    <div class="text-danger"
+                      *ngIf="userForm.get('password')?.hasError('required') && userForm.get('password')?.touched">
+                      <span>El campo es obligatorio</span>
+                    </div>
+                  </div>
+
+                  <div class="pt-1 mb-4">
+                    <button class="btn btn-dark btn-lg btn-block" type="ngSubmit">Iniciar</button>
+                  </div>
+                  <span [ngClass]="errorclass">{{errormessage}}</span>
+                </form>
+
+              </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,5 +1,5 @@
-import { Categoria } from './../../interfaces/categoria';
-import { CategoriasService } from './../../services/categorias.service';
+import { Categoria } from '../../interfaces/categoria';
+import { CategoriasService } from '../../services/categorias.service';
 import { Component, OnInit } from '@angular/core';
 import { ItemService } from 'src/app/services/item.service';
 import { Item } from 'src/app/interfaces/item';
@@ -7,11 +7,11 @@ import { CarroService } from 'src/app/services/carro.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-cliente',
-  templateUrl: './cliente.component.html',
-  styleUrls: ['./cliente.component.scss']
+  selector: 'app-carta',
+  templateUrl: './carta.component.html',
+  styleUrls: ['./carta.component.scss']
 })
-export class ClienteComponent implements OnInit {
+export class CartaComponent implements OnInit {
   subcategorias: string[] = [];
   listaItems: Item[] = [];
   categorias: string[] = ['Comida', 'Bebestible'];
@@ -50,9 +50,10 @@ export class ClienteComponent implements OnInit {
   }
 
   agregarCarro(item: any) {
+    var cantidad: number = +(<HTMLInputElement>document.getElementById('cantidad')).value;
+    for (let index = 0; index < cantidad; index++) {
+      this._carroService.agregarCarro(item);
+    }
     this.toastr.success('Item agregado a la cesta')
-    this._carroService.agregarCarro(item);
-
   }
-
 }
