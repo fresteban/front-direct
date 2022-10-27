@@ -6,37 +6,49 @@ import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   userForm: FormGroup;
+  errormessage = '';
+  errorclass = '';
 
-  constructor(private _administracionService: AdministracionService, private uF: FormBuilder) {
+  constructor(
+    private _administracionService: AdministracionService,
+    private uF: FormBuilder
+  ) {
     this.userForm = this.uF.group({
       email: ['', [Validators.required]],
-      password: ['', [Validators.required]]
-    })
-   }
-
-  email: string = 'amandaflores@outlook.cl';
-  password: string = 'admin123';
-
-  ngOnInit(): void {
-  }
-
-  obtenerUsuario(){
-    console.log(this.userForm);
-    let usuario = new HttpParams({
-      fromObject: {'email':this.userForm.get('email')?.value, 'password':this.userForm.get('password')?.value}
+      password: ['', [Validators.required]],
     });
-    console.log(usuario);
-    this._administracionService.getUsuario(usuario).subscribe(data =>{
-      console.log(data);
-    }, error =>{
-      console.log(error);
-    }
-    )
   }
 
+  ngOnInit(): void {}
+
+  obtenerUsuario() {
+    console.log(this.userForm);
+    if (this.userForm.valid) {
+      let usuario = new HttpParams({
+        fromObject: {
+          email: this.userForm.get('email')?.value,
+          password: this.userForm.get('password')?.value,
+        },
+      });
+      console.log(usuario);
+
+      this._administracionService.getUsuario(usuario).subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+          this.errormessage = 'Ingese datos validossss';
+          this.errorclass = 'errormessage';
+        }
+      );
+    } else {
+      this.errormessage = 'Ingese datos validos';
+      this.errorclass = 'errormessage';
+    }
+  }
 }
