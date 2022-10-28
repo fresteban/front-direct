@@ -14,7 +14,6 @@ import { ToastrService } from 'ngx-toastr';
 export class CartaComponent implements OnInit {
   subcategorias: string[] = [];
   listaItems: Item[] = [];
-  categorias: string[] = ['Comida', 'Bebestible'];
   cat: Categoria[] = [];
 
   constructor(private _itemService: ItemService, private _carroService: CarroService, private _categoriaService: CategoriasService, private toastr: ToastrService) { }
@@ -27,9 +26,7 @@ export class CartaComponent implements OnInit {
 
   cargarCategorias() {
     this._categoriaService.obtenerCategorias().subscribe(data => {
-      console.log("data:; ", data);
       this.cat = data;
-      console.log("this.cat: ", this.cat);
     })
   }
 
@@ -42,7 +39,6 @@ export class CartaComponent implements OnInit {
 
   obtenerItems() {
     this._itemService.getItems().subscribe(data => {
-      console.log(data);
       this.listaItems = data;
     }, error => {
       console.log(error);
@@ -51,6 +47,7 @@ export class CartaComponent implements OnInit {
 
   agregarCarro(item: any) {
     var cantidad: number = +(<HTMLInputElement>document.getElementById('cantidad')).value;
+    console.log("cantidad: ", cantidad);
     for (let index = 0; index < cantidad; index++) {
       this._carroService.agregarCarro(item);
     }

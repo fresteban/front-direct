@@ -69,7 +69,6 @@ export class ModalItemComponent implements OnInit {
   editdata: any = '';
 
   changeCategoria(it) {
-    console.log("ITT: ", it);
     this.cat.forEach(element => {
       if (element.categoria == it) {
         this.subcategorias = element.subcategoria
@@ -107,7 +106,6 @@ export class ModalItemComponent implements OnInit {
       this.errormessage = 'Ingese datos validos';
       this.errorclass = 'errormessage';
     }
-    console.log('subcategoria: ', this.newItem.subcategoria)
   }
 
   cargarItemEditar(id: any) {

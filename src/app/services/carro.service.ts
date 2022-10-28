@@ -32,8 +32,6 @@ export class CarroService {
     this.listaCarro.push(product);
     this.listaProductos.next(this.listaCarro);
     this.obtenerPrecio();
-    console.log(this.listaCarro);
-    console.log(this.listaProductos);
   }
   obtenerPrecio(): number {
     let total = 0;

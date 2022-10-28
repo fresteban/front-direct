@@ -33,7 +33,6 @@ export class ItemTableComponent implements OnInit {
 
   obtenerItems() {
     this._itemService.getItems().subscribe(data => {
-      console.log(data);
       this.listaItems = data;
     }, error => {
       console.log(error);
