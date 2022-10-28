@@ -1,3 +1,4 @@
+import { Router, Routes } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AdministracionService } from '../../services/administracion.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private _administracionService: AdministracionService,
-    private uF: FormBuilder
+    private uF: FormBuilder,
+    private router: Router
   ) {
     this.userForm = this.uF.group({
       email: ['', [Validators.required]],
@@ -23,10 +25,9 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   obtenerUsuario() {
-    console.log(this.userForm);
     if (this.userForm.valid) {
       let usuario = new HttpParams({
         fromObject: {
@@ -34,11 +35,15 @@ export class LoginComponent implements OnInit {
           password: this.userForm.get('password')?.value,
         },
       });
-      console.log(usuario);
 
       this._administracionService.getUsuario(usuario).subscribe(
         (data) => {
-          console.log(data);
+          if (data.rol == 'administrador') {
+            this.router.navigate(['/admin']);
+          }
+          else{
+            this.router.navigate(['/empleado']);
+          }
         },
         (error) => {
           console.log(error);

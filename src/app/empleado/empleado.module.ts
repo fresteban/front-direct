@@ -5,6 +5,8 @@ import { MesasComponent } from './mesas/mesas.component';
 import { CuentasEsperaComponent } from './cuentas-espera/cuentas-espera.component';
 import { CuentasComponent } from './cuentas/cuentas.component';
 import { MenuEmpleadoComponent } from './menu-empleado/menu-empleado.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -14,10 +16,18 @@ import { MenuEmpleadoComponent } from './menu-empleado/menu-empleado.component';
     MesasComponent,
     CuentasEsperaComponent,
     CuentasComponent,
-    MenuEmpleadoComponent
+    MenuEmpleadoComponent,
+    SidebarComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forRoot([
+      {path: 'cuentas',component:CuentasComponent},
+      {path: 'cuentas-espera',component:CuentasEsperaComponent},
+      {path: 'menu-empleado',component:MenuEmpleadoComponent},
+      {path: 'mesas',component:MesasComponent},
+      {path: '**',redirectTo:'/empleado',pathMatch:'full'},
+    ]),
   ]
 })
 export class EmpleadoModule { }

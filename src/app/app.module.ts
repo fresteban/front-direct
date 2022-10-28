@@ -20,6 +20,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CocinaModule } from './cocina/cocina.module';
 import { EmpleadoModule } from './empleado/empleado.module';
 import { UsuarioModule } from './usuario/usuario.module';
+import { LoginComponent } from './usuario/login/login.component';
 
 @NgModule({
   declarations: [
