@@ -1,3 +1,4 @@
+import { EmpleadoMainPageComponent } from './empleado/empleado-main-page/empleado-main-page.component';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -42,7 +43,7 @@ import { LoginComponent } from './usuario/login/login.component';
     RouterModule.forRoot([
       {path: '',component:CartaComponent},
       {path: 'admin',component:AdminMainPageComponent},
-      {path: 'carrito',component:CarritoComponent},
+      {path: 'empleado',component:EmpleadoMainPageComponent},
       {path: '**',redirectTo:'/',pathMatch:'full'},
     ]),
     NgbModule,
