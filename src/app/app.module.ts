@@ -26,7 +26,7 @@ import { UsuarioModule } from './usuario/usuario.module';
     AppComponent,
     CartaComponent,
     CarritoComponent,
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +47,8 @@ import { UsuarioModule } from './usuario/usuario.module';
     NgbModule,
     CocinaModule,
     EmpleadoModule,
-    UsuarioModule
+    UsuarioModule,
+    CompartidoModule
   ],
   providers: [],
   bootstrap: [AppComponent]
