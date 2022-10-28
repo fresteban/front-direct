@@ -11,19 +11,19 @@ import { CarroService } from '../../services/carro.service';
 export class CarritoComponent implements OnInit {
 
   listaItems: Item[] = [];
-  public listaProductos : any;
-  public productos : any;
-  public totalfinal ?: number;
+  public listaProductos: any;
+  public productos: any;
+  public totalfinal?: number;
 
   constructor(private _itemService: ItemService, private _carroService: CarroService) { }
 
   ngOnInit(): void {
     this.obtenerItems();
     this._carroService.obtenerProductos()
-    .subscribe(res=>{
-      this.productos = res;
-      this.totalfinal = this._carroService.obtenerPrecio();
-    })
+      .subscribe(res => {
+        this.productos = res;
+        this.totalfinal = this._carroService.obtenerPrecio();
+      })
   }
 
   obtenerItems() {
@@ -34,7 +34,7 @@ export class CarritoComponent implements OnInit {
     })
   }
 
-  quitarItem(item:any){
+  quitarItem(item: any) {
     this._carroService.quitarItemCarro(item);
   }
 

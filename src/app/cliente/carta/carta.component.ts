@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CartaComponent implements OnInit {
   subcategorias: string[] = [];
-  listaItems: Item[] = [];
+  listaItems: any[] = [];
   cat: Categoria[] = [];
 
   constructor(private _itemService: ItemService, private _carroService: CarroService, private _categoriaService: CategoriasService, private toastr: ToastrService) { }
@@ -32,25 +32,47 @@ export class CartaComponent implements OnInit {
 
   cargarSubCategorias() {
     this._itemService.obtenerSubCategorias().subscribe(data => {
-      console.log("data: ", data);
       this.subcategorias = data;
     })
   }
 
   obtenerItems() {
     this._itemService.getItems().subscribe(data => {
-      this.listaItems = data;
+      data.forEach(element => {
+        var feed = { Item: element, Cantidad: 1 }
+        this.listaItems.push(feed);
+      });
+      this.listaItems.forEach(element => {
+        //console.log("item: ", element.Item._id)
+      });
     }, error => {
       console.log(error);
     })
   }
 
   agregarCarro(item: any) {
-    var cantidad: number = +(<HTMLInputElement>document.getElementById('cantidad')).value;
-    console.log("cantidad: ", cantidad);
-    for (let index = 0; index < cantidad; index++) {
-      this._carroService.agregarCarro(item);
+    for (let index = 0; index < item.Cantidad; index++) {
+      this._carroService.agregarCarro(item.Item);
     }
     this.toastr.success('Item agregado a la cesta')
+  }
+
+  suma(item: any) {
+    this.listaItems.forEach(element => {
+      if (element.Item._id == item.Item._id) {
+        element.Cantidad++;
+      }
+    });
+  }
+
+  resta(item: any) {
+    this.listaItems.forEach(element => {
+      if (element.Item._id == item.Item._id) {
+        if (element.Cantidad == 1) { }
+        else {
+          element.Cantidad--;
+        }
+      }
+    });
   }
 }
