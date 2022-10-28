@@ -1,3 +1,4 @@
+import { EmpleadoMainPageComponent } from './empleado/empleado-main-page/empleado-main-page.component';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +21,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CocinaModule } from './cocina/cocina.module';
 import { EmpleadoModule } from './empleado/empleado.module';
 import { UsuarioModule } from './usuario/usuario.module';
+import { LoginComponent } from './usuario/login/login.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,7 @@ import { UsuarioModule } from './usuario/usuario.module';
     RouterModule.forRoot([
       {path: '',component:CartaComponent},
       {path: 'admin',component:AdminMainPageComponent},
-      {path: 'carrito',component:CarritoComponent},
+      {path: 'empleado',component:EmpleadoMainPageComponent},
       {path: '**',redirectTo:'/',pathMatch:'full'},
     ]),
     NgbModule,

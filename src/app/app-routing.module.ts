@@ -1,3 +1,6 @@
+import { CarritoComponent } from './cliente/carrito/carrito.component';
+import { VistaCategoriasComponent } from './admin/vista-categorias/vista-categorias.component';
+import { ItemTableComponent } from './admin/item-table/item-table.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminModule } from './admin/admin.module';
@@ -7,44 +10,59 @@ import { AdminMainPageComponent } from './admin/admin-main-page/admin-main-page.
 import { FormularioModificarItemComponent } from './admin/formulario-modificar-item/formulario-modificar-item.component';
 import { LoginComponent } from './usuario/login/login.component';
 import { EmpleadoMainPageComponent } from './empleado/empleado-main-page/empleado-main-page.component';
-import { CuentasComponent } from './empleado/cuentas/cuentas.component';
-import { CuentasEsperaComponent } from './empleado/cuentas-espera/cuentas-espera.component';
 import { MesasComponent } from './empleado/mesas/mesas.component';
+import { CuentasEsperaComponent } from './empleado/cuentas-espera/cuentas-espera.component';
+import { CuentasComponent } from './empleado/cuentas/cuentas.component';
+import { ItemEliminadosComponent } from './admin/item-eliminados/item-eliminados.component';
+import { CartaComponent } from './cliente/carta/carta.component';
 import { MenuEmpleadoComponent } from './empleado/menu-empleado/menu-empleado.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: CartaComponent
+  },
+  {
+    path: 'carrito',
+    component: CarritoComponent
+  },
   {
     path: 'login',
     component: LoginComponent
   },
   {
     path: 'admin',
-    component: AdminMainPageComponent
+    component: AdminMainPageComponent,
+    children: [
+      {
+        path: 'items', component: ItemTableComponent
+      },
+      {
+        path: 'categorias', component: VistaCategoriasComponent
+      },
+      {
+        path: 'eliminados', component: ItemEliminadosComponent
+      },
+    ]
   },
   {
-    path: 'admin/:idItem',
-    component: FormularioModificarItemComponent
-  },
-  {
-    path: 'mesero',
-    component: EmpleadoMainPageComponent
-  },
-  {
-    path: 'mesero/cuentas',
-    component: CuentasComponent
-  },
-  {
-    path: 'mesero/cuentas-espera',
-    component: CuentasEsperaComponent
-  },
-  {
-    path: 'mesero/mesas',
-    component: MesasComponent
-  },
-  {
-    path: 'mesero/menu-empleado',
-    component: MenuEmpleadoComponent
-  },
+    path: 'empleado',
+    component: EmpleadoMainPageComponent,
+    children: [
+      {
+        path: 'mesas', component: MesasComponent
+      },
+      {
+        path: 'cuentas-espera', component: CuentasEsperaComponent
+      },
+      {
+        path: 'cuentas', component: CuentasComponent
+      },
+      {
+        path: 'menu-empleado', component:MenuEmpleadoComponent
+      }
+    ]
+  }
 ];
 
 @NgModule({
