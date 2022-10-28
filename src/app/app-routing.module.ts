@@ -1,3 +1,4 @@
+import { CarritoComponent } from './cliente/carrito/carrito.component';
 import { VistaCategoriasComponent } from './admin/vista-categorias/vista-categorias.component';
 import { ItemTableComponent } from './admin/item-table/item-table.component';
 import { NgModule } from '@angular/core';
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: '',
     component: CartaComponent
+  },
+  {
+    path: 'carrito',
+    component: CarritoComponent
   },
   {
     path: 'login',
