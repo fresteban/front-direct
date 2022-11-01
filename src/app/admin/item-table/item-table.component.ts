@@ -19,12 +19,12 @@ export class ItemTableComponent implements OnInit {
 
   constructor(private _itemService: ItemService,
     private toastr: ToastrService) {
-      this._itemService.Refreshrequired.subscribe(result => {
-        this.obtenerItems();
-      })
-     }
+    this._itemService.Refreshrequired.subscribe(result => {
+      this.obtenerItems();
+    })
+  }
 
-  @ViewChild(ModalItemComponent) addView !:ModalItemComponent
+  @ViewChild(ModalItemComponent) addView !: ModalItemComponent
 
   ngOnInit(): void {
     this.obtenerItems();
@@ -57,5 +57,30 @@ export class ItemTableComponent implements OnInit {
     this.obtenerItems();
   }
 
+  remove($event, itemId) {
+    if (!confirm('Esta seguro?')) {
+      $event.stopPropagation();
+      return false;
+    }
+    else {
+      this._itemService.obtenerItem(itemId).subscribe(res => {
+        if (res.estado == 'disponible') {
+          res.estado = 'no disponible';
+        }
+        else if (res.estado == 'no disponible') {
+          res.estado = 'disponible';
+        }
+        else {
+          //return false;
+        }
+        this._itemService.actualizarItem(res, itemId).subscribe(data => {
+          this.toastr.success('Estado modificado con exito');
+        }, error => {
+          console.log(error);
+        });
 
+      });
+      return true;
+    }
+  }
 }

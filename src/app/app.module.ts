@@ -22,6 +22,7 @@ import { CocinaModule } from './cocina/cocina.module';
 import { EmpleadoModule } from './empleado/empleado.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { LoginComponent } from './usuario/login/login.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { LoginComponent } from './usuario/login/login.component';
     UsuarioModule,
     CompartidoModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

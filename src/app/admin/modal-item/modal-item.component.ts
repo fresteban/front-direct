@@ -18,6 +18,7 @@ export class ModalItemComponent implements OnInit {
   cat: Categoria[] = [];
   itemForm: FormGroup;
   title = '';
+  subCategoriaSelect = '';
 
   @Input()
   newItem: Item = {
@@ -113,6 +114,16 @@ export class ModalItemComponent implements OnInit {
     this._itemService.obtenerItem(id).subscribe(res => {
       this.editdata = res;
       this.changeCategoria(this.editdata.categoria)
+      this.subCategoriaSelect = this.editdata.subcategoria;
+
+      const indexItem = this.subcategorias.findIndex((item) => {
+        return item === this.subCategoriaSelect;
+      });
+
+      if (indexItem !== -1) {
+        this.subcategorias.splice(indexItem, 1);
+      }
+
       this.itemForm.setValue({
         nombre: this.editdata.nombre,
         detalle: this.editdata.detalle,

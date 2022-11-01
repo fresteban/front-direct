@@ -19,14 +19,14 @@
       <h4>{{subcategoria}}</h4>
     </div>
     <div *ngFor="let item of listaItems">
-      <div class="d-flex justify-content-center" *ngIf="item.categoria == categoria.categoria && item.subcategoria == subcategoria
-        && item.estado != 'eliminado'">
+      <div class="d-flex justify-content-center" *ngIf="item.Item.categoria == categoria.categoria && item.Item.subcategoria == subcategoria
+        && item.Item.estado != 'eliminado'">
         <div class="card mb-3" style="max-width: 540px;">
           <div class="row no-gutters">
             <div class="col-8 nopadding">
               <div class="card-body">
-                <h5 class="card-title col-7">{{item.nombre}}</h5>
-                <p class="card-text">{{item.detalle}}</p>
+                <h5 class="card-title col-7">{{item.Item.nombre}}</h5>
+                <p class="card-text">{{item.Item.detalle}}</p>
               </div>
             </div>
             <div class="col-4 nopadding">
@@ -36,28 +36,28 @@
                   class="card-img" alt="...">
               </div>
               <div class="row">
-                <h5 class="text-success">$ {{item.precio}}</h5>
+                <h5 class="text-success">$ {{item.Item.precio}}</h5>
               </div>
-              <div class="row number-input">
+              <div class="row">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                  <div class="col-xs-1">
+                  <div class="col-sm">
                     <button type="button" class="btn btn-warning form-control"
-                      onclick="this.parentNode.parentNode.querySelector('input[type=number]').stepDown()">-</button>
+                      (click)=resta(item)>-</button>
                   </div>
-                  <div class="col-xs-2">
-                    <input id="cantidad" class="form-control quantity" min="1" name="quantity" value="1" type="number">
+                  <div class="col-sm">
+                    <span type="number" id="cantidad" class="form-control quantity">{{item.Cantidad}}</span>
                   </div>
-                  <div class="col-xs-1">
+                  <div class="col-sm">
                     <button type="button" class="btn btn-warning form-control"
-                      onclick="this.parentNode.parentNode.querySelector('input[type=number]').stepUp()">+</button>
+                      (click)=suma(item)>+</button>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div *ngIf="item.estado == 'disponible'" class="btn-group" role="group" aria-label="Basic example">
+                <div *ngIf="item.Item.estado == 'disponible'" class="btn-group" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-success" (click)=agregarCarro(item)>Agregar a la Cesta</button>
                 </div>
-                <div *ngIf="item.estado != 'disponible'" class="btn-group" role="group" aria-label="Basic example">
+                <div *ngIf="item.Item.estado != 'disponible'" class="btn-group" role="group" aria-label="Basic example">
                   <button type="button" class="btn btn-secondary disable">No disponible</button>
                 </div>
               </div>

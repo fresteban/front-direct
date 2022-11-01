@@ -8,7 +8,7 @@
       <!-- Campo Nombre -->
       <div class="parte">
         <label for="nombreItem">Nombre Item</label>
-        <input type="text" formControlName="nombre" required class="form-control form-control-lg">
+        <input type="text" formControlName="nombre" required class="form-control">
         <div class="text-danger"
           *ngIf="itemForm.get('nombre')?.hasError('required') && itemForm.get('nombre')?.touched">
           <span>El campo es obligatorio</span>
@@ -26,7 +26,7 @@
       <!-- Campo Precio -->
       <div class="parte">
         <label for="precioItem">Precio</label>
-        <input type="number" formControlName="precio" class="form-control form-control-lg" required>
+        <input type="number" formControlName="precio" class="form-control" required>
         <div class="text-danger"
           *ngIf="itemForm.get('precio')?.hasError('required') && itemForm.get('precio')?.touched">
           <span>El campo es obligatorio</span>
@@ -50,13 +50,11 @@
       <!-- Campo Subcategoria -->
       <div class="parte">
         <label for="subcategoriaItem">Subcategoria de Item</label>
-        <div class="form-check">
           <select class="form-control" formControlName="subcategoria">
-            <option selected>Seleccionar una subcategoria</option>
+            <option selected>{{subCategoriaSelect}}</option>
             <option *ngFor="let subcat of subcategorias">{{subcat}}</option>
           </select>
-        </div>
-        <div class="text-danger"
+         <div class="text-danger"
           *ngIf="itemForm.get('categoria')?.hasError('required') && itemForm.get('categoria')?.touched">
           <span>El campo es obligatorio</span>
         </div>
