@@ -19,8 +19,13 @@ import { MenuEmpleadoComponent } from './empleado/menu-empleado/menu-empleado.co
 
 const routes: Routes = [
   {
-    path: '',
-    component: CartaComponent
+    path: 'carta/:mesa',
+    component: CartaComponent,
+    children: [
+      {
+        path: 'Carta',
+        component: CartaComponent
+      }]
   },
   {
     path: 'carrito',
