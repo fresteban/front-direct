@@ -47,12 +47,12 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           console.log(error);
-          this.errormessage = 'Ingese datos validossss';
+          this.errormessage = 'Ingese datos válidos';
           this.errorclass = 'errormessage';
         }
       );
     } else {
-      this.errormessage = 'Ingese datos validos';
+      this.errormessage = 'Ingese datos válidos';
       this.errorclass = 'errormessage';
     }
   }
