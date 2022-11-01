@@ -5,6 +5,12 @@ import { ItemService } from 'src/app/services/item.service';
 import { Item } from 'src/app/interfaces/item';
 import { CarroService } from 'src/app/services/carro.service';
 import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
+import {ActivatedRoute} from '@angular/router';
+import {Router} from "@angular/router"
+import { Carro } from 'src/app/interfaces/carro';
+import { CookieService } from 'ngx-cookie-service';
+import { Inject } from '@angular/core';
 
 @Component({
   selector: 'app-carta',
@@ -15,15 +21,66 @@ export class CartaComponent implements OnInit {
   subcategorias: string[] = [];
   listaItems: any[] = [];
   cat: Categoria[] = [];
+  codeTable: String;
+  mesaId: Number;
+  carro: Carro;
+  public cookieValue:any[]=[];
 
-  constructor(private _itemService: ItemService, private _carroService: CarroService, private _categoriaService: CategoriasService, private toastr: ToastrService) { }
+
+  constructor(private _itemService: ItemService, private _carroService: CarroService, private _categoriaService: CategoriasService, private toastr: ToastrService,private route: ActivatedRoute,private router: Router,private cookie: CookieService) { }
 
   ngOnInit(): void {
     this.obtenerItems();
     this.cargarSubCategorias();
     this.cargarCategorias();
-  }
 
+    this.route.params.subscribe(mesa => {this.codeTable = mesa['mesa']});
+    this.decode(this.codeTable)
+    console.log(this.mesaId);
+    this.cookieValue = JSON.parse(this.cookie.get('carrito'));
+    console.log(this.cookieValue)
+
+  }
+  decode(code:String){
+    switch(code){
+      case 'i':
+        this.mesaId=1;
+        break;
+      case 'iy':
+        this.mesaId=2;
+        break;
+      case 'iyj':
+        this.mesaId=3;
+        break;
+      case 'iw':
+        this.mesaId=4;
+        break;
+      case 'w':
+        this.mesaId=5;
+        break;
+      case 'wi':
+        this.mesaId=6;
+        break;
+      case 'wii':
+        this.mesaId=7;
+        break;
+      case 'wiii':
+        this.mesaId=8;
+        break;
+      case 'n':
+        this.mesaId=9;
+        break;
+      case 'x':
+        this.mesaId=10;
+        break;
+    }
+
+
+  }
+  maximoMesa(){
+    if (this.mesaId>10 || this.mesaId==0)
+    this.router.navigate(['carta'])
+  }
   cargarCategorias() {
     this._categoriaService.obtenerCategorias().subscribe(data => {
       this.cat = data;
@@ -53,7 +110,11 @@ export class CartaComponent implements OnInit {
   agregarCarro(item: any) {
     for (let index = 0; index < item.Cantidad; index++) {
       this._carroService.agregarCarro(item.Item);
+      this.cookieValue.push(item.Item);
     }
+    this.cookie.set('carrito',JSON.stringify(this.cookieValue));
+    console.log(this.cookieValue);
+
     this.toastr.success('Item agregado a la cesta')
   }
 
