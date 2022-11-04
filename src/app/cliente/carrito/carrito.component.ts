@@ -22,7 +22,7 @@ export class CarritoComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerItems();
-    this.mesaId = JSON.parse(this.cookie.get('mesa'));
+    this.mesaId = JSON.parse(localStorage.getItem('mesa'));
     this._carroService.obtenerProductos()
       .subscribe(res => {
         this.productos = res;
@@ -38,7 +38,7 @@ export class CarritoComponent implements OnInit {
       }if( this.productos==null){
         console.log('null');
       }
-        this.productos = JSON.parse(this.cookie.get('carrito'));
+        this.productos = JSON.parse(localStorage.getItem('carrito'));
         console.log('mesa:'+this.mesaId+' '+ 'cookie '+this.productos)
     }
   }
