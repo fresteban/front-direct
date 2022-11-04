@@ -13,12 +13,12 @@ import { Categoria } from '../../interfaces/categoria';
   styleUrls: ['./modal-item.component.scss']
 })
 export class ModalItemComponent implements OnInit {
-  categorias: String[] = ['Comida', 'Bebestible'];
   subcategorias: String[] = [];
   cat: Categoria[] = [];
   itemForm: FormGroup;
   title = '';
   subCategoriaSelect = '';
+  categoriaSelect = '';
 
   @Input()
   newItem: Item = {
@@ -49,7 +49,7 @@ export class ModalItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarCategorias();
-    this.cargarSubCategorias();
+    //this.cargarSubCategorias();
   }
 
   cargarSubCategorias() {
@@ -61,7 +61,7 @@ export class ModalItemComponent implements OnInit {
   cargarCategorias() {
     this._categoriaService.obtenerCategoriasTotal().subscribe(data => {
       this.cat = data;
-    })
+    });
   }
 
   errormessage = '';
@@ -109,6 +109,15 @@ export class ModalItemComponent implements OnInit {
     }
   }
 
+  borrarPrimerElementoSelect(){
+    const indexItem = this.subcategorias.findIndex((item) => {
+      return item === this.subCategoriaSelect;
+    });
+    if (indexItem !== -1) {
+      this.subcategorias.splice(indexItem, 1);
+    }
+  }
+
   cargarItemEditar(id: any) {
     this.open(id);
     this._itemService.obtenerItem(id).subscribe(res => {
@@ -140,16 +149,21 @@ export class ModalItemComponent implements OnInit {
       nombre: '',
       detalle: '',
       precio: '',
-      categoria: '',
-      subcategoria: '',
+      categoria: this.categoriaSelect,
+      subcategoria: this.subCategoriaSelect,
     });
+
     this.subcategorias = [];
     this.editdata = ''
   }
 
   open(id: any) {
+
     if (id == '') {
       this.title = "Agregar nuevo Item";
+      this.categoriaSelect = this.cat[0].categoria;
+      this.subCategoriaSelect = this.cat[0].subcategoria[0];
+      this.borrarPrimerElementoSelect();
     } else {
       this.title = "Editar Item";
     }

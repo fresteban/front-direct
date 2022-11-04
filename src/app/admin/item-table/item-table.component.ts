@@ -57,30 +57,47 @@ export class ItemTableComponent implements OnInit {
     this.obtenerItems();
   }
 
-  remove($event, itemId) {
+  cambiarEstado($event, itemId, evento) {
     if (!confirm('Esta seguro?')) {
       $event.stopPropagation();
       return false;
     }
     else {
-      this._itemService.obtenerItem(itemId).subscribe(res => {
-        if (res.estado == 'disponible') {
-          res.estado = 'no disponible';
-        }
-        else if (res.estado == 'no disponible') {
-          res.estado = 'disponible';
-        }
-        else {
-          //return false;
-        }
-        this._itemService.actualizarItem(res, itemId).subscribe(data => {
-          this.toastr.success('Estado modificado con exito');
-        }, error => {
-          console.log(error);
+      if (evento == 'cambiar'){
+        this._itemService.obtenerItem(itemId).subscribe(res => {
+          if (res.estado == 'disponible') {
+            res.estado = 'no disponible';
+          }
+          else if (res.estado == 'no disponible') {
+            res.estado = 'disponible';
+          }
+          else {
+            //return false;
+          }
+          this._itemService.actualizarItem(res, itemId).subscribe(data => {
+            this.toastr.success('Estado modificado con exito');
+          }, error => {
+            console.log(error);
+          });
         });
+        return true;
+      }
+      else if (evento == 'eliminar') {
+        this._itemService.obtenerItem(itemId).subscribe(res => {
+          res.estado = 'eliminado';
 
-      });
-      return true;
+          this._itemService.actualizarItem(res, itemId).subscribe(data => {
+            this.toastr.success('Item eliminado con exito');
+          }, error => {
+            console.log(error);
+          });
+        });
+        return true;
+      }
+      else{
+        return false;
+      }
+
     }
   }
 }
