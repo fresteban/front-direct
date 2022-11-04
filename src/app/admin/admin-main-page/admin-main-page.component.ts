@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemTableComponent } from '../item-table/item-table.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-admin-main-page',
@@ -8,7 +9,7 @@ import { ItemTableComponent } from '../item-table/item-table.component';
 })
 export class AdminMainPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(public _authService: AuthService) { }
 
 
   ngOnInit() {
