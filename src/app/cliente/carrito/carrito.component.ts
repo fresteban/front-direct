@@ -16,11 +16,13 @@ export class CarritoComponent implements OnInit {
   public productos: any;
   public totalfinal?: number;
   public cookieValue:any[]=[];
+  public mesaId: number;
 
   constructor(private _itemService: ItemService, private _carroService: CarroService,private cookie: CookieService) { }
 
   ngOnInit(): void {
     this.obtenerItems();
+    this.mesaId = JSON.parse(this.cookie.get('mesa'));
     this._carroService.obtenerProductos()
       .subscribe(res => {
         this.productos = res;
@@ -28,9 +30,16 @@ export class CarritoComponent implements OnInit {
         console.log('original '+ this.productos)
       })
 
-    if (typeof this.productos=='undefined' || this.productos! || this.productos==null){
-      this.productos = JSON.parse(this.cookie.get('carrito'));
-        console.log('cookie '+this.productos)
+    if (this.productos===undefined|| this.productos!|| this.productos==null){
+      if(typeof this.productos==='undefined'){
+        console.log('undefined');
+      }if( this.productos!){
+        console.log('noexiste');
+      }if( this.productos==null){
+        console.log('null');
+      }
+        this.productos = JSON.parse(this.cookie.get('carrito'));
+        console.log('mesa:'+this.mesaId+' '+ 'cookie '+this.productos)
     }
   }
 
