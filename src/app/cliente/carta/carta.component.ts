@@ -37,8 +37,12 @@ export class CartaComponent implements OnInit {
     this.route.params.subscribe(mesa => {this.codeTable = mesa['mesa']});
     this.decode(this.codeTable)
     console.log(this.mesaId);
-    this.cookieValue = JSON.parse(this.cookie.get('carrito'));
-    console.log(this.cookieValue)
+    localStorage.setItem('mesa',JSON.stringify(this.mesaId));
+    if(JSON.parse(localStorage.getItem('carrito'))!=null){
+      this.cookieValue = JSON.parse(localStorage.getItem('carrito'));
+    }
+
+
 
   }
   decode(code:String){
@@ -112,8 +116,8 @@ export class CartaComponent implements OnInit {
       this._carroService.agregarCarro(item.Item);
       this.cookieValue.push(item.Item);
     }
-    this.cookie.set('carrito',JSON.stringify(this.cookieValue));
-    console.log(this.cookieValue);
+
+   localStorage.setItem('carrito',JSON.stringify(this.cookieValue));
 
     this.toastr.success('Item agregado a la cesta')
   }
