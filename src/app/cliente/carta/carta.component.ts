@@ -25,6 +25,7 @@ export class CartaComponent implements OnInit {
   mesaId: Number;
   carro: Carro;
   public cookieValue:any[]=[];
+  indexCantidad:number[]=[];
 
 
   constructor(private _itemService: ItemService, private _carroService: CarroService, private _categoriaService: CategoriasService, private toastr: ToastrService,private route: ActivatedRoute,private router: Router,private cookie: CookieService) { }
@@ -38,7 +39,7 @@ export class CartaComponent implements OnInit {
     this.decode(this.codeTable)
     console.log(this.mesaId);
     localStorage.setItem('mesa',JSON.stringify(this.mesaId));
-    if(JSON.parse(localStorage.getItem('carrito'))!=null){
+    if(localStorage.getItem('carrito') != undefined || localStorage.getItem('carrito')!=null){
       this.cookieValue = JSON.parse(localStorage.getItem('carrito'));
     }
 
@@ -112,16 +113,16 @@ export class CartaComponent implements OnInit {
   }
 
   agregarCarro(item: any) {
+      let index :number=0;
     for (let index = 0; index < item.Cantidad; index++) {
-      this._carroService.agregarCarro(item.Item);
-      this.cookieValue.push(item.Item);
+
+        //this._carroService.agregarCarro(item.Item);
+        this.cookieValue.push(item);
+
+        localStorage.setItem('carrito',JSON.stringify(this.cookieValue));
+        this.toastr.success('Item agregado a la cesta')
     }
-
-   localStorage.setItem('carrito',JSON.stringify(this.cookieValue));
-
-    this.toastr.success('Item agregado a la cesta')
   }
-
   suma(item: any) {
     this.listaItems.forEach(element => {
       if (element.Item._id == item.Item._id) {
