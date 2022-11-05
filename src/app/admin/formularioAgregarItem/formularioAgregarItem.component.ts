@@ -49,18 +49,15 @@ export class FormularioAgregarItemComponent implements OnInit {
       document.getElementById("exampleModal")
     );
     this.cargarSubCategorias();
-    console.log("veve; ", this.categorias);
   }
 
   cargarSubCategorias() {
     this._itemService.obtenerSubCategorias().subscribe(data => {
-      console.log("data: ", data);
       this.subcategorias = data;
     })
   }
 
   agregarItem() {
-    console.log("yapo");
     const newItem: Item = {
       nombre: this.itemForm.get('nombre')?.value,
       detalle: this.itemForm.get('detalle')?.value,
@@ -70,8 +67,6 @@ export class FormularioAgregarItemComponent implements OnInit {
       foto: this.itemForm.get('foto')?.value,
       estado: 'no disponible'
     }
-
-    console.log(newItem);
 
     this._itemService.guardarItem(newItem).subscribe(data => {
       this.toastr.success('Agregado con exito');

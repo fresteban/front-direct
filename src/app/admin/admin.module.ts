@@ -7,13 +7,21 @@ import { FormularioAgregarItemComponent } from './formularioAgregarItem/formular
 import { FormularioModificarItemComponent } from './formulario-modificar-item/formulario-modificar-item.component';
 import { RouterModule } from '@angular/router';
 import { ModalItemComponent } from './modal-item/modal-item.component';
+import { ItemEliminadosComponent } from './item-eliminados/item-eliminados.component';
+import { VistaCategoriasComponent } from './vista-categorias/vista-categorias.component';
+import { LoginComponent } from '../usuario/login/login.component';
+import { CartaComponent } from '../cliente/carta/carta.component';
+import { CarritoComponent } from '../cliente/carrito/carrito.component';
 @NgModule({
   declarations: [
     AdminMainPageComponent,
     ItemTableComponent,
     FormularioAgregarItemComponent,
     FormularioModificarItemComponent,
-    ModalItemComponent
+    ModalItemComponent,
+    ItemEliminadosComponent,
+    VistaCategoriasComponent,
+    LoginComponent
   ],
   exports: [
     AdminMainPageComponent
@@ -22,7 +30,12 @@ import { ModalItemComponent } from './modal-item/modal-item.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule.forRoot([
+      {path: 'eliminados',component:ItemEliminadosComponent},
+      {path: 'categorias',component:VistaCategoriasComponent},
+      {path: 'items',component:ItemTableComponent},
+      {path: '**',redirectTo:'/admin',pathMatch:'full'},
+    ])
   ]
 })
 export class AdminModule { }

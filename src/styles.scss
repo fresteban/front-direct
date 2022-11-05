@@ -1,5 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 .boton-modificar {
+  fill: darkblue;
+  width: 30px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.boton-eliminar {
+  fill: darkred;
   width: 30px;
   border: none;
   background: none;
@@ -7,4 +16,4 @@
 }
 
 /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+@import 'bootstrap/scss/bootstrap';

@@ -4,11 +4,11 @@ div.tableContainer {
   height: 500px;
   /* must be greater than tbody*/
   overflow: auto;
-  margin: 50px auto;
+  margin: 50px;
 }
 
 table {
-  width: 97%;
+  width: 98%;
   /*100% of container produces horiz. scroll in Mozilla*/
   border: none;
   border-spacing: 0px;
