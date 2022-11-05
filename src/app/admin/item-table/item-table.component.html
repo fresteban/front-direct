@@ -5,7 +5,7 @@
       <thead>
         <tr>
           <th>Nombre</th>
-          <th>Descripción</th>
+          <th>Detalle</th>
           <th>Precio</th>
           <th>Categoría</th>
           <th>Subcategoría</th>
@@ -19,8 +19,8 @@
             <td> {{item.nombre}} </td>
             <td> {{item.detalle}} </td>
             <td> ${{item.precio | number}} </td>
-            <td> {{item.subcategoria}}</td>
-            <td class="text-capitalize"> {{item.categoria}} </td>
+            <td class="text-capitalize"> {{item.categoria}}</td>
+            <td class="text-capitalize"> {{item.subcategoria}} </td>
             <td><input class="form-check-input" type="checkbox" value="" id="flexCheckChecked"
                 [checked]="item.estado == 'disponible'" (click)="cambiarEstado($event,item._id,'cambiar')" ></td>
             <td>
