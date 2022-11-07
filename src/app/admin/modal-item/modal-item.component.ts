@@ -13,7 +13,7 @@ import { Categoria } from '../../interfaces/categoria';
   styleUrls: ['./modal-item.component.scss']
 })
 export class ModalItemComponent implements OnInit {
-  subcategorias: String[] = [];
+  subcategorias = [];
   cat: Categoria[] = [];
   itemForm: FormGroup;
   title = '';
@@ -46,9 +46,28 @@ export class ModalItemComponent implements OnInit {
   }
 
   @ViewChild('content') addview!: ElementRef
+  cargarCategorias() {
+    this._categoriaService.obtenerCategoriasTotal().subscribe(data => {
+      console.log("data: ", data);
+      this.cat = data;
+      console.log("catttt: ", this.cat[0].categoria);
+
+      this.categoriaSelect = this.cat[0].categoria;
+      this.subCategoriaSelect = this.cat[0].subcategoria[0];
+      console.log("subcat: " , this.subcategorias);
+      this.changeCategoria(this.cat[0].categoria);
+    });
+
+
+  }
 
   ngOnInit(): void {
+    console.log("ASDAD");
     this.cargarCategorias();
+    console.log("cat: ", this.cat);
+    //this.categoriaSelect = this.cat[0].categoria;
+    //this.subCategoriaSelect = this.cat[0].subcategoria[0];
+    //this.changeCategoria(this.categoriaSelect);
     //this.cargarSubCategorias();
   }
 
@@ -58,11 +77,7 @@ export class ModalItemComponent implements OnInit {
     })
   }
 
-  cargarCategorias() {
-    this._categoriaService.obtenerCategoriasTotal().subscribe(data => {
-      this.cat = data;
-    });
-  }
+
 
   errormessage = '';
   errorclass = '';
@@ -73,6 +88,7 @@ export class ModalItemComponent implements OnInit {
     this.cat.forEach(element => {
       if (element.categoria == it) {
         this.subcategorias = element.subcategoria
+        console.log("asa: " , this.subcategorias)
       }
     });
   }
@@ -109,7 +125,7 @@ export class ModalItemComponent implements OnInit {
     }
   }
 
-  borrarPrimerElementoSelect(){
+  borrarPrimerElementoSelect() {
     const indexItem = this.subcategorias.findIndex((item) => {
       return item === this.subCategoriaSelect;
     });
