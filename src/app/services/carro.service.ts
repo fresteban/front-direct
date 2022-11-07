@@ -8,8 +8,8 @@ import { ItemPedido } from '../interfaces/item-pedido';
   providedIn: 'root'
 })
 export class CarroService {
-  urlCarro = 'http://localhost:4000/api/Carro/';
-  urlItem = 'http://localhost:4000/api/Item/';
+  urlCarro = 'https://produccion2.herokuapp.com/api/Carro/';
+  urlItem = 'https://produccion2.herokuapp.com/api/Item/';
 
   constructor(private http: HttpClient) { }
   //USANDO BACKEND

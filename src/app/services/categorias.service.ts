@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CategoriasService {
-  url = 'http://localhost:4000/api/categoria/';
+  url = 'https://produccion2.herokuapp.com/api/categoria/';
 
   constructor(private http: HttpClient) { }
 
