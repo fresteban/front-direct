@@ -13,7 +13,7 @@ export class ItemService {
     return this._refreshrequired;
   }
 
-  url = 'http://localhost:4000/api/Item/';
+  url = 'https://produccion2.herokuapp.com/api/Item/';
 
   constructor(private http: HttpClient) { }
 
