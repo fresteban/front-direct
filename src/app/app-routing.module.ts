@@ -16,6 +16,7 @@ import { CuentasComponent } from './empleado/cuentas/cuentas.component';
 import { ItemEliminadosComponent } from './admin/item-eliminados/item-eliminados.component';
 import { CartaComponent } from './cliente/carta/carta.component';
 import { MenuEmpleadoComponent } from './empleado/menu-empleado/menu-empleado.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -38,6 +39,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminMainPageComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'items', component: ItemTableComponent

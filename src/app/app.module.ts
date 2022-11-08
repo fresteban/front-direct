@@ -8,7 +8,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CartaComponent } from './cliente/carta/carta.component';
 import { CarritoComponent } from './cliente/carrito/carrito.component';
 import { NavbarComponent } from './compartido/navbar/navbar.component';
@@ -23,6 +23,8 @@ import { EmpleadoModule } from './empleado/empleado.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { LoginComponent } from './usuario/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthGuard } from './auth.guard';
+import { TokenService } from './services/token.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,15 @@ import { CookieService } from 'ngx-cookie-service';
     UsuarioModule,
     CompartidoModule
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
