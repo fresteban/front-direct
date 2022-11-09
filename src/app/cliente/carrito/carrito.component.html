@@ -1,11 +1,11 @@
-<ng-container *ngIf="true">
+<ng-container *ngIf="siono == 2">
   <div class="slds-text-align_center">
     <div class="row">
       <div class="col">
         <h2>Mi Pedido</h2>
       </div>
       <div class="col">
-        <button class="btn btn-outline-info bg-dark" type="submit" routerLink="/">VOLVER AL MENÚ</button>
+        <button class="btn btn-outline-info bg-dark" type="submit" onclick="history.go(-1)">VOLVER AL MENÚ</button>
       </div>
     </div>
   </div>
@@ -38,22 +38,24 @@
       </tr>
     </tbody>
   </table>
-</ng-container>
-<div class="card text-center">
-  <div class="card-body">
-    <h5 class="card-title">Total:</h5>
-    <p class="card-text">{{totalfinal}}</p>
-    <a href="#" class="btn btn-primary">Pagar Pedido</a>
+  <div class="card text-center">
+    <div class="card-body">
+      <h5 class="card-title">Total:</h5>
+      <p class="card-text">{{totalfinal}}</p>
+      <a href="#" class="btn btn-primary">Pagar Pedido</a>
+    </div>
   </div>
-</div>
+</ng-container>
 
-<ng-container *ngIf="false">
+
+<ng-container *ngIf="siono == 1">
   <div class="container">
     <h5 class="carro">Mi Pedido</h5>
     <div class="center">
-      <img src="" alt="">
-      <h4>Tu carrito está vacío!</h4>
-      <h6>Agregale un producto!</h6>
+      <h1>🛒😥</h1>
+      <h4>Tu carrito está vacío! 💀</h4>
+      <h6>Agregale un producto!🤤</h6>
+      <button class="btn btn-outline-info bg-dark" type="submit" onclick="history.go(-1)">VOLVER AL MENÚ</button>
     </div>
   </div>
 </ng-container>

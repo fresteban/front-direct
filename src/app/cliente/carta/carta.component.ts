@@ -6,7 +6,7 @@ import { Item } from 'src/app/interfaces/item';
 import { CarroService } from 'src/app/services/carro.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {Router} from "@angular/router"
 import { Carro } from 'src/app/interfaces/carro';
 import { CookieService } from 'ngx-cookie-service';
@@ -26,6 +26,7 @@ export class CartaComponent implements OnInit {
   carro: Carro;
   public cookieValue:any[]=[];
   indexCantidad:number[]=[];
+  public totalItems : number = 0;
 
 
   constructor(private _itemService: ItemService, private _carroService: CarroService, private _categoriaService: CategoriasService, private toastr: ToastrService,private route: ActivatedRoute,private router: Router,private cookie: CookieService) { }
@@ -34,13 +35,15 @@ export class CartaComponent implements OnInit {
     this.obtenerItems();
     this.cargarSubCategorias();
     this.cargarCategorias();
-
     this.route.params.subscribe(mesa => {this.codeTable = mesa['mesa']});
     this.decode(this.codeTable)
     console.log(this.mesaId);
     localStorage.setItem('mesa',JSON.stringify(this.mesaId));
     if(localStorage.getItem('carrito') != undefined || localStorage.getItem('carrito')!=null){
       this.cookieValue = JSON.parse(localStorage.getItem('carrito'));
+    }
+    if(localStorage.getItem('totalCarrito') != undefined || localStorage.getItem('totalCarrito')!=null){
+      this.totalItems = JSON.parse(localStorage.getItem('totalCarrito'));
     }
 
 
@@ -78,6 +81,8 @@ export class CartaComponent implements OnInit {
       case 'x':
         this.mesaId=10;
         break;
+      default:
+        this.router.navigate(['/error']);
     }
 
 
@@ -122,6 +127,8 @@ export class CartaComponent implements OnInit {
         localStorage.setItem('carrito',JSON.stringify(this.cookieValue));
         this.toastr.success('Item agregado a la cesta')
     }
+    this.totalItems += item.Cantidad;
+    localStorage.setItem('totalCarrito',JSON.stringify(this.totalItems));
   }
   suma(item: any) {
     this.listaItems.forEach(element => {

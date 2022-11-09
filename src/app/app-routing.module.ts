@@ -17,6 +17,7 @@ import { ItemEliminadosComponent } from './admin/item-eliminados/item-eliminados
 import { CartaComponent } from './cliente/carta/carta.component';
 import { MenuEmpleadoComponent } from './empleado/menu-empleado/menu-empleado.component';
 import { AuthGuard } from './auth.guard';
+import { ErrorComponent } from './compartido/error/error.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'error',
+    component: ErrorComponent
   },
   {
     path: 'admin',

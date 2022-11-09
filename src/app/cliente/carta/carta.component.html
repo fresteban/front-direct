@@ -4,8 +4,10 @@
       <h5>Carta Online</h5>
     </div>
     <div class="col-4">
-      <button class="btn btn-outline-info bg-dark" type="submit" routerLink="/carrito"
-        style="margin-right:5%; margin-top: 5%; margin-bottom: 5%;">IR AL PEDIDO</button>
+      <button class="btn btn-secondary bg-dark" routerLink="/carrito">
+        <span style="font-size: 40px;">🛒</span>
+        <div style="font-size:10px;" class="badge bg-danger" style="top: -20px; right: 8px;">{{totalItems}}</div>
+      </button>
     </div>
   </div>
 </div>
@@ -21,7 +23,7 @@
     <div *ngFor="let item of listaItems">
       <div class="d-flex justify-content-center" *ngIf="item.Item.categoria == categoria.categoria && item.Item.subcategoria == subcategoria
         && item.Item.estado != 'eliminado'">
-        <div class="card mb-3" style="max-width: 540px;">
+        <div class="card mb-3" style="max-width:540px">
           <div class="row no-gutters">
             <div class="col-8 nopadding">
               <div class="card-body">
