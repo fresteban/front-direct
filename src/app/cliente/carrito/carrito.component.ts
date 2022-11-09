@@ -19,6 +19,8 @@ export class CarritoComponent implements OnInit {
   public mesaId: number;
   index: number =0;
   subi:number=0;
+  siono:number;
+
   constructor(private _itemService: ItemService, private _carroService: CarroService,private cookie: CookieService) { }
 
   ngOnInit(): void {
@@ -55,6 +57,13 @@ export class CarritoComponent implements OnInit {
        };
 
         console.log(this.productos)
+
+        if(JSON.parse(localStorage.getItem('totalCarrito')) ==0){
+          this.siono = 1;
+        }
+        if(JSON.parse(localStorage.getItem('totalCarrito')) != 0){
+          this.siono = 2;
+        }
   }
 
   obtenerItems() {
@@ -77,6 +86,7 @@ export class CarritoComponent implements OnInit {
 
     this.cookieValue.splice(index,1);
     localStorage.setItem('carrito',JSON.stringify(this.productos));
+    localStorage.setItem('totalCarrito',JSON.stringify(this.cookieValue.length));
 
 
   }
