@@ -63,7 +63,7 @@ export class ItemTableComponent implements OnInit {
       return false;
     }
     else {
-      if (evento == 'cambiar'){
+      if (evento == 'cambiar') {
         this._itemService.obtenerItem(itemId).subscribe(res => {
           if (res.estado == 'disponible') {
             res.estado = 'no disponible';
@@ -94,7 +94,7 @@ export class ItemTableComponent implements OnInit {
         });
         return true;
       }
-      else{
+      else {
         return false;
       }
 

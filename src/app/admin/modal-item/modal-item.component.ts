@@ -19,7 +19,7 @@ export class ModalItemComponent implements OnInit {
   title = '';
   subCategoriaSelect = '';
   categoriaSelect = '';
-  id_:any = '';
+  id_: any = '';
 
   @Input()
   newItem: Item = {
@@ -51,9 +51,7 @@ export class ModalItemComponent implements OnInit {
     this._categoriaService.obtenerCategoriasTotal().subscribe(data => {
       this.cat = data;
       this.categoriaSelect = this.cat[0].categoria;
-      this.subCategoriaSelect = this.cat[0].subcategoria[0];
-      this.changeCategoria(this.cat[0].categoria);
-      this.borrarPrimerElementoSelect();
+      this.changeCategoria(this.categoriaSelect);
     });
   }
 
@@ -67,15 +65,25 @@ export class ModalItemComponent implements OnInit {
   editdata: any = '';
 
   changeCategoria(it) {
-    this.cat.forEach(element => {
-      if (element.categoria == it) {
-        this.subcategorias = element.subcategoria
-        console.log("asa: " , this.subcategorias)
-      }
-    });
+    let found = this.cat.find(categoria => categoria.categoria == it);
+    if (found.categoria == this.id_.categoria) {
+      this.subCategoriaSelect = this.id_.subcategoria;
+      this.subcategorias = found.subcategoria.filter(subc => subc != this.id_.subcategoria);
+    }
+    else {
+      this.subCategoriaSelect = found.subcategoria[0];
+      this.subcategorias = found.subcategoria.filter(subc => subc != this.subCategoriaSelect);
+    }
   }
 
   guardarItem() {
+    let estado;
+    if (this.id_) {
+      estado = this.id_.estado;
+    }
+    else {
+      estado = 'no disponible'
+    }
     if (this.itemForm.valid) {
       const newItem: Item = {
         nombre: this.itemForm.get('nombre')?.value,
@@ -83,17 +91,21 @@ export class ModalItemComponent implements OnInit {
         precio: this.itemForm.get('precio')?.value,
         categoria: this.itemForm.get('categoria')?.value,
         subcategoria: this.itemForm.get('subcategoria')?.value,
-        estado: 'no disponible',
+        estado: estado,
         foto: ''
       }
 
       if (this.editdata) {
         this._itemService.actualizarItem(newItem, this.editdata._id).subscribe(data => {
         });
+        this.close()
       }
       else {
         this._itemService.guardarItem(newItem).subscribe(data => {
+          this.errormessage = '';
+          this.errorclass = ''
           this.toastr.success('Agregado con exito');
+          this.close()
         }, error => {
           console.log(error);
           this.itemForm.reset();
@@ -106,30 +118,22 @@ export class ModalItemComponent implements OnInit {
     }
   }
 
-  borrarPrimerElementoSelect() {
-    const indexItem = this.subcategorias.findIndex((item) => {
-      console.log('borrar: ', item)
-      return item === this.subCategoriaSelect;
-    });
-    console.log('idex: ', indexItem);
-    if (indexItem !== -1) {
-      this.subcategorias.splice(indexItem, 1);
-    }
-  }
-
   cargarItemEditar(id: any) {
     this.open(id);
+    this.cargarCategorias()
     this._itemService.obtenerItem(id).subscribe(res => {
       this.id_ = res;
       this.editdata = res;
       this.changeCategoria(this.editdata.categoria)
       this.subCategoriaSelect = this.editdata.subcategoria;
-
       const indexItem = this.subcategorias.findIndex((item) => {
         return item === this.subCategoriaSelect;
       });
       if (indexItem !== -1) {
         this.subcategorias.splice(indexItem, 1);
+      }
+      if (!this.editdata.detalle) {
+        this.editdata.detalle = '';
       }
 
       this.itemForm.setValue({
@@ -150,19 +154,15 @@ export class ModalItemComponent implements OnInit {
       categoria: this.categoriaSelect,
       subcategoria: this.subCategoriaSelect,
     });
-
-    this.subcategorias = [];
     this.editdata = ''
   }
 
   open(id: any) {
+    this.cargarCategorias();
+    this.errormessage = '';
+    this.errorclass = '';
     if (id == '') {
-      this.cargarCategorias();
       this.title = "Agregar nuevo Item";
-      this.categoriaSelect = this.cat[0].categoria;
-      this.subCategoriaSelect = this.cat[0].subcategoria[0];
-      this.borrarPrimerElementoSelect();
-      //this.changeCategoria(this.categoriaSelect);
     } else {
       this.title = "Editar Item";
     }
@@ -172,6 +172,10 @@ export class ModalItemComponent implements OnInit {
     }, (reason) => {
 
     });
+  }
+
+  close() {
+    this.modalService.dismissAll()
   }
 
   private getDismissReason(reason: any): string {
