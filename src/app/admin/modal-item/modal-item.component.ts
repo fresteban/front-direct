@@ -51,11 +51,11 @@ export class ModalItemComponent implements OnInit {
       console.log("data: ", data);
       this.cat = data;
       console.log("catttt: ", this.cat[0].categoria);
-
       this.categoriaSelect = this.cat[0].categoria;
       this.subCategoriaSelect = this.cat[0].subcategoria[0];
       console.log("subcat: " , this.subcategorias);
       this.changeCategoria(this.cat[0].categoria);
+      this.borrarPrimerElementoSelect();
     });
 
 
@@ -64,7 +64,6 @@ export class ModalItemComponent implements OnInit {
   ngOnInit(): void {
     console.log("ASDAD");
     this.cargarCategorias();
-    console.log("cat: ", this.cat);
     //this.categoriaSelect = this.cat[0].categoria;
     //this.subCategoriaSelect = this.cat[0].subcategoria[0];
     //this.changeCategoria(this.categoriaSelect);
@@ -127,14 +126,17 @@ export class ModalItemComponent implements OnInit {
 
   borrarPrimerElementoSelect() {
     const indexItem = this.subcategorias.findIndex((item) => {
+      console.log('borrar: ', item)
       return item === this.subCategoriaSelect;
     });
+    console.log('idex: ', indexItem);
     if (indexItem !== -1) {
       this.subcategorias.splice(indexItem, 1);
     }
   }
 
   cargarItemEditar(id: any) {
+    console.log("cargaritem");
     this.open(id);
     this._itemService.obtenerItem(id).subscribe(res => {
       this.editdata = res;
@@ -174,12 +176,14 @@ export class ModalItemComponent implements OnInit {
   }
 
   open(id: any) {
-
+    console.log("open");
     if (id == '') {
+      this.cargarCategorias();
       this.title = "Agregar nuevo Item";
       this.categoriaSelect = this.cat[0].categoria;
       this.subCategoriaSelect = this.cat[0].subcategoria[0];
       this.borrarPrimerElementoSelect();
+      //this.changeCategoria(this.categoriaSelect);
     } else {
       this.title = "Editar Item";
     }
