@@ -37,7 +37,7 @@ export class CartaComponent implements OnInit {
     this.cargarCategorias();
     this.route.params.subscribe(mesa => {this.codeTable = mesa['mesa']});
     this.decode(this.codeTable)
-    console.log(this.mesaId);
+
     localStorage.setItem('mesa',JSON.stringify(this.mesaId));
     if(localStorage.getItem('carrito') != undefined || localStorage.getItem('carrito')!=null){
       this.cookieValue = JSON.parse(localStorage.getItem('carrito'));
@@ -118,14 +118,14 @@ export class CartaComponent implements OnInit {
   }
 
   agregarCarro(item: any) {
-      let index :number=0;  
+      let index :number=0;
     for (let index = 0; index < item.Cantidad; index++) {
 
         //this._carroService.agregarCarro(item.Item);
         this.cookieValue.push(item);
 
         localStorage.setItem('carrito',JSON.stringify(this.cookieValue));
-        
+
     }
     this.toastr.success('Item agregado a la cesta')
     this.totalItems += item.Cantidad;
@@ -148,5 +148,8 @@ export class CartaComponent implements OnInit {
         }
       }
     });
+  }
+  carritoSalida(){
+    console.log(this.cookieValue);
   }
 }
