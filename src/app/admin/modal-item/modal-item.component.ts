@@ -19,6 +19,7 @@ export class ModalItemComponent implements OnInit {
   title = '';
   subCategoriaSelect = '';
   categoriaSelect = '';
+  id_:any = '';
 
   @Input()
   newItem: Item = {
@@ -119,6 +120,7 @@ export class ModalItemComponent implements OnInit {
   cargarItemEditar(id: any) {
     this.open(id);
     this._itemService.obtenerItem(id).subscribe(res => {
+      this.id_ = res;
       this.editdata = res;
       this.changeCategoria(this.editdata.categoria)
       this.subCategoriaSelect = this.editdata.subcategoria;
