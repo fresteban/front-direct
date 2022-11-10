@@ -33,13 +33,6 @@ export class CarritoComponent implements OnInit {
     //    this.totalfinal = this._carroService.obtenerPrecio();
     //    console.log('original '+ this.productos)
     //  })
-      if(typeof this.productos==='undefined'){
-        console.log('undefined');
-      }if( this.productos!){
-        console.log('noexiste');
-      }if( this.productos==null){
-        console.log('null');
-      }
 
       this.cookieValue = JSON.parse(localStorage.getItem('carrito'));
 
@@ -54,10 +47,8 @@ export class CarritoComponent implements OnInit {
           this.subi++;
         }
           this.totalfinal += this.cookieValue[i].Item.precio;
-          console.log(this.totalfinal)
-       };
 
-        console.log(this.productos)
+       };
 
         if(JSON.parse(localStorage.getItem('totalCarrito')) ==0){
           this.siono = 1;
@@ -65,6 +56,7 @@ export class CarritoComponent implements OnInit {
         if(JSON.parse(localStorage.getItem('totalCarrito')) != 0){
           this.siono = 2;
         }
+        console.log('CokkieValue antes de Borrar: ', this.cookieValue)
   }
 
   obtenerItems() {
@@ -79,16 +71,36 @@ export class CarritoComponent implements OnInit {
     //this._carroService.quitarItemCarro(item);
     //if(this.listaItems[index])
     //this.totalfinal-=this.cookieValue[index].Item.precio;
+    console.log(this.productos)
     this.totalfinal-=this.productos[index].Item.precio;
     this.productos[index].Cantidad-=1;
+
     if(this.productos[index].Cantidad==0){
       this.productos.splice(index,1);
     }
+    this.rellenarCarro();
 
-    this.cookieValue.splice(index,1);
-    localStorage.setItem('carrito',JSON.stringify(this.productos));
+  }
+  rellenarCarro(){
+    this.cookieValue =[];
+
+    var lastj: number = 0
+
+    for(var i = 0; i < this.productos.length; i++ ){
+
+      for(var j = 0 ; j < this.productos[i].Cantidad;j++){
+
+        this.cookieValue[lastj+j]=this.productos[i];
+        console.log(lastj+j,' ',this.cookieValue[lastj+j]);
+
+      }
+      lastj +=this.productos[i].Cantidad;
+
+    }
+    console.log('CokkieValue tras Borrar: ', this.cookieValue)
+
+    localStorage.setItem('carrito',JSON.stringify(this.cookieValue));
     localStorage.setItem('totalCarrito',JSON.stringify(this.cookieValue.length));
-
 
   }
   borrarCarrito() {
@@ -100,7 +112,7 @@ export class CarritoComponent implements OnInit {
       history.go(-1);
     }
     else{
-      
+
     }
   }
 }
