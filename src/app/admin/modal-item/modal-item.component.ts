@@ -48,35 +48,17 @@ export class ModalItemComponent implements OnInit {
   @ViewChild('content') addview!: ElementRef
   cargarCategorias() {
     this._categoriaService.obtenerCategoriasTotal().subscribe(data => {
-      console.log("data: ", data);
       this.cat = data;
-      console.log("catttt: ", this.cat[0].categoria);
       this.categoriaSelect = this.cat[0].categoria;
       this.subCategoriaSelect = this.cat[0].subcategoria[0];
-      console.log("subcat: " , this.subcategorias);
       this.changeCategoria(this.cat[0].categoria);
       this.borrarPrimerElementoSelect();
     });
-
-
   }
 
   ngOnInit(): void {
-    console.log("ASDAD");
     this.cargarCategorias();
-    //this.categoriaSelect = this.cat[0].categoria;
-    //this.subCategoriaSelect = this.cat[0].subcategoria[0];
-    //this.changeCategoria(this.categoriaSelect);
-    //this.cargarSubCategorias();
   }
-
-  cargarSubCategorias() {
-    this._itemService.obtenerSubCategorias().subscribe(data => {
-      this.subcategorias = data;
-    })
-  }
-
-
 
   errormessage = '';
   errorclass = '';
@@ -93,7 +75,6 @@ export class ModalItemComponent implements OnInit {
   }
 
   guardarItem() {
-
     if (this.itemForm.valid) {
       const newItem: Item = {
         nombre: this.itemForm.get('nombre')?.value,
@@ -136,7 +117,6 @@ export class ModalItemComponent implements OnInit {
   }
 
   cargarItemEditar(id: any) {
-    console.log("cargaritem");
     this.open(id);
     this._itemService.obtenerItem(id).subscribe(res => {
       this.editdata = res;
@@ -146,7 +126,6 @@ export class ModalItemComponent implements OnInit {
       const indexItem = this.subcategorias.findIndex((item) => {
         return item === this.subCategoriaSelect;
       });
-
       if (indexItem !== -1) {
         this.subcategorias.splice(indexItem, 1);
       }
@@ -159,7 +138,6 @@ export class ModalItemComponent implements OnInit {
         subcategoria: this.editdata.subcategoria
       });
     })
-
   }
 
   limpiarFormulario() {
@@ -176,7 +154,6 @@ export class ModalItemComponent implements OnInit {
   }
 
   open(id: any) {
-    console.log("open");
     if (id == '') {
       this.cargarCategorias();
       this.title = "Agregar nuevo Item";
