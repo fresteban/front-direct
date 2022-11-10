@@ -3,6 +3,7 @@ import { ItemService } from '../../services/item.service'
 import { Item } from '../../interfaces/item';
 import { CarroService } from '../../services/carro.service';
 import { CookieService } from 'ngx-cookie-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-carrito',
@@ -21,7 +22,7 @@ export class CarritoComponent implements OnInit {
   subi:number=0;
   siono:number;
 
-  constructor(private _itemService: ItemService, private _carroService: CarroService,private cookie: CookieService) { }
+  constructor(private _itemService: ItemService, private _carroService: CarroService,private cookie: CookieService,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     //this.obtenerItems();
@@ -90,5 +91,16 @@ export class CarritoComponent implements OnInit {
 
 
   }
-
+  borrarCarrito() {
+    if (confirm('Esta seguro que desea pagar?'))
+    {
+      this.toastr.success('El pedido fue pagado con éxito', 'Tu pedido está en la cola');
+      localStorage.setItem('carrito',JSON.stringify([]));
+      localStorage.setItem('totalCarrito',JSON.stringify(0));
+      history.go(-1);
+    }
+    else{
+      
+    }
+  }
 }
