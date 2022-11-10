@@ -18,7 +18,6 @@ import { Inject } from '@angular/core';
   styleUrls: ['./carta.component.scss']
 })
 export class CartaComponent implements OnInit {
-  subcategorias: string[] = [];
   listaItems: any[] = [];
   cat: Categoria[] = [];
   codeTable: String;
@@ -32,7 +31,6 @@ export class CartaComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerItems();
-    this.cargarSubCategorias();
     this.cargarCategorias();
     this.route.params.subscribe(mesa => { this.codeTable = mesa['mesa'] });
     this.decode(this.codeTable)
@@ -88,15 +86,13 @@ export class CartaComponent implements OnInit {
     if (this.mesaId > 10 || this.mesaId == 0)
       this.router.navigate(['carta'])
   }
+
   cargarCategorias() {
     this._categoriaService.obtenerCategorias().subscribe(data => {
       this.cat = data;
-    })
-  }
-
-  cargarSubCategorias() {
-    this._itemService.obtenerSubCategorias().subscribe(data => {
-      this.subcategorias = data;
+      this.cat.forEach(categoria => {
+        categoria.subcategoria.sort();
+      });
     })
   }
 
@@ -125,6 +121,7 @@ export class CartaComponent implements OnInit {
     this.totalItems += item.Cantidad;
     localStorage.setItem('totalCarrito', JSON.stringify(this.totalItems));
   }
+
   suma(item: any) {
     this.listaItems.forEach(element => {
       if (element.Item._id == item.Item._id) {
