@@ -118,15 +118,16 @@ export class CartaComponent implements OnInit {
   }
 
   agregarCarro(item: any) {
-      let index :number=0;
+      let index :number=0;  
     for (let index = 0; index < item.Cantidad; index++) {
 
         //this._carroService.agregarCarro(item.Item);
         this.cookieValue.push(item);
 
         localStorage.setItem('carrito',JSON.stringify(this.cookieValue));
-        this.toastr.success('Item agregado a la cesta')
+        
     }
+    this.toastr.success('Item agregado a la cesta')
     this.totalItems += item.Cantidad;
     localStorage.setItem('totalCarrito',JSON.stringify(this.totalItems));
   }
