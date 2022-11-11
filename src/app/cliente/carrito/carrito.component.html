@@ -1,4 +1,4 @@
-<ng-container *ngIf="siono == 2">
+<ng-container *ngIf="hayItems">
   <div class="slds-text-align_center">
     <div class="row">
       <div class="col">
@@ -25,7 +25,7 @@
         <td>
           {{ item.Item.nombre }}
         </td>
-        <td>{{ item.Item.precio | number }}</td>
+        <td>{{item.Item.precio | number}}</td>
         <td> {{item.Cantidad}} </td>
         <td>
           <button class="boton-eliminar" (click)="quitarItem(item,i)">
@@ -41,14 +41,14 @@
   <div class="card text-center">
     <div class="card-body">
       <h5 class="card-title">Total:</h5>
-      <p class="card-text" >{{totalfinal}}</p>
+      <p class="card-text">{{totalfinal}}</p>
       <a class="btn btn-primary" (click)="borrarCarrito()">Pagar Pedido</a>
     </div>
   </div>
 </ng-container>
 
 
-<ng-container *ngIf="siono == 1">
+<ng-container *ngIf="!hayItems">
   <div class="container">
     <h5 class="carro">Mi Pedido</h5>
     <div class="center">

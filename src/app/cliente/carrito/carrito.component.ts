@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../../services/item.service'
 import { Item } from '../../interfaces/item';
 import { CarroService } from '../../services/carro.service';
-import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -11,35 +10,31 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./carrito.component.scss']
 })
 export class CarritoComponent implements OnInit {
-
   listaItems: Item[] = [];
-  public listaProductos: any;
   public productos: any[] = [];
   public totalfinal: number = 0;
-  public cookieValue: any[] = [];
   public mesaId: number;
   index: number = 0;
-  subi: number = 0;
-  siono: number;
+  hayItems = false;
 
-  constructor(private _itemService: ItemService, private _carroService: CarroService, private cookie: CookieService, private toastr: ToastrService) { }
+  constructor(private _itemService: ItemService, private _carroService: CarroService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.mesaId = JSON.parse(localStorage.getItem('mesa'));
+    let carrito = [];
+    carrito = JSON.parse(localStorage.getItem('carrito'));
 
-    this.cookieValue = JSON.parse(localStorage.getItem('carrito'));
-
-    this.cookieValue.forEach(item => {
+    carrito.forEach(item => {
       this.productos.push(item)
       let precioItem = item.Item.precio * item.Cantidad
       this.totalfinal += precioItem;
     });
 
     if (JSON.parse(localStorage.getItem('totalCarrito')) == 0) {
-      this.siono = 1;
+      this.hayItems = false;
     }
     if (JSON.parse(localStorage.getItem('totalCarrito')) != 0) {
-      this.siono = 2;
+      this.hayItems = true;
     }
   }
 
@@ -59,14 +54,14 @@ export class CarritoComponent implements OnInit {
     }
     this.rellenarCarro();
   }
+
   rellenarCarro() {
-    this.cookieValue = [];
-    this.cookieValue = this.productos;
     localStorage.setItem('carrito', JSON.stringify(this.productos));
     let cantidadItems = 0;
     this.productos.forEach(elemento => cantidadItems += elemento.Cantidad);
     localStorage.setItem('totalCarrito', JSON.stringify(cantidadItems));
   }
+
   borrarCarrito() {
     if (confirm('Esta seguro que desea pagar?')) {
       this.toastr.success('El pedido fue pagado con éxito', 'Tu pedido está en la cola');
