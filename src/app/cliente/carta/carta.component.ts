@@ -132,7 +132,6 @@ export class CartaComponent implements OnInit {
     if (value) {
       let cantidad = itemsCarro.find(element => element.Item._id == item.Item._id).Cantidad
       itemsCarro.find(element => element.Item._id == item.Item._id).Cantidad = cantidad + item.Cantidad;
-      localStorage.clear()
       this.cookieValue = itemsCarro;
       localStorage.setItem('carrito', JSON.stringify(this.cookieValue))
       localStorage.setItem('mesa', JSON.stringify(this.mesaId))
@@ -144,16 +143,6 @@ export class CartaComponent implements OnInit {
     this.toastr.success('Item agregado a la cesta')
     this.totalItems += item.Cantidad;
     localStorage.setItem('totalCarrito', JSON.stringify(this.totalItems));
-    // for (let index = 0; index < item.Cantidad; index++) {
-    //   //this._carroService.agregarCarro(item.Item);
-    //   let itemsCarrito = JSON.parse(localStorage.getItem('carrito'));
-
-    //   this.cookieValue.push(item);
-    //   localStorage.setItem('carrito', JSON.stringify(this.cookieValue));
-    // }
-    // this.toastr.success('Item agregado a la cesta')
-    // this.totalItems += item.Cantidad;
-    // localStorage.setItem('totalCarrito', JSON.stringify(this.totalItems));
   }
 
   suma(item: any) {
