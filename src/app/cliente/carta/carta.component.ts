@@ -42,9 +42,30 @@ export class CartaComponent implements OnInit {
     if (localStorage.getItem('totalCarrito') != undefined || localStorage.getItem('totalCarrito') != null) {
       this.totalItems = JSON.parse(localStorage.getItem('totalCarrito'));
     }
-
   }
+
   decode(code: String) {
+    let mesas = new Map()
+    mesas.set('i', 1);
+    mesas.set('iy', 2);
+    mesas.set('iyj', 3);
+    mesas.set('iw', 4);
+    mesas.set('w', 5);
+    mesas.set('wi', 6);
+    mesas.set('wii', 7);
+    mesas.set('wiii', 8);
+    mesas.set('n', 9);
+    mesas.set('x', 10);
+
+    if (mesas.has(code)){
+      this.mesaId = mesas.get(code);
+    }
+    else {
+      this.router.navigate(['/error']);
+    }
+  }
+
+  decodex(code: String) {
     switch (code) {
       case 'i':
         this.mesaId = 1;
@@ -79,12 +100,6 @@ export class CartaComponent implements OnInit {
       default:
         this.router.navigate(['/error']);
     }
-
-
-  }
-  maximoMesa() {
-    if (this.mesaId > 10 || this.mesaId == 0)
-      this.router.navigate(['carta'])
   }
 
   cargarCategorias() {
@@ -102,9 +117,6 @@ export class CartaComponent implements OnInit {
         var feed = { Item: element, Cantidad: 1 }
         this.listaItems.push(feed);
       });
-      this.listaItems.forEach(element => {
-        //console.log("item: ", element.Item._id)
-      });
     }, error => {
       console.log(error);
     })
@@ -113,13 +125,17 @@ export class CartaComponent implements OnInit {
   agregarCarro(item: any) {
     let itemsCarro = []
     itemsCarro = JSON.parse(localStorage.getItem('carrito'));
-    let value = itemsCarro.find(element => element.Item._id == item.Item._id);
+    let value = null
+    if (itemsCarro){
+      value = itemsCarro.find(element => element.Item._id == item.Item._id);
+    }
     if (value) {
       let cantidad = itemsCarro.find(element => element.Item._id == item.Item._id).Cantidad
       itemsCarro.find(element => element.Item._id == item.Item._id).Cantidad = cantidad + item.Cantidad;
       localStorage.clear()
       this.cookieValue = itemsCarro;
       localStorage.setItem('carrito', JSON.stringify(this.cookieValue))
+      localStorage.setItem('mesa', JSON.stringify(this.mesaId))
     }
     else{
       this.cookieValue.push(item);
