@@ -65,43 +65,6 @@ export class CartaComponent implements OnInit {
     }
   }
 
-  decodex(code: String) {
-    switch (code) {
-      case 'i':
-        this.mesaId = 1;
-        break;
-      case 'iy':
-        this.mesaId = 2;
-        break;
-      case 'iyj':
-        this.mesaId = 3;
-        break;
-      case 'iw':
-        this.mesaId = 4;
-        break;
-      case 'w':
-        this.mesaId = 5;
-        break;
-      case 'wi':
-        this.mesaId = 6;
-        break;
-      case 'wii':
-        this.mesaId = 7;
-        break;
-      case 'wiii':
-        this.mesaId = 8;
-        break;
-      case 'n':
-        this.mesaId = 9;
-        break;
-      case 'x':
-        this.mesaId = 10;
-        break;
-      default:
-        this.router.navigate(['/error']);
-    }
-  }
-
   cargarCategorias() {
     this._categoriaService.obtenerCategorias().subscribe(data => {
       this.cat = data;
