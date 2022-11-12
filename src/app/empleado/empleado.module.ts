@@ -5,7 +5,6 @@ import { MesasComponent } from './mesas/mesas.component';
 import { CuentasEsperaComponent } from './cuentas-espera/cuentas-espera.component';
 import { CuentasComponent } from './cuentas/cuentas.component';
 import { MenuEmpleadoComponent } from './menu-empleado/menu-empleado.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 
 
@@ -17,7 +16,6 @@ import { RouterModule } from '@angular/router';
     CuentasEsperaComponent,
     CuentasComponent,
     MenuEmpleadoComponent,
-    SidebarComponent,
   ],
   imports: [
     CommonModule,

@@ -1,15 +1,19 @@
-<div>
-  <app-sidebar></app-sidebar>
+<div id="mySidenav" class="sidenav">
+  <a class="navbar-brand">
+    <img src="../../../assets/Arquitectura Logica - Page 1.png" alt="logo" width="40%" height="40%" class="d-inline-block align-text-mid">
+  </a>
+  <a routerLink="mesas">Mesas</a>
+  <a routerLink="cuentas-espera">Cuentas en espera</a>
+  <a routerLink="cuentas">Cuentas</a>
+  <a routerLink="menu-empleado">Carta</a>
 </div>
-<div>
+
+<!-- Use any element to open the sidenav -->
+
+<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+<div id="main" style="padding-left: 200px;">
   <router-outlet></router-outlet>
 </div>
+<!-- FIN SIDEBAR -->
 
-
-      <!-- referencia a boton mesas -->
-
-      <!-- referencia a boton cuentas en espera -->
-
-      <!-- referencia a boton cuentas -->
-      <!-- referencia a boton carta -->
-      <!-- INICIO CONTENIDO -->
+<!-- INICIO CONTENIDO -->
