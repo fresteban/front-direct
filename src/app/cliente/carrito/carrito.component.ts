@@ -3,6 +3,7 @@ import { ItemService } from '../../services/item.service'
 import { Item } from '../../interfaces/item';
 import { CarroService } from '../../services/carro.service';
 import { ToastrService } from 'ngx-toastr';
+import { Carro } from 'src/app/interfaces/carro';
 
 @Component({
   selector: 'app-carrito',
@@ -68,6 +69,11 @@ export class CarritoComponent implements OnInit {
       localStorage.setItem('carrito', JSON.stringify([]));
       localStorage.setItem('totalCarrito', JSON.stringify(0));
       history.go(-1);
+      let carro  = new Carro(this.mesaId, this.productos,"aceptado","virtual",this.totalfinal);
+
+      this._carroService.crearCarro(carro).subscribe(data=>{
+        console.log(data);
+      },error=>{console.log(error)});
     }
     else {
 
