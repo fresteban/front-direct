@@ -1,27 +1,151 @@
-.cartanasta {
-  background-color: blanchedalmond;
+.header {
+  background: linear-gradient(160deg, #0C4040, #BF9E80 50%, #F2522E 100%);
+  padding-top: 11px;
+  padding-bottom: 3px;
 }
 
-.tacokun {
-  background-color: aqua;
+.cont-1 {
+  padding-top: 0px;
+  margin-top: 6px;
+  margin-bottom: -18px;
+  padding-bottom: 18px;
 }
 
-.bebichan {
-  background-color: aquamarine;
+.cont-1-row-1 {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
 
-.flota {
-  margin-top: 10%;
+.cont-1-row-1-row-1 {
+  padding-bottom: 0px;
 }
 
-.nopadding {
-  padding-left: 0 !important;
-  margin: 0 !important;
+.mesa {
+  margin-bottom: -1px;
 }
 
-.center {
-  width: 120px;
+.btn-car {
+  color: rgb(255, 255, 255);
+  background: #BF9E80;
+  padding-right: 12px;
+  margin-bottom: 0px;
+}
+
+.far.fa-star.icon-car {
+  font-size: 24px;
+}
+
+.badge-car {
+  background: #F2522E;
+  font-size: 10px;
+  padding-top: 3px;
+  height: 17.5px;
+  width: 26.5469px;
+  margin: -7px;
+}
+
+.linea {
+  margin-bottom: 3px;
+  margin-top: 3px;
+}
+
+.cont-2 {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.cont-2-div {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+#collapse-1 {
+  background: #FFFAEE;
+  border: 1px solid rgb(217,88,41);
+}
+
+.card-div {
+  padding-bottom: 0px;
+  margin-bottom: 8px;
+}
+
+.card- {
+  margin-left: 3px;
+  padding-top: 3px;
+  padding-right: 3px;
+  margin-right: 2px;
+  min-width: 340px;
+  max-width: 540px;
+}
+
+.card-body- {
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-right: 16px;
+  padding-bottom: 3px;
+}
+.col-info {
+  width: 240px;
+}
+
+.col-card {
+  max-width: 100px;
   margin: 0;
+  padding: 0;
 }
 
+.precio {
+  height: 24px;
+}
+
+.contador {
+  height: 35px;
+}
+
+.contador-1 {
+  width: auto;
+  height: 31px;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+
+.btn-1 {
+  padding-right: 6px;
+  background: #145952;
+  border-color: #145952;
+  padding-left: 6px;
+}
+
+.btn-2 {
+  border-radius: o;
+  padding-left: 6px;
+  padding-right: 6px;
+  background: #145952;
+  border-color: #145952;
+}
+
+.btn-add {
+  background: #145959;
+}
+
+.collapsee {
+  margin: 0;
+  margin-left: 0px;
+  width: 100%;
+  background: #D95829;
+  border-radius: 0;
+  border-style: none;
+  padding: 0;
+}
+
+.collapsee {
+  margin: 0;
+  margin-left: 0px;
+  width: 100%;
+  background: #D95829;
+  border-radius: 0;
+  border-style: none;
+  padding: 0;
+}
 
