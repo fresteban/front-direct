@@ -63,13 +63,19 @@ export class CarritoComponent implements OnInit {
     localStorage.setItem('totalCarrito', JSON.stringify(cantidadItems));
   }
 
-  borrarCarrito() {
+  borrarCarrito(estado:boolean) {
     if (confirm('Esta seguro que desea pagar?')) {
 
       localStorage.setItem('carrito', JSON.stringify([]));
       localStorage.setItem('totalCarrito', JSON.stringify(0));
       history.go(-1);
-      let carro  = new Carro(this.mesaId, this.productos,"aceptado","virtual",this.totalfinal);
+      let Estado: string;
+      if(estado){
+        Estado = 'espera'
+      }else{
+        Estado = 'aceptado'
+      }
+      let carro  = new Carro(this.mesaId, this.productos,Estado,"virtual",this.totalfinal);
 
       this._carroService.crearCarro(carro).subscribe(data=>{
         this.toastr.success('El pedido fue pagado con éxito', 'Tu pedido está en la cola');
