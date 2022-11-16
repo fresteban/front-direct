@@ -100,7 +100,6 @@ export class CartaComponent implements OnInit {
       itemsCarro.find(element => element.Item._id == item.Item._id).Cantidad = cantidad + item.Cantidad;
       this.cookieValue = itemsCarro;
       localStorage.setItem('carrito', JSON.stringify(this.cookieValue))
-      localStorage.setItem('mesa', JSON.stringify(this.mesaId))
     }
     else{
       this.cookieValue.push(item);
