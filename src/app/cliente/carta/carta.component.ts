@@ -39,6 +39,9 @@ export class CartaComponent implements OnInit {
     if (localStorage.getItem('carrito') != undefined || localStorage.getItem('carrito') != null) {
       this.cookieValue = JSON.parse(localStorage.getItem('carrito'));
     }
+    else {
+      localStorage.setItem('carrito', JSON.stringify(this.cookieValue))
+    }
     if (localStorage.getItem('totalCarrito') != undefined || localStorage.getItem('totalCarrito') != null) {
       this.totalItems = JSON.parse(localStorage.getItem('totalCarrito'));
     }
