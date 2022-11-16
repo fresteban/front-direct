@@ -31,10 +31,10 @@ export class CarritoComponent implements OnInit {
       this.totalfinal += precioItem;
     });
 
-    if (JSON.parse(localStorage.getItem('totalCarrito')) == 0) {
+    if ((JSON.parse(localStorage.getItem('totalCarrito')) == 0) || localStorage.getItem('totalCarrito') != undefined || localStorage.getItem('totalCarrito') != null){
       this.hayItems = false;
     }
-    if (JSON.parse(localStorage.getItem('totalCarrito')) != 0) {
+    if (JSON.parse(localStorage.getItem('totalCarrito')) > 0) {
       this.hayItems = true;
     }
   }
