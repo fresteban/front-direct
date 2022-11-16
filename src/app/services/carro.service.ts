@@ -22,6 +22,9 @@ export class CarroService {
     console.log(carro);
     return this.http.post(this.urlCarro, carro);
   }
+  getCarros(): Observable<any> {
+    return this.http.get(this.urlCarro);
+  }
 
   public listaCarro: Carro[] = [];
   public listaItemPedido: ItemPedido[] = [];
