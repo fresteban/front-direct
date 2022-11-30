@@ -28,21 +28,16 @@ export class LoginComponent implements OnInit {
     });
   }
 
-
-
-
   ngOnInit(): void { }
 
   iniciarSesion() {
-    if(this.userForm.valid){
-      console.log(this.usuario);
+    if (this.userForm.valid) {
       this.usuario[0] = this.userForm.get('email')?.value;
       this.usuario[1] = this.userForm.get('password')?.value;
       this._authService.signIn(this.usuario).subscribe(
         res => {
-          console.log(res.token);
           localStorage.setItem('token: ', res.token);
-          this.router.navigate(['/admin'])
+          this.router.navigate(['/admin/items'])
         },
         err => {
           console.log(err);
@@ -51,12 +46,11 @@ export class LoginComponent implements OnInit {
         }
       )
     }
-
-    }
-
-
-
   }
+
+
+
+}
 
   // obtenerUsuario() {
   //   if (this.userForm.valid) {

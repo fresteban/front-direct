@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable,Subject, tap } from 'rxjs';
 import { Carro } from '../interfaces/carro';
 import { ItemPedido } from '../interfaces/item-pedido';
 
@@ -8,13 +8,22 @@ import { ItemPedido } from '../interfaces/item-pedido';
   providedIn: 'root'
 })
 export class CarroService {
-  urlCarro = 'https://produccion2.herokuapp.com/api/Carro/';
+  urlCarro = 'https://produccion2.herokuapp.com/api/carro/';
   urlItem = 'https://produccion2.herokuapp.com/api/Item/';
+  private _refreshrequired = new Subject<void>();
+
+  get Refreshrequired(){
+    return this._refreshrequired;
+  }
 
   constructor(private http: HttpClient) { }
   //USANDO BACKEND
   crearCarro(carro: Carro): Observable<any> {
+    console.log(carro);
     return this.http.post(this.urlCarro, carro);
+  }
+  getCarros(): Observable<any> {
+    return this.http.get(this.urlCarro);
   }
 
   public listaCarro: Carro[] = [];

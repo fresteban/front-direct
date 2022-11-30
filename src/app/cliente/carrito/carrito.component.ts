@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../../services/item.service'
 import { Item } from '../../interfaces/item';
 import { CarroService } from '../../services/carro.service';
-import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
+import { Carro } from 'src/app/interfaces/carro';
 
 @Component({
   selector: 'app-carrito',
@@ -11,60 +11,32 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./carrito.component.scss']
 })
 export class CarritoComponent implements OnInit {
-
   listaItems: Item[] = [];
-  public listaProductos: any;
   public productos: any[] = [];
-  public totalfinal: number=0;
-  public cookieValue:any[]=[];
+  public totalfinal: number = 0;
   public mesaId: number;
-  index: number =0;
-  subi:number=0;
-  siono:number;
+  index: number = 0;
+  hayItems = false;
 
-  constructor(private _itemService: ItemService, private _carroService: CarroService,private cookie: CookieService,private toastr: ToastrService) { }
+  constructor(private _itemService: ItemService, private _carroService: CarroService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    //this.obtenerItems();
     this.mesaId = JSON.parse(localStorage.getItem('mesa'));
-    //this._carroService.obtenerProductos()
-    //  .subscribe(res => {
-    //    this.productos = res;
-    //    this.totalfinal = this._carroService.obtenerPrecio();
-    //    console.log('original '+ this.productos)
-    //  })
-      if(typeof this.productos==='undefined'){
-        console.log('undefined');
-      }if( this.productos!){
-        console.log('noexiste');
-      }if( this.productos==null){
-        console.log('null');
-      }
+    let carrito = [];
+    carrito = JSON.parse(localStorage.getItem('carrito'));
 
-      this.cookieValue = JSON.parse(localStorage.getItem('carrito'));
+    carrito.forEach(item => {
+      this.productos.push(item)
+      let precioItem = item.Item.precio * item.Cantidad
+      this.totalfinal += precioItem;
+    });
 
-      for(var i = 0; i < this.cookieValue.length; i++ ){
-
-        if(this.cookieValue[i].Cantidad >=1 && i==this.index){
-
-          this.productos[this.subi]=this.cookieValue[i];
-
-          this.index=i+this.cookieValue[i].Cantidad;
-
-          this.subi++;
-        }
-          this.totalfinal += this.cookieValue[i].Item.precio;
-          console.log(this.totalfinal)
-       };
-
-        console.log(this.productos)
-
-        if(JSON.parse(localStorage.getItem('totalCarrito')) ==0){
-          this.siono = 1;
-        }
-        if(JSON.parse(localStorage.getItem('totalCarrito')) != 0){
-          this.siono = 2;
-        }
+    if ((JSON.parse(localStorage.getItem('totalCarrito')) == 0) || localStorage.getItem('totalCarrito') != undefined || localStorage.getItem('totalCarrito') != null){
+      this.hayItems = false;
+    }
+    if (JSON.parse(localStorage.getItem('totalCarrito')) > 0) {
+      this.hayItems = true;
+    }
   }
 
   obtenerItems() {
@@ -75,32 +47,43 @@ export class CarritoComponent implements OnInit {
     })
   }
 
-  quitarItem(item: Item,index: number) {
-    //this._carroService.quitarItemCarro(item);
-    //if(this.listaItems[index])
-    //this.totalfinal-=this.cookieValue[index].Item.precio;
-    this.totalfinal-=this.productos[index].Item.precio;
-    this.productos[index].Cantidad-=1;
-    if(this.productos[index].Cantidad==0){
-      this.productos.splice(index,1);
+  quitarItem(item: any, index: number) {
+    this.productos.find(itemCarrito => itemCarrito.Item._id == item.Item._id).Cantidad -= 1
+    this.totalfinal -= this.productos.find(itemCarrito => itemCarrito.Item._id == item.Item._id).Item.precio;
+    if (this.productos.find(itemCarrito => itemCarrito.Item._id == item.Item._id).Cantidad == 0) {
+      this.productos.splice(index, 1);
     }
-
-    this.cookieValue.splice(index,1);
-    localStorage.setItem('carrito',JSON.stringify(this.productos));
-    localStorage.setItem('totalCarrito',JSON.stringify(this.cookieValue.length));
-
-
+    this.rellenarCarro();
   }
-  borrarCarrito() {
-    if (confirm('Esta seguro que desea pagar?'))
-    {
-      this.toastr.success('El pedido fue pagado con éxito', 'Tu pedido está en la cola');
-      localStorage.setItem('carrito',JSON.stringify([]));
-      localStorage.setItem('totalCarrito',JSON.stringify(0));
+
+  rellenarCarro() {
+    localStorage.setItem('carrito', JSON.stringify(this.productos));
+    let cantidadItems = 0;
+    this.productos.forEach(elemento => cantidadItems += elemento.Cantidad);
+    localStorage.setItem('totalCarrito', JSON.stringify(cantidadItems));
+  }
+
+  borrarCarrito(estado:boolean) {
+    if (confirm('Esta seguro que desea pagar?')) {
+
+      localStorage.setItem('carrito', JSON.stringify([]));
+      localStorage.setItem('totalCarrito', JSON.stringify(0));
       history.go(-1);
+      let Estado: string;
+      if(estado){
+        Estado = 'espera'
+      }else{
+        Estado = 'aceptado'
+      }
+      let carro  = new Carro(this.mesaId, this.productos,Estado,"virtual",this.totalfinal);
+
+      this._carroService.crearCarro(carro).subscribe(data=>{
+        this.toastr.success('El pedido fue pagado con éxito', 'Tu pedido está en la cola');
+        console.log(data);
+      },error=>{console.log(error)});
     }
-    else{
-      
+    else {
+
     }
   }
 }

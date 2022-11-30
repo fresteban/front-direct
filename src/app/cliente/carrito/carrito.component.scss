@@ -1,31 +1,22 @@
-@media only screen and (max-device-width: 480px) {
-    /* styles for mobile browsers smaller than 480px; (iPhone) */
+body {
+  background: #FFFCF5;
 }
 
+.header {
+  background: linear-gradient(160deg, #0C4040, #BF9E80 50%, #F2522E 100%);
+  padding-top: 11px;
+  padding-bottom: 3px;
+}
 
-.center{
-    position:absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    border: 5px;
-    border-style: solid;
-    border-color: beige;
-    padding-top: 5%;
-    padding-right: 5%;
-    padding-left: 5%;
-    padding-bottom: 8%;
-    background-color: gainsboro;
+.container {
+  margin-top: 16px;
+  position: sticky;
 }
-.carro{
-    position: absolute;
-    top:20%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    text-align: center;
-}
---.imgtmn{
-    width: 25%;
-    height: 25%;
+
+hr {
+  margin: 1rem 0;
+  color: inherit;
+  border: 0;
+  border-top: 1px solid;
+  opacity: .25;
 }

@@ -13,12 +13,13 @@ import { Categoria } from '../../interfaces/categoria';
   styleUrls: ['./modal-item.component.scss']
 })
 export class ModalItemComponent implements OnInit {
-  categorias: String[] = ['Comida', 'Bebestible'];
-  subcategorias: String[] = [];
+  subcategorias = [];
   cat: Categoria[] = [];
   itemForm: FormGroup;
   title = '';
   subCategoriaSelect = '';
+  categoriaSelect = '';
+  id_: any = '';
 
   @Input()
   newItem: Item = {
@@ -46,22 +47,16 @@ export class ModalItemComponent implements OnInit {
   }
 
   @ViewChild('content') addview!: ElementRef
-
-  ngOnInit(): void {
-    this.cargarCategorias();
-    this.cargarSubCategorias();
-  }
-
-  cargarSubCategorias() {
-    this._itemService.obtenerSubCategorias().subscribe(data => {
-      this.subcategorias = data;
-    })
-  }
-
   cargarCategorias() {
     this._categoriaService.obtenerCategoriasTotal().subscribe(data => {
       this.cat = data;
-    })
+      this.categoriaSelect = this.cat[0].categoria;
+      this.changeCategoria(this.categoriaSelect);
+    });
+  }
+
+  ngOnInit(): void {
+    this.cargarCategorias();
   }
 
   errormessage = '';
@@ -70,15 +65,25 @@ export class ModalItemComponent implements OnInit {
   editdata: any = '';
 
   changeCategoria(it) {
-    this.cat.forEach(element => {
-      if (element.categoria == it) {
-        this.subcategorias = element.subcategoria
-      }
-    });
+    let found = this.cat.find(categoria => categoria.categoria == it);
+    if (found.categoria == this.id_.categoria) {
+      this.subCategoriaSelect = this.id_.subcategoria;
+      this.subcategorias = found.subcategoria.filter(subc => subc != this.id_.subcategoria);
+    }
+    else {
+      this.subCategoriaSelect = found.subcategoria[0];
+      this.subcategorias = found.subcategoria.filter(subc => subc != this.subCategoriaSelect);
+    }
   }
 
   guardarItem() {
-
+    let estado;
+    if (this.id_) {
+      estado = this.id_.estado;
+    }
+    else {
+      estado = 'no disponible'
+    }
     if (this.itemForm.valid) {
       const newItem: Item = {
         nombre: this.itemForm.get('nombre')?.value,
@@ -86,17 +91,21 @@ export class ModalItemComponent implements OnInit {
         precio: this.itemForm.get('precio')?.value,
         categoria: this.itemForm.get('categoria')?.value,
         subcategoria: this.itemForm.get('subcategoria')?.value,
-        estado: 'no disponible',
+        estado: estado,
         foto: ''
       }
 
       if (this.editdata) {
         this._itemService.actualizarItem(newItem, this.editdata._id).subscribe(data => {
         });
+        this.close()
       }
       else {
         this._itemService.guardarItem(newItem).subscribe(data => {
+          this.errormessage = '';
+          this.errorclass = ''
           this.toastr.success('Agregado con exito');
+          this.close()
         }, error => {
           console.log(error);
           this.itemForm.reset();
@@ -111,17 +120,20 @@ export class ModalItemComponent implements OnInit {
 
   cargarItemEditar(id: any) {
     this.open(id);
+    this.cargarCategorias()
     this._itemService.obtenerItem(id).subscribe(res => {
+      this.id_ = res;
       this.editdata = res;
       this.changeCategoria(this.editdata.categoria)
       this.subCategoriaSelect = this.editdata.subcategoria;
-
       const indexItem = this.subcategorias.findIndex((item) => {
         return item === this.subCategoriaSelect;
       });
-
       if (indexItem !== -1) {
         this.subcategorias.splice(indexItem, 1);
+      }
+      if (!this.editdata.detalle) {
+        this.editdata.detalle = '';
       }
 
       this.itemForm.setValue({
@@ -132,7 +144,6 @@ export class ModalItemComponent implements OnInit {
         subcategoria: this.editdata.subcategoria
       });
     })
-
   }
 
   limpiarFormulario() {
@@ -140,14 +151,16 @@ export class ModalItemComponent implements OnInit {
       nombre: '',
       detalle: '',
       precio: '',
-      categoria: '',
-      subcategoria: '',
+      categoria: this.categoriaSelect,
+      subcategoria: this.subCategoriaSelect,
     });
-    this.subcategorias = [];
     this.editdata = ''
   }
 
   open(id: any) {
+    this.cargarCategorias();
+    this.errormessage = '';
+    this.errorclass = '';
     if (id == '') {
       this.title = "Agregar nuevo Item";
     } else {
@@ -159,6 +172,10 @@ export class ModalItemComponent implements OnInit {
     }, (reason) => {
 
     });
+  }
+
+  close() {
+    this.modalService.dismissAll()
   }
 
   private getDismissReason(reason: any): string {

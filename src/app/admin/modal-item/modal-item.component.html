@@ -18,9 +18,9 @@
       <div class="parte">
         <label for="detalleItem">Detalle</label>
         <textarea class="form-control" formControlName="detalle" required rows="3"></textarea>
-        <div class="text-warning"
+        <div class="text-danger"
           *ngIf="itemForm.get('detalle')?.hasError('required') && itemForm.get('detalle')?.touched">
-          <span>El campo esta vacio</span>
+          <span>El campo es obligatorio</span>
         </div>
       </div>
       <!-- Campo Precio -->
@@ -32,13 +32,13 @@
           <span>El campo es obligatorio</span>
         </div>
       </div>
-      <!-- Campo Tipo -->
+      <!-- Campo Categoria -->
       <div class="parte">
         <label for="categoriaItem">Categoria de Item</label>
         <div class="form-check">
           <div *ngFor="let categoria of cat">
-            <input type="radio" formControlName="categoria" class="form-check-input" value="{{categoria.categoria}}" (change)="changeCategoria($any($event).target.id)"
-              id="{{categoria.categoria}}">
+            <input type="radio" formControlName="categoria" class="form-check-input" value="{{categoria.categoria}}"
+              (change)="changeCategoria($any($event).target.id)" id="{{categoria.categoria}}">
             <label class="form-check-label" for="{categoria.categoria}">{{categoria.categoria}}</label>
           </div>
         </div>
@@ -48,13 +48,23 @@
         </div>
       </div>
       <!-- Campo Subcategoria -->
+
       <div class="parte">
         <label for="subcategoriaItem">Subcategoria de Item</label>
+        <!-- Campo editar item -->
+        <div *ngIf="id_">
           <select class="form-control" formControlName="subcategoria">
             <option selected>{{subCategoriaSelect}}</option>
             <option *ngFor="let subcat of subcategorias">{{subcat}}</option>
           </select>
-         <div class="text-danger"
+        </div>
+        <!-- Campo nuevo item -->
+        <div *ngIf="id_ == ''">
+          <select class="form-control" formControlName="subcategoria">
+            <option *ngFor="let subcat of subcategorias; let first" [selected]='first'>{{subcat}}</option>
+          </select>
+        </div>
+        <div class="text-danger"
           *ngIf="itemForm.get('categoria')?.hasError('required') && itemForm.get('categoria')?.touched">
           <span>El campo es obligatorio</span>
         </div>
@@ -64,15 +74,11 @@
       </div>
       <div>
         <div class="input-group">
-          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" (click)="modal.close('save click')">Guardar</button>
+          <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
         </div>
         <span [ngClass]="errorclass">{{errormessage}}</span>
       </div>
     </form>
-  </div>
-  <div class="modal-footer">
-    <button style="display:none" type="button" class="btn btn-outline-dark"
-      (click)="modal.close('save click')">Save</button>
   </div>
 </ng-template>
 

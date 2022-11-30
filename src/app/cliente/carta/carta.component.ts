@@ -6,8 +6,8 @@ import { Item } from 'src/app/interfaces/item';
 import { CarroService } from 'src/app/services/carro.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
-import {ActivatedRoute, RouterLink} from '@angular/router';
-import {Router} from "@angular/router"
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Router } from "@angular/router"
 import { Carro } from 'src/app/interfaces/carro';
 import { CookieService } from 'ngx-cookie-service';
 import { Inject } from '@angular/core';
@@ -18,88 +18,62 @@ import { Inject } from '@angular/core';
   styleUrls: ['./carta.component.scss']
 })
 export class CartaComponent implements OnInit {
-  subcategorias: string[] = [];
   listaItems: any[] = [];
   cat: Categoria[] = [];
   codeTable: String;
   mesaId: Number;
   carro: Carro;
-  public cookieValue:any[]=[];
-  indexCantidad:number[]=[];
-  public totalItems : number = 0;
+  public cookieValue: any[] = [];
+  indexCantidad: number[] = [];
+  public totalItems: number = 0;
 
-
-  constructor(private _itemService: ItemService, private _carroService: CarroService, private _categoriaService: CategoriasService, private toastr: ToastrService,private route: ActivatedRoute,private router: Router,private cookie: CookieService) { }
+  constructor(private _itemService: ItemService, private _carroService: CarroService, private _categoriaService: CategoriasService, private toastr: ToastrService, private route: ActivatedRoute, private router: Router, private cookie: CookieService) { }
 
   ngOnInit(): void {
     this.obtenerItems();
-    this.cargarSubCategorias();
     this.cargarCategorias();
-    this.route.params.subscribe(mesa => {this.codeTable = mesa['mesa']});
+    this.route.params.subscribe(mesa => { this.codeTable = mesa['mesa'] });
     this.decode(this.codeTable)
-    console.log(this.mesaId);
-    localStorage.setItem('mesa',JSON.stringify(this.mesaId));
-    if(localStorage.getItem('carrito') != undefined || localStorage.getItem('carrito')!=null){
+
+    localStorage.setItem('mesa', JSON.stringify(this.mesaId));
+    if (localStorage.getItem('carrito') != undefined || localStorage.getItem('carrito') != null) {
       this.cookieValue = JSON.parse(localStorage.getItem('carrito'));
     }
-    if(localStorage.getItem('totalCarrito') != undefined || localStorage.getItem('totalCarrito')!=null){
+    else {
+      localStorage.setItem('carrito', JSON.stringify(this.cookieValue))
+    }
+    if (localStorage.getItem('totalCarrito') != undefined || localStorage.getItem('totalCarrito') != null) {
       this.totalItems = JSON.parse(localStorage.getItem('totalCarrito'));
     }
-
-
-
   }
-  decode(code:String){
-    switch(code){
-      case 'i':
-        this.mesaId=1;
-        break;
-      case 'iy':
-        this.mesaId=2;
-        break;
-      case 'iyj':
-        this.mesaId=3;
-        break;
-      case 'iw':
-        this.mesaId=4;
-        break;
-      case 'w':
-        this.mesaId=5;
-        break;
-      case 'wi':
-        this.mesaId=6;
-        break;
-      case 'wii':
-        this.mesaId=7;
-        break;
-      case 'wiii':
-        this.mesaId=8;
-        break;
-      case 'n':
-        this.mesaId=9;
-        break;
-      case 'x':
-        this.mesaId=10;
-        break;
-      default:
-        this.router.navigate(['/error']);
+
+  decode(code: String) {
+    let mesas = new Map()
+    mesas.set('i', 1);
+    mesas.set('iy', 2);
+    mesas.set('iyj', 3);
+    mesas.set('iw', 4);
+    mesas.set('w', 5);
+    mesas.set('wi', 6);
+    mesas.set('wii', 7);
+    mesas.set('wiii', 8);
+    mesas.set('n', 9);
+    mesas.set('x', 10);
+
+    if (mesas.has(code)){
+      this.mesaId = mesas.get(code);
     }
-
-
+    else {
+      this.router.navigate(['/error']);
+    }
   }
-  maximoMesa(){
-    if (this.mesaId>10 || this.mesaId==0)
-    this.router.navigate(['carta'])
-  }
+
   cargarCategorias() {
     this._categoriaService.obtenerCategorias().subscribe(data => {
       this.cat = data;
-    })
-  }
-
-  cargarSubCategorias() {
-    this._itemService.obtenerSubCategorias().subscribe(data => {
-      this.subcategorias = data;
+      this.cat.forEach(categoria => {
+        categoria.subcategoria.sort();
+      });
     })
   }
 
@@ -109,28 +83,33 @@ export class CartaComponent implements OnInit {
         var feed = { Item: element, Cantidad: 1 }
         this.listaItems.push(feed);
       });
-      this.listaItems.forEach(element => {
-        //console.log("item: ", element.Item._id)
-      });
     }, error => {
       console.log(error);
     })
   }
 
   agregarCarro(item: any) {
-      let index :number=0;  
-    for (let index = 0; index < item.Cantidad; index++) {
-
-        //this._carroService.agregarCarro(item.Item);
-        this.cookieValue.push(item);
-
-        localStorage.setItem('carrito',JSON.stringify(this.cookieValue));
-        
+    let itemsCarro = []
+    itemsCarro = JSON.parse(localStorage.getItem('carrito'));
+    let value = null
+    if (itemsCarro){
+      value = itemsCarro.find(element => element.Item._id == item.Item._id);
+    }
+    if (value) {
+      let cantidad = itemsCarro.find(element => element.Item._id == item.Item._id).Cantidad
+      itemsCarro.find(element => element.Item._id == item.Item._id).Cantidad = cantidad + item.Cantidad;
+      this.cookieValue = itemsCarro;
+      localStorage.setItem('carrito', JSON.stringify(this.cookieValue))
+    }
+    else{
+      this.cookieValue.push(item);
+      localStorage.setItem('carrito', JSON.stringify(this.cookieValue));
     }
     this.toastr.success('Item agregado a la cesta')
     this.totalItems += item.Cantidad;
-    localStorage.setItem('totalCarrito',JSON.stringify(this.totalItems));
+    localStorage.setItem('totalCarrito', JSON.stringify(this.totalItems));
   }
+
   suma(item: any) {
     this.listaItems.forEach(element => {
       if (element.Item._id == item.Item._id) {
@@ -148,5 +127,8 @@ export class CartaComponent implements OnInit {
         }
       }
     });
+  }
+  carritoSalida() {
+    //console.log(this.cookieValue);
   }
 }
