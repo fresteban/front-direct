@@ -15,6 +15,7 @@ export class PantallaComponent implements OnInit {
 
   constructor(private _pedidoService: PedidoService, private _itemService: ItemService) { }
 
+//Carga los pedidos que estan en el sistema
   ngOnInit(): void {
     this.obtenerPedidos();
     this.pedidos.forEach(element => {
@@ -23,6 +24,7 @@ export class PantallaComponent implements OnInit {
 
   }
 
+  //Permite obtener todos los pedidos realizados
   obtenerPedidos() {
     this._pedidoService.obtenerPedidos().subscribe(data => {
       data.forEach(element => {
@@ -35,6 +37,7 @@ export class PantallaComponent implements OnInit {
     })
   }
 
+//Permite cambiar el estado del pedido
   cambiarEstado(pedido: Pedido) {
     console.log('pedido', pedido);
     if(confirm('¿Está seguro de que el pedido está listo?')){
