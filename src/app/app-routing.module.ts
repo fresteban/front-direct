@@ -18,6 +18,8 @@ import { CartaComponent } from './cliente/carta/carta.component';
 import { MenuEmpleadoComponent } from './empleado/menu-empleado/menu-empleado.component';
 import { AuthGuard } from './services/auth.guard';
 import { ErrorComponent } from './compartido/error/error.component';
+import { CocinaModule } from './cocina/cocina.module';
+import { PantallaComponent } from './cocina/pantalla/pantalla.component';
 
 const routes: Routes = [
   {
@@ -74,6 +76,10 @@ const routes: Routes = [
         path: 'menu-empleado', component:MenuEmpleadoComponent
       }
     ]
+  },
+  {
+    path: 'cocina',
+    component: PantallaComponent
   }
 ];
 
