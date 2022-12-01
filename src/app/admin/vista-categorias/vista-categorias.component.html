@@ -12,7 +12,7 @@
         </thead>
         <tbody>
           <!-- <ng-container *ngFor="let item of listaItems"> -->
-            <ng-container *ngFor="let subcategoria of listaCategorias[0].subcategoria; let z = index "> 
+            <ng-container *ngFor="let subcategoria of listaCategorias[0].subcategoria; let z = index ">
             <tr class="table-active">
               <td class="text-capitalize text-center" style="font-size:35px; font-style:bold;">{{listaCategorias[0].subcategoria[z]}}</td>
               <td>
@@ -56,7 +56,7 @@
             </thead>
             <tbody>
               <!-- <ng-container *ngFor="let item of listaItems"> -->
-                <ng-container *ngFor="let subcategoria of listaCategorias[1].subcategoria; let z = index "> 
+                <ng-container *ngFor="let subcategoria of listaCategorias[1].subcategoria; let z = index ">
                 <tr class="table-active">
                   <td class="text-capitalize text-center" style="font-size:35px; font-style:bold;">{{listaCategorias[1].subcategoria[z]}}</td>
                   <td>
@@ -90,5 +90,29 @@
     <div class="p-3 p-4 ">
       <button class="btn-danger rounded" style="padding:9px; font-size:24px; color: black">Nueva Categoría</button>
     </div>
+    <form [formGroup]="categoriaForm" (ngSubmit)="crearCategoria()">
+      <!-- Campo Categoria -->
+      <div class="parte">
+        <label for="categoriaItem">Categoria de Item</label>
+        <div class="form-check">
+          <div *ngFor="let categoria of listaCategorias">
+            <input type="radio" formControlName="categoria" class="form-check-input" value="{{categoria.categoria}}"
+              (change)="changeCategoria($any($event).target.id)" id="{{categoria.categoria}}">
+            <label class="form-check-label" for="{categoria.categoria}">{{categoria.categoria}}</label>
+          </div>
+        </div>
+        <div class="text-danger"
+          *ngIf="categoriaForm.get('categoria.categoria')?.hasError('required') && categoriaForm.get('categoria.categoria')?.touched">
+          <span>El campo es obligatorio</span>
+        </div>
+      </div>
+      <!-- Campo Subcategoria -->
+
+      <div class="parte">
+        <label for="subcategoriaItem">Subcategoria de Item</label>
+          <label for="nombreItem">Nombre Item</label>
+          <input type="text" formControlName="subcategoria" required class="form-control">
+      </div>
+    </form>
   </div>
 </div>

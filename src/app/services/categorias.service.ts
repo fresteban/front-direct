@@ -13,7 +13,7 @@ export class CategoriasService {
   get Refreshrequired(){
     return this._refreshrequired;
   }
-  url = 'https://produccion2.herokuapp.com/api/categoria/';
+  url = 'https://la-mexicana-app.herokuapp.com/api/categoria/';
 
   constructor(private http: HttpClient) { }
 
@@ -31,6 +31,14 @@ export class CategoriasService {
 
   obtenerSubCategorias(): Observable<any> {
     return this.http.get(this.url + 'subcategorias');
+  }
+
+  crearCategoria(categoria:Categoria): Observable<any> {
+    return this.http.post(this.url, categoria).pipe(
+      tap(() => {
+        this._refreshrequired.next();
+      })
+    );
   }
 
   actualizarCategoria(categoria:Categoria, id:string): Observable<any> {

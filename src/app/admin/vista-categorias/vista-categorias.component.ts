@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import { ModalItemComponent } from '../modal-item/modal-item.component';
@@ -10,12 +11,20 @@ import { ModalItemComponent } from '../modal-item/modal-item.component';
 })
 export class VistaCategoriasComponent implements OnInit {
 
-  constructor(private _categoriaService: CategoriasService, private toastr: ToastrService) {
+  categoriaForm: FormGroup;
+  id_: any = '';
+
+
+  constructor(private fb: FormBuilder, private _categoriaService: CategoriasService, private toastr: ToastrService) {
     this._categoriaService.Refreshrequired.subscribe(result => {
       this.obtenerCategorias();
     })
     this._categoriaService.Refreshrequired.subscribe(result => {
       this.obtenerSubCategorias();
+    })
+    this.categoriaForm = this.fb.group({
+      categoria: ['', [Validators.required]],
+      subcategoria: ['', [Validators.required]]
     })
    }
 
@@ -33,7 +42,7 @@ export class VistaCategoriasComponent implements OnInit {
 
 //Función obtenerCategorias() permite obtener las categorias ya existentes
   obtenerCategorias() {
-    this._categoriaService.obtenerCategorias().subscribe(data => {
+    this._categoriaService.obtenerCategoriasTotal().subscribe(data => {
       this.listaCategorias = data;
     }, error => {
       console.log(error);
@@ -47,6 +56,17 @@ export class VistaCategoriasComponent implements OnInit {
     }, error => {
       console.log(error);
     })
+  }
+
+//Función crearCategoria() permite crear una nueva subcategoria
+//Sugerencia: Cambiar nombre
+  crearCategoria(){
+    if(this.categoriaForm.valid) {
+      let categoria =  this.categoriaForm.get('categoria')?.value
+      let subcategoria = this.categoriaForm.get('subcategoria')?.value
+    }
+
+    //this._categoriaService.crearCategoria(this.categoria)
   }
 
 //Función eliminarCategoria() permite eliminar una categoria deseada
@@ -88,5 +108,14 @@ export class VistaCategoriasComponent implements OnInit {
     this.obtenerCategorias();
   }
 
+  changeCategoria(it) {
+    let found = this.listaCategorias.find(categoria => categoria.categoria == it);
+    if (found.categoria == this.id_.categoria) {
+      this.listaSubcategorias = found.subcategoria.filter(subc => subc != this.id_.subcategoria);
+    }
+    else {
+      //this.listaSubcategorias = found.subcategoria.filter(subc => subc != this.subCategoriaSelect);
+    }
+  }
 
 }

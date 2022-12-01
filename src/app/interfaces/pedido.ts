@@ -1,8 +1,9 @@
-import { Cesta } from "./carro";
+import { Carro } from "./carro";
 
 export interface Pedido {
   id_: number;
-  listaCesta: Cesta[];
-  totalPedido: number;
+  carro: Carro;
+  fecha_creacion: Date;
+  estado: string;
   mesa: number;
 }

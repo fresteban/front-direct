@@ -1,3 +1,4 @@
+import { PedidoService } from './../../services/pedido.service';
 import { Component, OnInit } from '@angular/core';
 import { ItemService } from '../../services/item.service'
 import { Item } from '../../interfaces/item';
@@ -18,7 +19,10 @@ export class CarritoComponent implements OnInit {
   index: number = 0;
   hayItems = false;
 
-  constructor(private _itemService: ItemService, private _carroService: CarroService, private toastr: ToastrService) { }
+  constructor(private _itemService: ItemService,
+              private _carroService: CarroService,
+              private toastr: ToastrService,
+              private _pedidoService: PedidoService) { }
 
   ngOnInit(): void {
     // se cargan el numero de mesa y carrito
@@ -32,8 +36,7 @@ export class CarritoComponent implements OnInit {
       this.totalfinal += precioItem;
     });
 
-  //Se verifica si el carrito esta vacio o no 
-    if ((JSON.parse(localStorage.getItem('totalCarrito')) == 0) || localStorage.getItem('totalCarrito') != undefined || localStorage.getItem('totalCarrito') != null){
+    if ((JSON.parse(localStorage.getItem('totalCarrito')) == 0) || localStorage.getItem('totalCarrito') != undefined || localStorage.getItem('totalCarrito') != null) {
       this.hayItems = false;
     }
     if (JSON.parse(localStorage.getItem('totalCarrito')) > 0) {
@@ -68,29 +71,48 @@ export class CarritoComponent implements OnInit {
     localStorage.setItem('totalCarrito', JSON.stringify(cantidadItems));
   }
 
- //Función borrarCarrito() termina el carro una vez el pedido finaliza
- //Sugerencia: Cambiar nombre a uno más representativo ej: carritoFinalizado() 
-  borrarCarrito(estado:boolean) {
+//Funcion pagoVirtual() permite hacer pagos con tarjeta
+  pagoVirtual() {
     if (confirm('Esta seguro que desea pagar?')) {
-
+      let Estado = 'aceptado';
+      let metodo_pago = 'virual'
       localStorage.setItem('carrito', JSON.stringify([]));
       localStorage.setItem('totalCarrito', JSON.stringify(0));
       history.go(-1);
-      let Estado: string;
-      if(estado){
-        Estado = 'espera'
-      }else{
-        Estado = 'aceptado'
-      }
-      let carro  = new Carro(this.mesaId, this.productos,Estado,"virtual",this.totalfinal);
 
-      this._carroService.crearCarro(carro).subscribe(data=>{
+      let carro = new Carro(this.mesaId, this.productos, Estado, metodo_pago, this.totalfinal);
+
+      this._pedidoService.crearPedido(carro).subscribe(data => {
         this.toastr.success('El pedido fue pagado con éxito', 'Tu pedido está en la cola');
-        console.log(data);
-      },error=>{console.log(error)});
+      },
+      error => {
+        console.log(error)
+      });
+
+      // this._carroService.crearCarro(carro).subscribe(data=>{
+      //   this.toastr.success('El pedido fue pagado con éxito', 'Tu pedido está en la cola');
+      //   console.log(data);
+      // },error=>{console.log(error)});
     }
     else {
 
     }
+  }
+
+//Función pagoFisico() permite hacer pagos de forma fisica
+  pagoFisico() {
+    if (confirm('Esta seguro que desea pagar?')) {
+      let metodo_pago = 'fisico'
+      let Estado = 'espera'
+      localStorage.setItem('carrito', JSON.stringify([]));
+      localStorage.setItem('totalCarrito', JSON.stringify(0));
+      history.go(-1);
+      let carro = new Carro(this.mesaId, this.productos, Estado, metodo_pago, this.totalfinal);
+      this._carroService.crearCarro(carro).subscribe(data=>{
+        this.toastr.success('El pedido fue generado', 'Vendrá un mesero a realizar el pago');
+        console.log(data);
+      },error=>{console.log(error)});
+    }
+
   }
 }
