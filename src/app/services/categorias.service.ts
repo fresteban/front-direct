@@ -13,7 +13,7 @@ export class CategoriasService {
   get Refreshrequired(){
     return this._refreshrequired;
   }
-  url = 'https://localhost:4000/api/categoria/';
+  url = 'https://la-mexicana-app.herokuapp.com/api/categoria/';
 
   constructor(private http: HttpClient) { }
 

@@ -6,7 +6,7 @@ import { Observable, Subject, tap } from 'rxjs';
   providedIn: 'root'
 })
 export class AdministracionService {
-  url = 'https://localhost:4000/api/Administracion/';
+  url = 'https://la-mexicana-app.herokuapp.com/api/Administracion/';
 
   constructor(private http: HttpClient) { }
 

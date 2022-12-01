@@ -8,8 +8,8 @@ import { ItemPedido } from '../interfaces/item-pedido';
   providedIn: 'root'
 })
 export class CarroService {
-  urlCarro = 'https://localhost:4000/api/carro/';
-  urlItem = 'https://localhost:4000/api/Item/';
+  urlCarro = 'https://la-mexicana-app.herokuapp.com/api/carro/';
+  urlItem = 'https://la-mexicana-app.herokuapp.com/api/Item/';
   private _refreshrequired = new Subject<void>();
 
   get Refreshrequired(){
