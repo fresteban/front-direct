@@ -3,31 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-  <title>Untitled</title>
+  <title>Pantalla cocina</title>
 </head>
 
 <body>
   <div>
     <h1 class="text-center lista-pedido">Listado de Pedidos</h1>
-    <div class="div-1">
+    <div *ngFor="let pedido of pedidos" class="div-1">
       <div class="container bg-container">
         <div class="row">
           <div id="col-1" class="col offset-lg-0 text-center align-self-center">
-            <button class="btn btn-primary" type="button">Pedido Listo
+            <button class="btn btn-primary" type="button" (click)="cambiarEstado(pedido)">Pedido Terminado
             </button>
           </div>
           <div class="col-lg-10 offset-lg-0 align-self-center">
-            <h1 class="h1-1">Pedido: Mesa 1</h1>
+            <h1 class="h1-1">Pedido: Mesa {{pedido.mesa}}</h1>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <ul class="list-group l-gp">
-              <li class="list-group-item"><span>List Group Item 1</span>
-              </li>
-              <li class="list-group-item"><span>List Group Item 2</span>
-              </li>
-              <li class="list-group-item"><span>List Group Item 3</span>
+              <li *ngFor="let items of pedido.carro[0].carroItems" class="list-group-item"><span>{{items.Item.nombre}} x {{items.Cantidad}}</span>
               </li>
             </ul>
           </div>

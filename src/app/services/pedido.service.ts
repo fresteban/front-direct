@@ -23,4 +23,8 @@ export class PedidoService {
     return this.http.get(this.urlPedido);
   }
 
+  cambiarEstadoPedido(pedido: Pedido): Observable<any> {
+    return this.http.put(this.urlPedido, pedido);
+  }
+
 }
