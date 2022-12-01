@@ -21,6 +21,7 @@ export class CarritoComponent implements OnInit {
   constructor(private _itemService: ItemService, private _carroService: CarroService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    // se cargan el numero de mesa y carrito
     this.mesaId = JSON.parse(localStorage.getItem('mesa'));
     let carrito = [];
     carrito = JSON.parse(localStorage.getItem('carrito'));
@@ -31,6 +32,7 @@ export class CarritoComponent implements OnInit {
       this.totalfinal += precioItem;
     });
 
+  //Se verifica si el carrito esta vacio o no 
     if ((JSON.parse(localStorage.getItem('totalCarrito')) == 0) || localStorage.getItem('totalCarrito') != undefined || localStorage.getItem('totalCarrito') != null){
       this.hayItems = false;
     }
@@ -39,6 +41,7 @@ export class CarritoComponent implements OnInit {
     }
   }
 
+//Funcion obtenerItems() funcion para obtener items existentes 
   obtenerItems() {
     this._itemService.getItems().subscribe(data => {
       this.listaItems = data;
@@ -47,6 +50,7 @@ export class CarritoComponent implements OnInit {
     })
   }
 
+  //Función quitarItem() eliminar items del carro
   quitarItem(item: any, index: number) {
     this.productos.find(itemCarrito => itemCarrito.Item._id == item.Item._id).Cantidad -= 1
     this.totalfinal -= this.productos.find(itemCarrito => itemCarrito.Item._id == item.Item._id).Item.precio;
@@ -56,6 +60,7 @@ export class CarritoComponent implements OnInit {
     this.rellenarCarro();
   }
 
+//Función rellenarCarro() llena con los items seleccionados el carro
   rellenarCarro() {
     localStorage.setItem('carrito', JSON.stringify(this.productos));
     let cantidadItems = 0;
@@ -63,6 +68,8 @@ export class CarritoComponent implements OnInit {
     localStorage.setItem('totalCarrito', JSON.stringify(cantidadItems));
   }
 
+ //Función borrarCarrito() termina el carro una vez el pedido finaliza
+ //Sugerencia: Cambiar nombre a uno más representativo ej: carritoFinalizado() 
   borrarCarrito(estado:boolean) {
     if (confirm('Esta seguro que desea pagar?')) {
 

@@ -18,6 +18,7 @@ export class CuentasEsperaComponent implements OnInit {
 
   }
 
+//Función obtenerCarros() permite obtener la lista de carros que estan en espera
   obtenerCarros() {
     this._carroService.getCarros().subscribe(data => {
       data.forEach(element => {

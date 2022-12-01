@@ -51,12 +51,14 @@ export class FormularioAgregarItemComponent implements OnInit {
     this.cargarSubCategorias();
   }
 
+//Función cargarSubCategorias() permite cargar las subcategorias existentes
   cargarSubCategorias() {
     this._itemService.obtenerSubCategorias().subscribe(data => {
       this.subcategorias = data;
     })
   }
 
+//Función agregarItem() permite agregar un nuevo item al inventario  
   agregarItem() {
     const newItem: Item = {
       nombre: this.itemForm.get('nombre')?.value,
@@ -83,9 +85,12 @@ export class FormularioAgregarItemComponent implements OnInit {
     this.itemForm.reset();
   }
 
+//Función openModal() permite abrir el modal que contiene el fomulario 
   openModal() {
     this.formModal.show();
   }
+
+//Función save() permite guardar los datos
   save() {
     this.formModal.hide();
   }

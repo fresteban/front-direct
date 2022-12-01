@@ -30,12 +30,15 @@ export class CartaComponent implements OnInit {
   constructor(private _itemService: ItemService, private _carroService: CarroService, private _categoriaService: CategoriasService, private toastr: ToastrService, private route: ActivatedRoute, private router: Router, private cookie: CookieService) { }
 
   ngOnInit(): void {
+    //Se llaman a las Funciones
     this.obtenerItems();
     this.cargarCategorias();
     this.route.params.subscribe(mesa => { this.codeTable = mesa['mesa'] });
     this.decode(this.codeTable)
 
     localStorage.setItem('mesa', JSON.stringify(this.mesaId));
+
+    //Se verifica si el carrito esta vacio
     if (localStorage.getItem('carrito') != undefined || localStorage.getItem('carrito') != null) {
       this.cookieValue = JSON.parse(localStorage.getItem('carrito'));
     }
@@ -47,6 +50,7 @@ export class CartaComponent implements OnInit {
     }
   }
 
+//Mapa de codigos que estan asociados a cada mesa
   decode(code: String) {
     let mesas = new Map()
     mesas.set('i', 1);
@@ -68,6 +72,7 @@ export class CartaComponent implements OnInit {
     }
   }
 
+  //Funcion cargarCategorias() permite cargar las categorias existentes
   cargarCategorias() {
     this._categoriaService.obtenerCategorias().subscribe(data => {
       this.cat = data;
@@ -77,6 +82,7 @@ export class CartaComponent implements OnInit {
     })
   }
 
+//Funcion obtenerItems() funcion para obtener items existentes 
   obtenerItems() {
     this._itemService.getItems().subscribe(data => {
       data.forEach(element => {
@@ -88,6 +94,8 @@ export class CartaComponent implements OnInit {
     })
   }
 
+//Funcion AgregarCarro() para agregar items al carro de compras
+// Sugerencia Cambiar nombre de la función por algo mas representativo ej: agregarItemCarro()
   agregarCarro(item: any) {
     let itemsCarro = []
     itemsCarro = JSON.parse(localStorage.getItem('carrito'));
@@ -110,6 +118,8 @@ export class CartaComponent implements OnInit {
     localStorage.setItem('totalCarrito', JSON.stringify(this.totalItems));
   }
 
+//Función suma() para sumar items
+//Sugerencia: Colocar un nombre más representativo ej: sumarItemsSeleccionado()
   suma(item: any) {
     this.listaItems.forEach(element => {
       if (element.Item._id == item.Item._id) {
@@ -118,6 +128,8 @@ export class CartaComponent implements OnInit {
     });
   }
 
+//Función resta() para restar items
+//Sugerencia: Colocar un nombre más representativo ej: restarItemsSeleccionado()
   resta(item: any) {
     this.listaItems.forEach(element => {
       if (element.Item._id == item.Item._id) {
@@ -128,6 +140,8 @@ export class CartaComponent implements OnInit {
       }
     });
   }
+
+//Funcion carritoSalida() (NO SE UTILIZA)
   carritoSalida() {
     //console.log(this.cookieValue);
   }

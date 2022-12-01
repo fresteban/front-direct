@@ -20,6 +20,7 @@ export class FormularioModificarItemComponent implements OnInit {
   formModal: any;
   itemForm: FormGroup;
 
+//Atributos que tiene un Item
   @Input()
   editItem: Item = {
     nombre: '',
@@ -32,7 +33,7 @@ export class FormularioModificarItemComponent implements OnInit {
   }
 
   constructor(private ItemService: ItemService, private fb: FormBuilder, private router: Router, private _itemService: ItemService, private toastr: ToastrService) {
-    this.itemForm = this.fb.group({
+    this.itemForm = this.fb.group({ 
       nombre: [''],
       detalle: [''],
       precio: [''],
@@ -48,14 +49,17 @@ export class FormularioModificarItemComponent implements OnInit {
     );
   }
 
+//Función openModal() sirve para abrir el modal que contiene el formulario
   openModal(){
     this.formModal.show();
   }
 
+//Función closeModal() sirve para cerrar el modal que contiene el formulario
   closeModal(){
     this.formModal.hide();
   }
 
+//Función modificarItem() permite modificar los atributos de un item ya existente 
   modificarItem(item : Item){
     const newItem: Item = {
       nombre: this.itemForm.get('nombre')?.value,

@@ -31,6 +31,7 @@ export class VistaCategoriasComponent implements OnInit {
 
   @ViewChild(ModalItemComponent) addView !: ModalItemComponent
 
+//Función obtenerCategorias() permite obtener las categorias ya existentes
   obtenerCategorias() {
     this._categoriaService.obtenerCategorias().subscribe(data => {
       this.listaCategorias = data;
@@ -38,6 +39,8 @@ export class VistaCategoriasComponent implements OnInit {
       console.log(error);
     })
   }
+
+//Función obtenerSubCategorias() permite obtener las Sub-categorias ya existentes
   obtenerSubCategorias() {
     this._categoriaService.obtenerSubCategorias().subscribe(data => {
       this.listaSubcategorias = data;
@@ -46,6 +49,7 @@ export class VistaCategoriasComponent implements OnInit {
     })
   }
 
+//Función eliminarCategoria() permite eliminar una categoria deseada
   eliminarCategoria(id: any) {
     if (confirm('Esta seguro de eliminar?'))
       this._categoriaService.eliminarCategoria(id).subscribe(data => {

@@ -30,7 +30,7 @@ export class ItemTableComponent implements OnInit {
     this.obtenerItems();
   }
 
-
+//Funcion obtenerItems() funcion para obtener items existentes 
   obtenerItems() {
     this._itemService.getItems().subscribe(data => {
       this.listaItems = data;
@@ -39,6 +39,7 @@ export class ItemTableComponent implements OnInit {
     })
   }
 
+//Función eliminarItem() permite eliminar un item existente
   eliminarItem(id: any) {
     if (confirm('Esta seguro de eliminar?'))
       this._itemService.eliminarItem(id).subscribe(data => {
@@ -49,6 +50,7 @@ export class ItemTableComponent implements OnInit {
       })
   }
 
+//Función editarItem() carga los datos del item a editar
   editarItem(id: any) {
     this.addView.cargarItemEditar(id);
   }
@@ -57,6 +59,8 @@ export class ItemTableComponent implements OnInit {
     this.obtenerItems();
   }
 
+//Función cambiarEstado() permite cambiar el estado de un item
+//Sugerencia: Colocar un nombre más representativo ej: cambiarEstadoItem()
   cambiarEstado($event, itemId, evento) {
     if (!confirm('Esta seguro?')) {
       $event.stopPropagation();

@@ -47,6 +47,7 @@ export class ModalItemComponent implements OnInit {
   }
 
   @ViewChild('content') addview!: ElementRef
+  //Función cargarCategorias() carga las categorias existentes
   cargarCategorias() {
     this._categoriaService.obtenerCategoriasTotal().subscribe(data => {
       this.cat = data;
@@ -76,6 +77,7 @@ export class ModalItemComponent implements OnInit {
     }
   }
 
+// Función guardarItem() permite guardar un nuevo item 
   guardarItem() {
     let estado;
     if (this.id_) {
@@ -118,6 +120,7 @@ export class ModalItemComponent implements OnInit {
     }
   }
 
+//Función cargarItemEditar() permite cargar los datos de los items existentes
   cargarItemEditar(id: any) {
     this.open(id);
     this.cargarCategorias()
@@ -146,6 +149,7 @@ export class ModalItemComponent implements OnInit {
     })
   }
 
+//Función cargarCategoriaEditar() permite cargar las categorias de los items existentes
   cargarCategoriaEditar(id: any) {
     this.open(id);
     this.cargarCategorias()
@@ -168,6 +172,7 @@ export class ModalItemComponent implements OnInit {
     })
   }
 
+//Función limpiarFormulario() permite limpiar el formulario una vez que se cierra el formulario y se abre nuevamente
   limpiarFormulario() {
     this.itemForm.setValue({
       nombre: '',
@@ -179,6 +184,7 @@ export class ModalItemComponent implements OnInit {
     this.editdata = ''
   }
 
+// Función open() permite abrir el modal que contiene el formulario 
   open(id: any) {
     this.cargarCategorias();
     this.errormessage = '';
@@ -196,6 +202,7 @@ export class ModalItemComponent implements OnInit {
     });
   }
 
+//Función close() permite cerrar el modal que contiene el formulario
   close() {
     this.modalService.dismissAll()
   }
