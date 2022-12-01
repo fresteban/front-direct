@@ -13,7 +13,7 @@ export class CategoriasService {
   get Refreshrequired(){
     return this._refreshrequired;
   }
-  url = 'https://localhost:3000/api/categoria/';
+  url = 'https://localhost:4000/api/categoria/';
 
   constructor(private http: HttpClient) { }
 
