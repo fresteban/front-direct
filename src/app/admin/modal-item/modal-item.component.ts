@@ -146,6 +146,28 @@ export class ModalItemComponent implements OnInit {
     })
   }
 
+  cargarCategoriaEditar(id: any) {
+    this.open(id);
+    this.cargarCategorias()
+    this._categoriaService.obtenerCategorias().subscribe(res => {
+      this.id_ = res;
+      this.editdata = res;
+      this.changeCategoria(this.editdata.categoria)
+      this.subCategoriaSelect = this.editdata.subcategoria;
+      const indexItem = this.subcategorias.findIndex((item) => {
+        return item === this.subCategoriaSelect;
+      });
+      if (indexItem !== -1) {
+        this.subcategorias.splice(indexItem, 1);
+      }
+
+      this.itemForm.setValue({
+        categoria: this.editdata.categoria,
+        subcategoria: this.editdata.subcategoria
+      });
+    })
+  }
+
   limpiarFormulario() {
     this.itemForm.setValue({
       nombre: '',
