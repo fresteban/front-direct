@@ -19,4 +19,8 @@ export class PedidoService {
     return this.http.post(this.urlPedido, carro);
   }
 
+  obtenerPedidos(): Observable<any> {
+    return this.http.get(this.urlPedido);
+  }
+
 }
