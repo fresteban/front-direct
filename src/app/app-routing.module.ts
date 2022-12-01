@@ -16,7 +16,7 @@ import { CuentasComponent } from './empleado/cuentas/cuentas.component';
 import { ItemEliminadosComponent } from './admin/item-eliminados/item-eliminados.component';
 import { CartaComponent } from './cliente/carta/carta.component';
 import { MenuEmpleadoComponent } from './empleado/menu-empleado/menu-empleado.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './services/auth.guard';
 import { ErrorComponent } from './compartido/error/error.component';
 
 const routes: Routes = [

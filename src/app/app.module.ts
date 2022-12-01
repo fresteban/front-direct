@@ -23,7 +23,7 @@ import { EmpleadoModule } from './empleado/empleado.module';
 import { UsuarioModule } from './usuario/usuario.module';
 import { LoginComponent } from './usuario/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
-import { AuthGuard } from './auth.guard';
+import { AuthGuard } from './services/auth.guard';
 import { TokenService } from './services/token.service';
 
 @NgModule({
