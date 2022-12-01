@@ -28,6 +28,8 @@ export class PantallaComponent implements OnInit {
       data.forEach(element => {
         this.pedidos.push(element);
       });
+      //console.log(this.pedidos)
+      this.imprimir();
     }, error => {
       console.log(error);
     })
@@ -40,6 +42,15 @@ export class PantallaComponent implements OnInit {
 
       })
     }
+  imprimir(){
+    console.log('this.p: ', this.pedidos);
+
+    console.log('peido: ', this.pedidos[0].carro[0].carroItems[0].Item.nombre);
+    console.log('peido: ', this.pedidos[0].carro[0].carroItems[0].Cantidad);
+
+    this.pedidos.forEach(element => {
+      console.log('elem: ', element.carro[0].carroItems)
+    });
   }
 
 }
