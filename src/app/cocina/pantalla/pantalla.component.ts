@@ -45,6 +45,8 @@ export class PantallaComponent implements OnInit {
 
       })
     }
+  }
+
   imprimir(){
     console.log('this.p: ', this.pedidos);
 

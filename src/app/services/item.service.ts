@@ -13,7 +13,7 @@ export class ItemService {
     return this._refreshrequired;
   }
 
-  url = 'https://la-mexicana-app.herokuapp.com/api/Item/';
+  url = 'http://localhost:3000/api/Item/';
 
   constructor(private http: HttpClient) { }
 

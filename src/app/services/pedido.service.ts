@@ -8,8 +8,8 @@ import { Carro } from '../interfaces/carro';
   providedIn: 'root'
 })
 export class PedidoService {
-  urlCarro = 'https://la-mexicana-app.herokuapp.com/api/carro/';
-  urlPedido = 'https://la-mexicana-app.herokuapp.com/api/pedido/';
+  urlCarro = 'http://localhost:3000/api/carro/';
+  urlPedido = 'http://localhost:3000/api/pedido/';
 
   constructor(private http: HttpClient) {}
 
