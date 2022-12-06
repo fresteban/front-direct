@@ -22,7 +22,6 @@
     "@ng-bootstrap/ng-bootstrap": "^13.1.0",
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.1",
-    "firebase": "^9.14.0",
     "ngx-cookie-service": "^14.0.1",
     "ngx-toastr": "^15.0.0",
     "rxjs": "~7.5.0",
